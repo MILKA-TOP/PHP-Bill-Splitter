@@ -55,14 +55,7 @@ class User
         $stmt->bindParam(":stateArgs", $this->stateArgs);
         $stmt->bindParam(":bills", $this->bills);
 
-        try {
-            if ($stmt->execute()) {
-                return true;
-            }
-        } catch (PDOException $e) {
-            echo "Your fail message: " . $e->getMessage();
-        }
-        return false;
+        return $stmt->execute();
     }
 
     // READ single
@@ -87,5 +80,3 @@ class User
         $this->bills = $dataRow['bills'];
     }
 }
-
-?>

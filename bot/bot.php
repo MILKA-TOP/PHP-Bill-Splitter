@@ -20,10 +20,11 @@ function stateById($user_id)
         // create array
 
     } else {
+        echo "Creating%n";
         $item->stateId = 0;
         $item->stateArgs = EMPTY_JSON_STATE;
         $item->bills = EMPTY_JSON_IDS_ARRAY;
-        $item->createUser();
+        echo $item->createUser();
     }
     $usr_arr = array(
         "id" => $item->id,
