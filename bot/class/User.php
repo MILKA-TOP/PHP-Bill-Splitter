@@ -16,6 +16,7 @@ class User
 
     public function __construct($db)
     {
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->conn = $db;
     }
 
@@ -54,8 +55,12 @@ class User
         $stmt->bindParam(":stateArgs", $this->stateArgs);
         $stmt->bindParam(":bills", $this->bills);
 
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            echo "Your fail message: " . $e->getMessage();
         }
         return false;
     }
