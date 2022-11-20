@@ -3,8 +3,8 @@
 function bot_sendMessage($user_id, $data)
 {
     $msg = "Привет, {$user_id}!";
-    $curr_data = stateById($user_id);
-    vkApi_messagesSend($user_id, $curr_data);
+    //$curr_data = stateById($user_id);
+    vkApi_messagesSend($user_id, $msg);
 }
 
 function stateById($user_id)
