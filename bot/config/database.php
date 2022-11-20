@@ -3,11 +3,11 @@ include_once '../../config.php';
 
 class Database
 {
+    public $conn;
     private $host = "127.0.0.1";
     private $database_name = BOT_DB_NAME;
     private $username = BOT_DB_USERNAME;
     private $password = BOT_DB_PASSWORD;
-    public $conn;
 
     public function getConnection()
     {

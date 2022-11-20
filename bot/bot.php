@@ -1,19 +1,36 @@
 <?php
 
-function bot_sendMessage($user_id) {
-  //$users_get_response = vkApi_usersGet($user_id);
-  //$user = array_pop($users_get_response);
-  $msg = "Привет, {$user_id}!";
+function bot_sendMessage($user_id, $data)
+{
+    $msg = "Привет, {$user_id}!";
+    stateById($user_id);
+    vkApi_messagesSend($user_id, $data);
+}
 
- // $photo = _bot_uploadPhoto($user_id, BOT_IMAGES_DIRECTORY.'/cat.jpeg');
+function stateById($user_id)
+{
+    $database = new Database();
+    $db = $database->getConnection();
 
-  //$voice_message_file_name = yandexApi_getVoice($msg);
-  //$doc = _bot_uploadVoiceMessage($user_id, $voice_message_file_name);
+    $item = new User($db);
 
-  //$attachments = array(
-  //  'photo'.$photo['owner_id'].'_'.$photo['id'],
-    //'doc'.$doc['owner_id'].'_'.$doc['id'],
-  //);
+    $item->id = $user_id->id;
+    $item->getSingleUser();
+    if ($item->stateId != null) {
+        // create array
 
-  vkApi_messagesSend($user_id, $msg);
+    } else {
+        $item->stateId = 0;
+        $item->stateArgs = EMPTY_JSON_STATE;
+        $item->bills = EMPTY_JSON_IDS_ARRAY;
+    }
+    $usr_arr = array(
+        "id" => $item->id,
+        "stateId" => $item->stateId,
+        "stateArgs" => $item->stateArgs,
+        "bills" => $item->bills,
+    );
+
+    http_response_code(200);
+    echo json_encode($usr_arr);
 }

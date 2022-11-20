@@ -8,6 +8,9 @@ require_once 'global.php';
 
 require_once 'api/vk_api.php';
 
+require_once 'bot/class/User.php';
+require_once 'bot/config/database.php';
+require_once 'bot/config/json.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
@@ -56,7 +59,7 @@ function _callback_handleConfirmation()
 function _callback_handleMessageNew($data)
 {
     $user_id = $data['message']['peer_id'];
-    bot_sendMessage($user_id);
+    bot_sendMessage($user_id, $data);
     _callback_okResponse();
 }
 
