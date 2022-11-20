@@ -16,7 +16,6 @@ class User
 
     public function __construct($db)
     {
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->conn = $db;
     }
 
