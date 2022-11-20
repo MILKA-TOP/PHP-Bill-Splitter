@@ -5,11 +5,14 @@ function bot_sendMessage($user_id, $data)
     $msg = "Привет, {$user_id}!";
     //$curr_data = stateById($user_id);
     vkApi_messagesSend($user_id, $msg);
-    vkApi_messagesSend($user_id, stateById($user_id));
+    vkApi_messagesSend($user_id, "$msg");
+    $res =stateById($user_id);
+    vkApi_messagesSend($user_id, $res);
 }
 
 function stateById($user_id)
 {
+    vkApi_messagesSend($user_id, "stateById");
     $database = new Database();
     $db = $database->getConnection();
     vkApi_messagesSend($user_id, $db);
