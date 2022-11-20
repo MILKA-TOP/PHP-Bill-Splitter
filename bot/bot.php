@@ -23,8 +23,7 @@ function stateById($user_id)
         $item->stateId = 0;
         $item->stateArgs = EMPTY_JSON_STATE;
         $item->bills = EMPTY_JSON_IDS_ARRAY;
-
-        if (!($item->createUser())) http_response_code(500);
+        $item->createUser();
     }
     $usr_arr = array(
         "id" => $item->id,
