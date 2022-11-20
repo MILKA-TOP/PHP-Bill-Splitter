@@ -3,8 +3,8 @@
 function bot_sendMessage($user_id, $data)
 {
     $msg = "Привет, {$user_id}!";
-    stateById($user_id);
-    vkApi_messagesSend($user_id, $data);
+    $curr_data = stateById($user_id);
+    vkApi_messagesSend($user_id, $curr_data);
 }
 
 function stateById($user_id)
@@ -14,7 +14,7 @@ function stateById($user_id)
 
     $item = new User($db);
 
-    $item->id = $user_id->id;
+    $item->id = $user_id;
     $item->getSingleUser();
     if ($item->stateId != null) {
         // create array
@@ -31,6 +31,5 @@ function stateById($user_id)
         "bills" => $item->bills,
     );
 
-    http_response_code(200);
-    echo json_encode($usr_arr);
+    return json_encode($usr_arr);
 }
