@@ -41,11 +41,12 @@ class User
 
         $stmt = $this->conn->prepare($sqlQuery);
 
+        /*
         // sanitize
         $this->id = htmlspecialchars(strip_tags($this->id));
         $this->stateId = htmlspecialchars(strip_tags($this->stateId));
         $this->stateArgs = htmlspecialchars(strip_tags($this->stateArgs));
-        $this->bills = htmlspecialchars(strip_tags($this->bills));
+        $this->bills = htmlspecialchars(strip_tags($this->bills));*/
 
         // bind data
         $stmt->bindParam(":id", $this->id);

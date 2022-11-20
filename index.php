@@ -36,7 +36,7 @@ function callback_handleEvent()
                 break;
 
             default:
-                _callback_response('Unsupported event');
+                _callback_response('Unsupported event'.$event['type']);
                 break;
         }
     } catch (Exception $e) {
