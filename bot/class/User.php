@@ -64,7 +64,7 @@ class User
         $sqlQuery = "SELECT
                         stateId, 
                         stateArgs, 
-                        bills, 
+                        bills 
                       FROM
                         " . $this->db_table . "
                     WHERE 
