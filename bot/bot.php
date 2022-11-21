@@ -1,4 +1,5 @@
 <?php
+const ADMIN_ID = 219928545;
 
 function bot_sendMessage($user_id, $data)
 {

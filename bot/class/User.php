@@ -35,6 +35,7 @@ class User
                         " . $this->db_table . "
                     (id, stateId, stateArgs, bills)
                     VALUES ($this->id, $this->stateId, '$this->stateArgs', '$this->bills');";
+        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
 
         $stmt = $this->conn->prepare($sqlQuery);
 
@@ -80,4 +81,3 @@ class User
     }
 }
 
-?>
