@@ -50,12 +50,8 @@ class User
         $stmt->bindParam(":stateId", $this->stateId);
         $stmt->bindParam(":stateArgs", $this->stateArgs);
         $stmt->bindParam(":bills", $this->bills);*/
-        try {
-            if ($stmt->execute()) {
-                return true;
-            }
-        } catch (PDOException $exception) {
-            echo "Database could not be connected: " . $exception->getMessage();
+        if ($stmt->execute()) {
+            return true;
         }
 
         return false;
