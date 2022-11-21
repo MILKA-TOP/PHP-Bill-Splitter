@@ -68,8 +68,7 @@ class User
                       FROM
                         " . $this->db_table . "
                     WHERE 
-                       id = ?
-                    LIMIT 0,1;";
+                       id = ?;";
         vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->id);
