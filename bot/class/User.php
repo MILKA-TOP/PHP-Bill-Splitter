@@ -36,8 +36,8 @@ class User
                     SET
                         id = :id, 
                         stateId = :stateId, 
-                        stateArgs = :stateArgs, 
-                        bills = :bills";
+                        stateArgs = json(:stateArgs), 
+                        bills = json(:bills)";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
