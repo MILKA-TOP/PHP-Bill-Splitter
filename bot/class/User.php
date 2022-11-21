@@ -33,11 +33,8 @@ class User
     {
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    SET
-                        id = :id, 
-                        stateId = :stateId, 
-                        stateArgs = json(:stateArgs), 
-                        bills = json(:bills)";
+                    (id, stateId, stateArgs, bills)
+                    VALUES ($this->id, $this->stateId, '$this->stateArgs', '$this->bills')";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
@@ -46,13 +43,13 @@ class User
         $this->id = htmlspecialchars(strip_tags($this->id));
         $this->stateId = htmlspecialchars(strip_tags($this->stateId));
         $this->stateArgs = htmlspecialchars(strip_tags($this->stateArgs));
-        $this->bills = htmlspecialchars(strip_tags($this->bills));*/
+        $this->bills = htmlspecialchars(strip_tags($this->bills));
 
         // bind data
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":stateId", $this->stateId);
         $stmt->bindParam(":stateArgs", $this->stateArgs);
-        $stmt->bindParam(":bills", $this->bills);
+        $stmt->bindParam(":bills", $this->bills);*/
 
         if ($stmt->execute()) {
             return true;
