@@ -34,7 +34,7 @@ class User
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (id, stateId, stateArgs, bills)
-                    VALUES ($this->id, $this->stateId, '$this->stateArgs', '$this->bills')";
+                    VALUES ($this->id, $this->stateId, '$this->stateArgs', '$this->bills');";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
@@ -50,10 +50,14 @@ class User
         $stmt->bindParam(":stateId", $this->stateId);
         $stmt->bindParam(":stateArgs", $this->stateArgs);
         $stmt->bindParam(":bills", $this->bills);*/
-
-        if ($stmt->execute()) {
-            return true;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (PDOException $exception) {
+            echo "Database could not be connected: " . $exception->getMessage();
         }
+
         return false;
     }
 
