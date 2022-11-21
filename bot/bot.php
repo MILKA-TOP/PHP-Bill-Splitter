@@ -25,7 +25,11 @@ function stateById($user_id)
         $item->stateArgs = EMPTY_JSON_STATE;
         $item->bills = EMPTY_JSON_IDS_ARRAY;
         $resCreate = $item->createUser();
+
         vkApi_messagesSend($user_id, "Create new: $resCreate");
+        vkApi_messagesSend($user_id, gettype($item->stateArgs));
+        vkApi_messagesSend($user_id, gettype($item->bills));
+        vkApi_messagesSend($user_id, gettype($item->stateId));
     }
     $usr_arr = array(
         "id" => $item->id,
