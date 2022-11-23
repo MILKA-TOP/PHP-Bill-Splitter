@@ -9,6 +9,10 @@ require_once 'global.php';
 require_once 'api/vk_api.php';
 
 require_once 'bot/class/User.php';
+require_once 'bot/class/SingleBill.php';
+require_once 'bot/class/Person.php';
+require_once 'bot/class/Field.php';
+require_once 'bot/class/Bill.php';
 require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
 require_once 'bot/bot.php';
