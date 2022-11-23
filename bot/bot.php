@@ -6,8 +6,9 @@ function bot_sendMessage($user_id, $data)
     $msg = "Привет, {$user_id}!";
     vkApi_messagesSend($user_id, "Start sending");
     vkApi_messagesSend($user_id, $data["message"]["text"]);
-    $curr_data = stateById($user_id);
-    vkApi_messagesSend($user_id, $curr_data);
+    completeByMessage($user_id, $data["message"]["text"]);
+    //$curr_data = stateById($user_id);
+    //vkApi_messagesSend($user_id, $curr_data);
 }
 
 function stateById($user_id)
@@ -37,4 +38,20 @@ function stateById($user_id)
     );
 
     return json_encode($usr_arr);
+}
+
+function completeByMessage($user_id, $message)
+{
+    $messagesParts = preg_split('/\s+/', $message);
+    if ($messagesParts[0] === "INC") {
+        if (sizeof($messagesParts) > 2 && is_numeric($messagesParts[1])) {
+            $currNUmber = (int)$messagesParts[1] + 1;
+            vkApi_messagesSend($user_id, "Result: $currNUmber");
+        } else {
+            vkApi_messagesSend($user_id, "Is not a number: $messagesParts[1]");
+        }
+    } else {
+        vkApi_messagesSend($user_id, "Error input: $messagesParts[0]");
+    }
+
 }
