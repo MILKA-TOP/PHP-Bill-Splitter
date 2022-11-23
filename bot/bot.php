@@ -44,7 +44,7 @@ function completeByMessage($user_id, $message)
 {
     $messagesParts = preg_split('/\s+/', $message);
     if ($messagesParts[0] === "INC") {
-        if (sizeof($messagesParts) > 2 && is_numeric($messagesParts[1])) {
+        if (sizeof($messagesParts) > 1 && is_numeric($messagesParts[1])) {
             $currNUmber = (int)$messagesParts[1] + 1;
             vkApi_messagesSend($user_id, "Result: $currNUmber");
         } else {
