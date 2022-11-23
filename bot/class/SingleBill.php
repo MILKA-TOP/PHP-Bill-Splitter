@@ -1,6 +1,6 @@
 <?php
 
-class Bill
+class SingleBill
 {
     // Connection
     private $conn;
