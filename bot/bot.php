@@ -22,7 +22,6 @@ function stateById($user_id, $db)
         $item->stateArgs = EMPTY_JSON_STATE;
         $item->bills = EMPTY_JSON_IDS_ARRAY;
         $item->createUser();
-        vkApi_messagesSend($user_id, START_MESSAGE);
     }
 
     return $item->stateId;
