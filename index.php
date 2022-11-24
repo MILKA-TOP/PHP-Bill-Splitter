@@ -15,6 +15,9 @@ require_once 'bot/class/Field.php';
 require_once 'bot/class/Bill.php';
 require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
+require_once 'bot/config/message_examples.php';
+require_once 'bot/config/states.php';
+require_once 'bot/actions/MainScreen.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
