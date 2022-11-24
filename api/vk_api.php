@@ -11,6 +11,15 @@ function vkApi_messagesSend($peer_id, $message, $attachments = array()) {
   ));
 }
 
+function vkApi_messagesSendWithKeyBoard($peer_id, $message, $keyboard, $attachments = array()) {
+    return _vkApi_call('messages.send', array(
+        'peer_id'    => $peer_id,
+        'message'    => $message,
+        'keyboard'    => $message,
+        'attachment' => implode(',', $attachments)
+    ));
+}
+
 function vkApi_usersGet($user_id) {
   return _vkApi_call('users.get', array(
     'user_id' => $user_id,

@@ -8,6 +8,6 @@ function mainStateAction($user_id, $data, $db)
         case SHOW_BILLS_BUTTON_TEXT:
             break;
         default:
-            vkApi_messagesSend($user_id, START_MESSAGE);
+            vkApi_messagesSendWithKeyBoard($user_id, START_MESSAGE, MAIN_JSON_BUTTONS);
     }
 }
