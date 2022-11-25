@@ -5,7 +5,7 @@ function inputNameAction($user_id, $data, $db)
     if (namePayloadSwitch($user_id, $data, $db)) return;
 
     $input_name = $data["message"]["text"];
-    if ($input_name !== '' && strlen($input_name) < BILL_NAME_MAX_SIZE) {
+    if (strlen($input_name) > 0 && strlen($input_name) < BILL_NAME_MAX_SIZE) {
         setCurrentName($user_id, $input_name, $db);
     } else {
         vkApi_messagesSend($user_id, INPUT_NAME_INCORRECT_MESSAGE, CREATE_BILL_INPUT);
