@@ -48,5 +48,8 @@ function showUserBills($user_id, $db)
 
 function startCreateUserBills($user_id, $db)
 {
-    vkApi_messagesSend($user_id, DEVELOP_MESSAGE, MAIN_KEYBOARD);
+    $user = new User($db);
+    $user->id = $user_id;
+    $user->updateState(SET_BILL_NAME_STATE);
+    vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
 }

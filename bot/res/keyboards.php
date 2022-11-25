@@ -17,3 +17,13 @@ const MAIN_KEYBOARD = [
             "payload" => '{"command": "' . HELP_PAYLOAD . '"}',
             "label" => HELP_TEXT],
             "color" => "secondary"]]]];
+
+const CREATE_BILL_INPUT = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+            "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"],
+    ]]];

@@ -61,5 +61,24 @@ class User
         $this->stateArgs = $dataRow['stateArgs'];
         $this->bills = $dataRow['bills'];
     }
+
+    public function updateState($newStateId)
+    {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET stateId = " . $newStateId . "
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
+    public function updateStateWithArgs($newStateId, $newStateArgs)
+    {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET stateId = " . $newStateId . ",
+                        stateArgs = " . $newStateArgs . "
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
 }
 

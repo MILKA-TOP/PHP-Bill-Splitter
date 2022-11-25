@@ -5,8 +5,14 @@ const START_MESSAGE = "Добро пожаловать в бота \"Bill-Splitt
 
 const DEVELOP_MESSAGE = "Данный раздел еще находится в разработке <3";
 
+const INPUT_NAME_MESSAGE = "Введите пожалуйста название данного чека.\nМожете сюда вписать название" .
+    " заведение, дату встречи или что-то иное\n\nДля отмены нажмите на кнопку \"Отмена\"";
+
 const ERROR_MAIN_MESSAGE = "Пожалуйста, введите корректную команду";
 
 const CREATE_BILL_BUTTON_TEXT = "Создать счёт";
 const SHOW_BILLS_BUTTON_TEXT = "Показать доступные счета";
 const HELP_TEXT = "Помощь";
+
+const NEXT_BUTTON_TEXT = "Далее";
+const CANCEL_BUTTON_TEXT = "Отмена";
