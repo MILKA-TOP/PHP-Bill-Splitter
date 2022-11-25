@@ -19,9 +19,9 @@ require_once 'bot/config/states.php';
 require_once 'bot/config/payloads.php';
 require_once 'bot/actions/MainScreen.php';
 require_once 'bot/actions/CreateStateScreen.php';
+require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/res/numbers.php';
-require_once 'bot/res/strings.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
