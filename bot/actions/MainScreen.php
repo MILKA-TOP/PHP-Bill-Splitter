@@ -2,7 +2,7 @@
 
 function mainStateAction($user_id, $data, $db)
 {
-    if (payloadSwitch($user_id, $data, $db)) return;
+    if (mainPayloadSwitch($user_id, $data, $db)) return;
 
     switch ($data["message"]["text"]) {
         default:
@@ -10,7 +10,7 @@ function mainStateAction($user_id, $data, $db)
     }
 }
 
-function payloadSwitch($user_id, $data, $db)
+function mainPayloadSwitch($user_id, $data, $db)
 {
     if (isset($data["message"]["payload"])) {
         $data_payload = $data["message"]["payload"];

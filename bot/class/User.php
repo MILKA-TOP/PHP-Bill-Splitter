@@ -75,7 +75,7 @@ class User
     {
         $sqlQuery = "UPDATE " . $this->db_table . " 
                     SET stateId = " . $newStateId . ",
-                        stateArgs = " . $newStateArgs . "
+                        stateArgs = '" . $newStateArgs . "'
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();

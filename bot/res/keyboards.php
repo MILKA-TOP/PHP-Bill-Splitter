@@ -27,3 +27,25 @@ const CREATE_BILL_INPUT = [
             "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"],
     ]]];
+
+const CONFIRM_BILL_NAME_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+                "label" => RENAME_BUTTON_TEXT],
+            "color" => "negative"],
+            [
+                "action" => [
+                    "type" => "text",
+                    "payload" => '{"command": "' . CONFIRM_PAYLOAD . '"}',
+                    "label" => OK_BUTTON_TEXT],
+                "color" => "positive"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+            "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"],
+        ]]];

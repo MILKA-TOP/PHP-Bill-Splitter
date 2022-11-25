@@ -6,4 +6,6 @@ const SHOW_BILLS_PAYLOAD = "show_user_bills";
 const HELP_PAYLOAD = "help";
 
 const NEXT_PAYLOAD = "next";
+const CONFIRM_PAYLOAD = "confirm";
+const BACK_PAYLOAD = "back";
 const CANCEL_PAYLOAD = "cancel";
