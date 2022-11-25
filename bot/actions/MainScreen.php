@@ -2,7 +2,7 @@
 
 function mainStateAction($user_id, $data, $db)
 {
-    if (checkStartPayload($data)) {
+    if (payloadSwitch($user_id, $data)) {
         vkApi_messagesSend($user_id, START_MESSAGE, MAIN_KEYBOARD);
         return;
     }
@@ -23,10 +23,13 @@ function mainStateAction($user_id, $data, $db)
         }
 }
 
-function checkStartPayload($data)
+function payloadSwitch($user_id, $data)
 {
     if (isset($data["message"]["payload"])) {
-        return $data["message"]["payload"] === '{"command":"start"}';
+        $data_payload = json_decode($data["message"]["payload"]);
+        vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
+
+        return $data_payload["command"] === 'start';
     }
     return false;
 }
