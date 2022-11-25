@@ -17,13 +17,13 @@ function payloadSwitch($user_id, $data, $db)
         vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
         if (!isset($data_payload[COMMAND_PAYLOAD])) return false;
         switch ($data["message"]["text"]) {
-            case CREATE_BILL_BUTTON_TEXT:
+            case CREATE_BILL_PAYLOAD:
                 startCreateUserBills($user_id, $db);
                 break;
-            case SHOW_BILLS_BUTTON_TEXT:
+            case SHOW_BILLS_PAYLOAD:
                 showUserBills($user_id, $db);
                 break;
-            case HELP_TEXT:
+            case HELP_PAYLOAD:
                 vkApi_messagesSend($user_id, START_MESSAGE, MAIN_KEYBOARD);
                 break;
             default:
