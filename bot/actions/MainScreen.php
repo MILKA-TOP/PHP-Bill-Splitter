@@ -33,7 +33,14 @@ function checkStartPayload($data)
 
 function showUserBills($user_id, $db)
 {
-    vkApi_messagesSend($user_id, DEVELOP_MESSAGE, MAIN_KEYBOARD);
+    $user = new User($db);
+    $user->id = $user_id;
+    $user->getSingleUser();
+
+    $bill = new Bill($db);
+    $bill_id_list = json_decode($user->bills);
+    $bill_name_list = $bill->getNameBillList($bill_id_list);
+    vkApi_messagesSend($user_id, $bill_name_list, MAIN_KEYBOARD);
 }
 
 function startCreateUserBills($user_id, $db)

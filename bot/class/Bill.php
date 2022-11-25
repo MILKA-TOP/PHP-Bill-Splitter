@@ -70,5 +70,22 @@ class Bill
         $this->name  = $dataRow['name'];
         $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
+
+    public function getNameBillList($id_array)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        name 
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id in (" . implode(', ', $id_array) . ");";
+        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $dataRow;
+    }
+
 }
 
