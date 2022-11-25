@@ -20,8 +20,6 @@ require_once 'bot/config/states.php';
 require_once 'bot/actions/MainScreen.php';
 require_once 'bot/bot.php';
 
-const MAIN_BUTTONS_JSON_FILE = "bot/res/json/main_buttons.json";
-
 if (!isset($_REQUEST)) {
     exit;
 }
