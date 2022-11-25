@@ -19,9 +19,9 @@ function payloadSwitch($user_id, $data, $db)
         $array = json_decode($data_payload, true);
         vkApi_messagesSend($user_id, isset($data_payload[COMMAND_PAYLOAD]));
         vkApi_messagesSend($user_id, isset($array[COMMAND_PAYLOAD]));
-        if (!isset($data_payload[COMMAND_PAYLOAD])) return false;
-        vkApi_messagesSend($user_id, $data_payload[COMMAND_PAYLOAD]);
-        switch ($data_payload[COMMAND_PAYLOAD]) {
+        if (!isset($array[COMMAND_PAYLOAD])) return false;
+        vkApi_messagesSend($user_id, $array[COMMAND_PAYLOAD]);
+        switch ($array[COMMAND_PAYLOAD]) {
             case CREATE_BILL_PAYLOAD:
                 startCreateUserBills($user_id, $db);
                 break;
