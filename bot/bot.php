@@ -31,10 +31,10 @@ function actionByState($user_id, $stateId, $data, $db)
 {
     switch ($stateId) {
         case START_STATE:
-            mainStateAction($user_id, $data, $db);
+            (new StartState())->stateAction($user_id, $data, $db);
             break;
         case SET_BILL_NAME_STATE:
-            inputNameAction($user_id, $data, $db);
+            (new InputNameState())->stateAction($user_id, $data, $db);
             break;
     }
 }
