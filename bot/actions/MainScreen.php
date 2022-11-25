@@ -13,7 +13,7 @@ function mainStateAction($user_id, $data, $db)
 function payloadSwitch($user_id, $data, $db)
 {
     if (isset($data["message"]["payload"])) {
-        $data_payload = $data["message"]["payload"];
+        $data_payload = json_decode($data["message"]["payload"], true);
         vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
         vkApi_messagesSend($user_id, gettype($data_payload), MAIN_KEYBOARD);
         vkApi_messagesSend($user_id, isset($data_payload[COMMAND_PAYLOAD]));
