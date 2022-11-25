@@ -27,7 +27,7 @@ function payloadSwitch($user_id, $data)
 {
     if (isset($data["message"]["payload"])) {
         vkApi_messagesSend($user_id, $data["message"]["payload"], MAIN_KEYBOARD);
-        $data_payload = json_decode($data["message"]["payload"]);
+        $data_payload = $data["message"]["payload"];
         vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
 
         //return $data_payload["command"] === 'start';
