@@ -16,7 +16,7 @@ function payloadSwitch($user_id, $data, $db)
         $data_payload = $data["message"]["payload"];
         vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
         if (!isset($data_payload[COMMAND_PAYLOAD])) return false;
-        switch ($data["message"]["text"]) {
+        switch ($data_payload[COMMAND_PAYLOAD]) {
             case CREATE_BILL_PAYLOAD:
                 startCreateUserBills($user_id, $db);
                 break;
