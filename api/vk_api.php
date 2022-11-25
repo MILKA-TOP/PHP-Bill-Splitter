@@ -3,12 +3,22 @@
 define('VK_API_VERSION', '5.131'); //Используемая версия API
 define('VK_API_ENDPOINT', 'https://api.vk.com/method/');
 
-function vkApi_messagesSend($peer_id, $message, $attachments = array()) {
+function vkApi_messagesSend($peer_id, $message, $keyboard = array(), $attachments = array()) {
   return _vkApi_call('messages.send', array(
     'peer_id'    => $peer_id,
     'message'    => $message,
-    'attachment' => implode(',', $attachments)
+      'keyboard'    => json_encode($keyboard, JSON_UNESCAPED_UNICODE),
+      'attachment' => implode(',', $attachments)
   ));
+}
+
+function vkApi_messagesSendWithKeyBoard($peer_id, $message, $keyboard, $attachments = array()) {
+    return _vkApi_call('messages.send', array(
+        'peer_id'    => $peer_id,
+        'message'    => $message,
+        'keyboard'    => json_encode($keyboard, JSON_UNESCAPED_UNICODE),
+        'attachment' => implode(',', $attachments)
+    ));
 }
 
 function vkApi_usersGet($user_id) {

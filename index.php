@@ -9,8 +9,16 @@ require_once 'global.php';
 require_once 'api/vk_api.php';
 
 require_once 'bot/class/User.php';
+require_once 'bot/class/SingleBill.php';
+require_once 'bot/class/Person.php';
+require_once 'bot/class/Field.php';
+require_once 'bot/class/Bill.php';
 require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
+require_once 'bot/config/message_examples.php';
+require_once 'bot/config/states.php';
+require_once 'bot/actions/MainScreen.php';
+require_once 'bot/res/keyboards.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
@@ -36,7 +44,7 @@ function callback_handleEvent()
                 break;
 
             default:
-                _callback_response('Unsupported event: '.$event['type']);
+                _callback_response('Unsupported event '.$event['type']);
                 break;
         }
     } catch (Exception $e) {

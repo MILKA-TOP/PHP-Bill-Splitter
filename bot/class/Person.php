@@ -1,16 +1,16 @@
 <?php
 
-class User
+class Person
 {
     // Columns
     public $id;
-    public $stateId;
-    public $stateArgs;
-    public $bills;
+    public $name;
+    public $singleBillsIds;
+    public $billId;
     // Connection
     private $conn;
     // Table
-    private $db_table = "USER";
+    private $db_table = "PERSON";
 
     public function __construct($db)
     {
@@ -18,21 +18,21 @@ class User
     }
 
     // GET ALL
-    public function getUsers()
+    public function getPerson()
     {
-        $sqlQuery = "SELECT id, stateId, stateArgs, bills FROM " . $this->db_table . "";
+        $sqlQuery = "SELECT id, name, singleBillsIds, billId FROM " . $this->db_table . "";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt;
     }
 
     // CREATE
-    public function createUser()
+    public function createPerson()
     {
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    (id, stateId, stateArgs, bills)
-                    VALUES ($this->id, $this->stateId, '$this->stateArgs', '$this->bills');";
+                    (name, singleBillsIds, billId)
+                    VALUES ($this->name, '$this->singleBillsIds', $this->billId);";
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
@@ -43,12 +43,12 @@ class User
     }
 
     // READ single
-    public function getSingleUser()
+    public function getSinglePerson()
     {
         $sqlQuery = "SELECT
-                        stateId, 
-                        stateArgs, 
-                        bills 
+                        name, 
+                        singleBillsIds, 
+                        billId 
                       FROM
                         " . $this->db_table . "
                     WHERE 
@@ -57,9 +57,9 @@ class User
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->stateId = $dataRow['stateId'];
-        $this->stateArgs = $dataRow['stateArgs'];
-        $this->bills = $dataRow['bills'];
+        $this->name = $dataRow['name'];
+        $this->singleBillsIds = $dataRow['singleBillsIds'];
+        $this->billId = $dataRow['billId'];
     }
 }
 
