@@ -2,12 +2,20 @@
 
 function mainStateAction($user_id, $data, $db)
 {
-    if (payloadSwitch($user_id, $data)) {
-        vkApi_messagesSend($user_id, START_MESSAGE, MAIN_KEYBOARD);
-        return;
-    }
+    if (payloadSwitch($user_id, $data, $db)) return;
 
-    if (isset($data["message"]["payload"]))
+    switch ($data["message"]["text"]) {
+        default:
+            vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, MAIN_KEYBOARD);
+    }
+}
+
+function payloadSwitch($user_id, $data, $db)
+{
+    if (isset($data["message"]["payload"])) {
+        $data_payload = $data["message"]["payload"];
+        vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
+        if (!isset($data_payload[COMMAND_PAYLOAD])) return false;
         switch ($data["message"]["text"]) {
             case CREATE_BILL_BUTTON_TEXT:
                 startCreateUserBills($user_id, $db);
@@ -19,19 +27,8 @@ function mainStateAction($user_id, $data, $db)
                 vkApi_messagesSend($user_id, START_MESSAGE, MAIN_KEYBOARD);
                 break;
             default:
-                vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, MAIN_KEYBOARD);
+                return false;
         }
-}
-
-function payloadSwitch($user_id, $data)
-{
-    if (isset($data["message"]["payload"])) {
-        vkApi_messagesSend($user_id, $data["message"]["payload"], MAIN_KEYBOARD);
-        $data_payload = $data["message"]["payload"];
-        vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
-
-        //return $data_payload["command"] === 'start';
-        return false;
     }
     return false;
 }
