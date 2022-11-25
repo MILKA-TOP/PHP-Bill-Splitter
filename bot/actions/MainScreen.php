@@ -16,6 +16,7 @@ function payloadSwitch($user_id, $data, $db)
         $data_payload = $data["message"]["payload"];
         vkApi_messagesSend($user_id, $data_payload, MAIN_KEYBOARD);
         vkApi_messagesSend($user_id, isset($data_payload[COMMAND_PAYLOAD]));
+        vkApi_messagesSend($user_id, isset($data_payload["command"]));
         if (!isset($data_payload[COMMAND_PAYLOAD])) return false;
         vkApi_messagesSend($user_id, $data_payload[COMMAND_PAYLOAD]);
         switch ($data_payload[COMMAND_PAYLOAD]) {
