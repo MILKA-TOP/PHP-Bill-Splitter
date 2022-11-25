@@ -26,8 +26,7 @@ function mainStateAction($user_id, $data, $db)
 function checkStartPayload($data)
 {
     if (isset($data["message"]["payload"])) {
-        $start_json_array = json_decode($data["message"]["payload"]);
-        return isset($start_json_array["command"]) && $start_json_array["command"] == "start";
+        return isset($data["message"]["payload"]["command"]) && $data["message"]["payload"]["command"] == "start";
     }
     return false;
 }
