@@ -1,11 +1,11 @@
 <?php
 const MAIN_KEYBOARD = [
     "one_time" => false,
-    "buttons" => [
-        ["action" => [
+    "buttons" => [[[
+        "action" => [
             "type" => "text",
             "label" => CREATE_BILL_BUTTON_TEXT],
-            "color" => "positive"],
+        "color" => "positive"],
         ["action" => [
             "type" => "text",
             "label" => SHOW_BILLS_BUTTON_TEXT],
@@ -13,4 +13,4 @@ const MAIN_KEYBOARD = [
         ["action" => [
             "type" => "text",
             "label" => HELP_TEXT],
-            "color" => "secondary"]]];
+            "color" => "secondary"]]]];
