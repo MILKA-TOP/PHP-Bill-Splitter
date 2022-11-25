@@ -4,6 +4,8 @@ function mainStateAction($user_id, $data, $db)
 {
     if (isset($data["payload"])) {
         vkApi_messagesSend($user_id, $data["payload"]);
+    } else {
+        vkApi_messagesSend($user_id, $data);
     }
     switch ($data["message"]["text"]) {
         case CREATE_BILL_BUTTON_TEXT:
