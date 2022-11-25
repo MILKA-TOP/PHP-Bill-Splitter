@@ -43,7 +43,7 @@ function callback_handleEvent()
                 break;
 
             default:
-                _callback_response('Unsupported event'.$event['type']);
+                _callback_response('Unsupported event '.$event['type']);
                 break;
         }
     } catch (Exception $e) {
