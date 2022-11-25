@@ -15,7 +15,7 @@ function vkApi_messagesSendWithKeyBoard($peer_id, $message, $keyboard, $attachme
     return _vkApi_call('messages.send', array(
         'peer_id'    => $peer_id,
         'message'    => $message,
-        'keyboard'    => $message,
+        'keyboard'    => $keyboard,
         'attachment' => implode(',', $attachments)
     ));
 }
