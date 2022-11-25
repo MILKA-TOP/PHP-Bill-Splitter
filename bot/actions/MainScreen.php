@@ -8,6 +8,14 @@ function mainStateAction($user_id, $data, $db)
         case SHOW_BILLS_BUTTON_TEXT:
             break;
         default:
-            vkApi_messagesSendWithKeyBoard($user_id, START_MESSAGE, MAIN_JSON_BUTTONS);
+            vkApi_messagesSendWithKeyBoard($user_id, START_MESSAGE, [
+                "one_time" => true,
+                "buttons" => [[
+                    ["action" => [
+                        "type" => "text",
+                        "payload" => '{"button": "1"}',
+                        "label" => "Фрукты?"],
+                        "color" => "default"],
+                ]]]);
     }
 }
