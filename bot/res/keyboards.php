@@ -4,6 +4,7 @@ const MAIN_KEYBOARD = [
     "buttons" => [[
         ["action" => [
             "type" => "text",
+            "payload" => '{"command": "create"}',
             "label" => CREATE_BILL_BUTTON_TEXT],
             "color" => "positive"]],
         [["action" => [
