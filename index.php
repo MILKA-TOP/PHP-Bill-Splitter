@@ -22,6 +22,8 @@ require_once 'bot/actions/StartState.php';
 require_once 'bot/actions/InputNameState.php';
 require_once 'bot/actions/ConfirmNameState.php';
 require_once 'bot/actions/InputPasswordState.php';
+require_once 'bot/model/KeyboardModel.php';
+require_once 'bot/model/StateModel.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/res/numbers.php';

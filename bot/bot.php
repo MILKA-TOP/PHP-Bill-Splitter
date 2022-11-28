@@ -29,7 +29,12 @@ function stateById($user_id, $db)
 
 function actionByState($user_id, $stateId, $data, $db)
 {
-    switch ($stateId) {
+    (new (
+    state_model[$stateId](
+        $stateId,
+        keyboard_model[$stateId]
+    )))->stateAction($user_id, $data, $db);
+    /*switch ($stateId) {
         case START_STATE:
             (new StartState(START_STATE, array()))->stateAction($user_id, $data, $db);
             break;
@@ -42,5 +47,5 @@ function actionByState($user_id, $stateId, $data, $db)
         case SET_BILL_PASSWORD_INPUT_STATE:
             (new InputPasswordState(SET_BILL_PASSWORD_INPUT_STATE, array()))->stateAction($user_id, $data, $db);
             break;
-    }
+    }*/
 }
