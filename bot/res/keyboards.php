@@ -49,3 +49,19 @@ const CONFIRM_BILL_NAME_KEYBOARD = [
             "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"],
         ]]];
+
+const INPUT_PASSWORD_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . SKIP_PASSWORD_PAYLOAD . '"}',
+                "label" => SKIP_PASSWORD_BUTTON_TEXT],
+            "color" => "primary"]],
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+                "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"]]]];

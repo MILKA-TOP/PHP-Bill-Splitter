@@ -1,16 +1,16 @@
 <?php
 
 
-class ConfirmNameState
+class ConfirmNameState implements BotState
 {
     function stateAction($user_id, $data, $db)
     {
-        if ($this->namePayloadSwitch($user_id, $data, $db)) return;
+        if ($this->payloadSwitch($user_id, $data, $db)) return;
 
         vkApi_messagesSend($user_id, CONFIRM_INPUT_NAME_INCORRECT_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
     }
 
-    private function namePayloadSwitch($user_id, $data, $db)
+    private function payloadSwitch($user_id, $data, $db)
     {
         if (isset($data["message"]["payload"])) {
             $data_payload = $data["message"]["payload"];
@@ -37,6 +37,10 @@ class ConfirmNameState
     private function setConfirmState($user_id, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(SET_BILL_PASSWORD_INPUT_STATE);
+        vkApi_messagesSend($user_id, INPUT_PASSWORD_MESSAGE, INPUT_PASSWORD_KEYBOARD);
     }
 
     private function setBackState($user_id, $db)

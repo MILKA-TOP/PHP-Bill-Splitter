@@ -10,3 +10,7 @@ function setNameStateJsonArgument($name)
 {
     return json_encode(array("name" => $name));
 }
+
+function setPasswordFieldToJson($input_json, $password) {
+
+}

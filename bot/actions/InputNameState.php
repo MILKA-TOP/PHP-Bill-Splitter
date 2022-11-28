@@ -1,11 +1,11 @@
 <?php
 
 
-class InputNameState
+class InputNameState implements BotState
 {
     function stateAction($user_id, $data, $db)
     {
-        if ($this->namePayloadSwitch($user_id, $data, $db)) return;
+        if ($this->payloadSwitch($user_id, $data, $db)) return;
 
         $input_name = $data["message"]["text"];
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_NAME_MAX_SIZE) {
@@ -15,7 +15,7 @@ class InputNameState
         }
     }
 
-    private function namePayloadSwitch($user_id, $data, $db)
+    private function payloadSwitch($user_id, $data, $db)
     {
         if (isset($data["message"]["payload"])) {
             $data_payload = $data["message"]["payload"];

@@ -1,6 +1,6 @@
 <?php
 
-class StartState
+class StartState implements BotState
 {
     public function stateAction($user_id, $data, $db)
     {

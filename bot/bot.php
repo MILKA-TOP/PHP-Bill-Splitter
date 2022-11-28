@@ -39,5 +39,8 @@ function actionByState($user_id, $stateId, $data, $db)
         case SET_BILL_CONFIRM_NAME_STATE:
             (new ConfirmNameState())->stateAction($user_id, $data, $db);
             break;
+        case SET_BILL_PASSWORD_INPUT_STATE:
+            (new InputPasswordState())->stateAction($user_id, $data, $db);
+            break;
     }
 }
