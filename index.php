@@ -17,6 +17,7 @@ require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
 require_once 'bot/config/states.php';
 require_once 'bot/config/payloads.php';
+require_once 'bot/actions/BotState.php';
 require_once 'bot/actions/StartState.php';
 require_once 'bot/actions/InputNameState.php';
 require_once 'bot/actions/ConfirmNameState.php';
