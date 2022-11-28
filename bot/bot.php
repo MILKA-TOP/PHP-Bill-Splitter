@@ -29,11 +29,11 @@ function stateById($user_id, $db)
 
 function actionByState($user_id, $stateId, $data, $db)
 {
-    (new (
+    new (
     state_model[$stateId](
         $stateId,
         keyboard_model[$stateId]
-    )))->stateAction($user_id, $data, $db);
+    ))->stateAction($user_id, $data, $db);
     /*switch ($stateId) {
         case START_STATE:
             (new StartState(START_STATE, array()))->stateAction($user_id, $data, $db);
