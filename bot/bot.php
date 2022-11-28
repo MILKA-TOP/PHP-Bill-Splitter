@@ -31,16 +31,16 @@ function actionByState($user_id, $stateId, $data, $db)
 {
     switch ($stateId) {
         case START_STATE:
-            (new StartState())->stateAction($user_id, $data, $db);
+            (new StartState(START_STATE, array()))->stateAction($user_id, $data, $db);
             break;
         case SET_BILL_NAME_STATE:
-            (new InputNameState())->stateAction($user_id, $data, $db);
+            (new InputNameState(SET_BILL_NAME_STATE, array()))->stateAction($user_id, $data, $db);
             break;
         case SET_BILL_CONFIRM_NAME_STATE:
-            (new ConfirmNameState())->stateAction($user_id, $data, $db);
+            (new ConfirmNameState(SET_BILL_CONFIRM_NAME_STATE, array()))->stateAction($user_id, $data, $db);
             break;
         case SET_BILL_PASSWORD_INPUT_STATE:
-            (new InputPasswordState())->stateAction($user_id, $data, $db);
+            (new InputPasswordState(SET_BILL_PASSWORD_INPUT_STATE, array()))->stateAction($user_id, $data, $db);
             break;
     }
 }
