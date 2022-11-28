@@ -29,7 +29,8 @@ function stateById($user_id, $db)
 
 function actionByState($user_id, $stateId, $data, $db)
 {
-    $state_object = new state_model[$stateId]($stateId, keyboard_model[$stateId]);
+    $state_class = state_model[$stateId];
+    $state_object = new $state_class($stateId, keyboard_model[$stateId]);
     $state_object->stateAction($user_id, $data, $db);
     /*switch ($stateId) {
         case START_STATE:
