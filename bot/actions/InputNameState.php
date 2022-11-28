@@ -1,7 +1,7 @@
 <?php
 
 
-class InputNameState implements BotState
+class InputNameState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {

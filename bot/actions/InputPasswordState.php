@@ -1,6 +1,6 @@
 <?php
 
-class InputPasswordState implements BotState
+class InputPasswordState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {

@@ -1,7 +1,7 @@
 <?php
 
 
-class ConfirmNameState implements BotState
+class ConfirmNameState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {
