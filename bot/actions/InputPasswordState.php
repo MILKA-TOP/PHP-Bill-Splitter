@@ -22,7 +22,7 @@ class InputPasswordState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case CANCEL_PAYLOAD:
-                    $this->setCancelState($user_id, $db);
+                    $this->toStartMenuState($user_id, $db);
                     break;
                 case SKIP_PASSWORD_PAYLOAD:
                     $this->skipPassword($user_id, $db);
@@ -33,14 +33,6 @@ class InputPasswordState extends BotState
             return true;
         }
         return false;
-    }
-
-    private function setCancelState($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateStateWithArgs(START_STATE, EMPTY_JSON_STATE);
-        vkApi_messagesSend($user_id, ROLLBACK_TO_MAIN_MENU, MAIN_KEYBOARD);
     }
 
     private function setCurrentPassword($user_id, $password, $db)

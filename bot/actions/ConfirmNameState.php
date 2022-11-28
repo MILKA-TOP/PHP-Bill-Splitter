@@ -24,7 +24,7 @@ class ConfirmNameState extends BotState
                     $this->setBackState($user_id, $db);
                     break;
                 case CANCEL_PAYLOAD:
-                    $this->setCancelState($user_id, $db);
+                    $this->toStartMenuState($user_id, $db);
                     break;
                 default:
                     return false;
@@ -49,15 +49,6 @@ class ConfirmNameState extends BotState
         $user->id = $user_id;
         $user->updateStateWithArgs(SET_BILL_NAME_STATE, EMPTY_JSON_STATE);
         vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
-    }
-
-
-    private function setCancelState($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateStateWithArgs(START_STATE, EMPTY_JSON_STATE);
-        vkApi_messagesSend($user_id, ROLLBACK_TO_MAIN_MENU, MAIN_KEYBOARD);
     }
 
 }

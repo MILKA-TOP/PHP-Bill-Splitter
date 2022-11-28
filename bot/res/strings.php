@@ -38,3 +38,4 @@ const RENAME_BUTTON_TEXT = "Переименовать";
 const OK_BUTTON_TEXT = "Ок";
 const CANCEL_BUTTON_TEXT = "Отмена";
 const SKIP_PASSWORD_BUTTON_TEXT = "Пропустить пароль";
+const CHANGE_PASSWORD_BUTTON_TEXT = "Изменить пароль";

@@ -65,3 +65,20 @@ const INPUT_PASSWORD_KEYBOARD = [
                 "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
                 "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"]]]];
+
+const CONFIRM_PASSWORD_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+                "label" => CHANGE_PASSWORD_BUTTON_TEXT],
+            "color" => "negative"]],
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+                "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+
