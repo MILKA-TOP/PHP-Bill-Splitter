@@ -45,7 +45,7 @@ class InputPasswordState implements BotState
 
     private function setCurrentPassword($user_id, $password, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, INPUT_PASSWORD_KEYBOARD);
 
         #$user = new User($db);
         #$user->id = $user_id;
@@ -55,7 +55,7 @@ class InputPasswordState implements BotState
 
     private function skipPassword($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, INPUT_PASSWORD_KEYBOARD);
 
         #$user = new User($db);
         #$user->id = $user_id;
