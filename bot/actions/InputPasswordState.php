@@ -10,7 +10,7 @@ class InputPasswordState extends BotState
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_PASSWORD_MAX_SIZE) {
             $this->setCurrentPassword($user_id, $input_name, $db);
         } else {
-            vkApi_messagesSend($user_id, INPUT_PASSWORD_INCORRECT_MESSAGE, INPUT_PASSWORD_KEYBOARD);
+            vkApi_messagesSend($user_id, INPUT_PASSWORD_INCORRECT_MESSAGE, $this->keyboard);
         }
     }
 
@@ -45,7 +45,7 @@ class InputPasswordState extends BotState
 
     private function setCurrentPassword($user_id, $password, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, INPUT_PASSWORD_KEYBOARD);
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
 
         #$user = new User($db);
         #$user->id = $user_id;
@@ -55,7 +55,7 @@ class InputPasswordState extends BotState
 
     private function skipPassword($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, INPUT_PASSWORD_KEYBOARD);
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
 
         #$user = new User($db);
         #$user->id = $user_id;

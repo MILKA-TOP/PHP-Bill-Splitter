@@ -11,7 +11,7 @@ class InputNameState extends BotState
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_NAME_MAX_SIZE) {
             $this->setCurrentName($user_id, $input_name, $db);
         } else {
-            vkApi_messagesSend($user_id, INPUT_NAME_INCORRECT_MESSAGE, CREATE_BILL_INPUT);
+            vkApi_messagesSend($user_id, INPUT_NAME_INCORRECT_MESSAGE, $this->keyboard);
         }
     }
 

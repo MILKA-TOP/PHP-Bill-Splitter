@@ -3,13 +3,13 @@
 abstract class BotState
 {
 
-    private $state_number;
-    private $keyboard;
+    protected $state_number;
+    protected $keyboard;
 
     public function __construct(int $state_number, array $keyboard)
     {
-        $this->$state_number=$state_number;
-        $this->$keyboard=$keyboard;
+        $this->state_number=$state_number;
+        $this->keyboard=$keyboard;
     }
 
     abstract public function stateAction($user_id, $data, $db);

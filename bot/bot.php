@@ -32,18 +32,4 @@ function actionByState($user_id, $stateId, $data, $db)
     $state_class = state_model[$stateId];
     $state_object = new $state_class($stateId, keyboard_model[$stateId]);
     $state_object->stateAction($user_id, $data, $db);
-    /*switch ($stateId) {
-        case START_STATE:
-            (new StartState(START_STATE, array()))->stateAction($user_id, $data, $db);
-            break;
-        case SET_BILL_NAME_STATE:
-            (new InputNameState(SET_BILL_NAME_STATE, array()))->stateAction($user_id, $data, $db);
-            break;
-        case SET_BILL_CONFIRM_NAME_STATE:
-            (new ConfirmNameState(SET_BILL_CONFIRM_NAME_STATE, array()))->stateAction($user_id, $data, $db);
-            break;
-        case SET_BILL_PASSWORD_INPUT_STATE:
-            (new InputPasswordState(SET_BILL_PASSWORD_INPUT_STATE, array()))->stateAction($user_id, $data, $db);
-            break;
-    }*/
 }

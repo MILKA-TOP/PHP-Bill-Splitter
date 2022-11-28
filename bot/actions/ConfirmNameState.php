@@ -7,7 +7,7 @@ class ConfirmNameState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        vkApi_messagesSend($user_id, CONFIRM_INPUT_NAME_INCORRECT_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
+        vkApi_messagesSend($user_id, CONFIRM_INPUT_NAME_INCORRECT_MESSAGE, $this->keyboard);
     }
 
     private function payloadSwitch($user_id, $data, $db)

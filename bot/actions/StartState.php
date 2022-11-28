@@ -8,7 +8,7 @@ class StartState extends BotState
 
         switch ($data["message"]["text"]) {
             default:
-                vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, MAIN_KEYBOARD);
+                vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
         }
     }
 
@@ -26,7 +26,7 @@ class StartState extends BotState
                     $this->showUserBills($user_id, $db);
                     break;
                 case HELP_PAYLOAD:
-                    vkApi_messagesSend($user_id, START_MESSAGE, MAIN_KEYBOARD);
+                    vkApi_messagesSend($user_id, START_MESSAGE, $this->keyboard);
                     break;
                 default:
                     return false;
@@ -45,7 +45,7 @@ class StartState extends BotState
         $bill = new Bill($db);
         $bill_id_list = json_decode($user->bills);
         $bill_name_list = $bill->getNameBillList($bill_id_list);
-        vkApi_messagesSend($user_id, $bill_name_list, MAIN_KEYBOARD);
+        vkApi_messagesSend($user_id, $bill_name_list, $this->keyboard);
     }
 
     private function startCreateUserBills($user_id, $db)
