@@ -115,14 +115,14 @@ const TEST_INLINE_KEYBOARD = [
 const BACK_BUTTON = [
     "action" => [
         "type" => "callback",
-        "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+        "payload" => '{"command": "' . PREV_PAGE_PAYLOAD . '"}',
         "label" => PREV_PAGE_INLINE],
     "color" => "positive"];
 
 const NEXT_BUTTON = [
     "action" => [
         "type" => "callback",
-        "payload" => '{"command": "' . CONFIRM_PAYLOAD . '"}',
+        "payload" => '{"command": "' . NEXT_PAGE_PAYLOAD . '"}',
         "label" => NEXT_PAGE_INLINE],
     "color" => "positive"];
 

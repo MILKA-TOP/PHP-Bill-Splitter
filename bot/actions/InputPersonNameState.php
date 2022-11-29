@@ -20,7 +20,6 @@ class InputPersonNameState extends BotState
         $data_payload = $this->getPayloadArgs($data);
         if (!empty($data_payload)) {
             $array = json_decode($data_payload, true);
-            vkApi_messagesSend($user_id, print_r($array, true), $this->keyboard);
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case CANCEL_PAYLOAD:
@@ -32,12 +31,26 @@ class InputPersonNameState extends BotState
                 case REMOVE_PERSON_PAYLOAD:
                     $this->removePerson($user_id, $array, $db);
                     break;
+                case PREV_PAGE_PAYLOAD:
+                    $this->prevPage($user_id, $db);
+                    break;
+                case NEXT_PAGE_PAYLOAD:
+                    $this->nextPage($user_id, $db);
+                    break;
                 default:
                     return false;
             }
             return true;
         }
         return false;
+    }
+
+    private function prevPage($user_id, $db) {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+    }
+
+    private function nextPage($user_id, $db) {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
     private function creatingBill($user_id, $db)
