@@ -148,7 +148,6 @@ function arrayOfPersonButtons($names_array, $with_back = false, $with_next = fal
         $buttons_array[] = [NEXT_BUTTON];
     }
 
-    //return ["inline" => true, "buttons" => $buttons_array];
-    return TEST_INLINE_KEYBOARD;
+    return ["inline" => true, "buttons" => $buttons_array];
 }
 
