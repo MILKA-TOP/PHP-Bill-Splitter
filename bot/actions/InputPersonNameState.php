@@ -1,7 +1,7 @@
 <?php
 
 
-class InputNameState extends BotState
+class InputPersonNameState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {
@@ -9,9 +9,9 @@ class InputNameState extends BotState
 
         $input_name = $data["message"]["text"];
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_NAME_MAX_SIZE) {
-            $this->setCurrentName($user_id, $input_name, $db);
+            $this->addPersonToArgs($user_id, $input_name, $db);
         } else {
-            vkApi_messagesSend($user_id, INPUT_NAME_INCORRECT_MESSAGE, $this->keyboard);
+            vkApi_messagesSend($user_id, ERROR_MESSAGE_PERSON_INPUT, $this->keyboard);
         }
     }
 
@@ -25,6 +25,9 @@ class InputNameState extends BotState
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
                     break;
+                case CONFIRM_PAYLOAD:
+                    $this->creatingBill($user_id, $db);
+                    break;
                 default:
                     return false;
             }
@@ -33,12 +36,21 @@ class InputNameState extends BotState
         return false;
     }
 
-    private function setCurrentName($user_id, $name, $db)
+    private function creatingBill($user_id, $db) {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+    }
+
+    private function addPersonToArgs($user_id, $name, $db)
     {
-        $user = new User($db);
+        /*$user = new User($db);
         $user->id = $user_id;
-        $user->updateStateWithArgs(SET_BILL_CONFIRM_NAME_STATE, setNameStateJsonArgument($name));
-        vkApi_messagesSend($user_id, sprintf(INPUT_NAME_CONFIRM, $name), CONFIRM_BILL_NAME_KEYBOARD);
+        $user->getSingleUser();
+        $user->updateStateWithArgs(
+            SET_BILL_PASSWORD_CONFIRM_STATE,
+            setPasswordFieldToJson($user->stateArgs, $name)
+        );*/
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
     }
 
 }

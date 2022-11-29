@@ -27,6 +27,13 @@ const INPUT_PASSWORD_MESSAGE = "Введите пожалуйста пароль
 const INPUT_PASSWORD_CONFIRM_MESSAGE = "Пожалуйста, подтвердите пароль, введя его еще раз.\n\nТекущий пароль: '%s';\n\n" .
     "Если вы хотите его изменить, то нажмите на кнопку \"Изменить пароль\".";
 
+const INPUT_PERSONS_BILL_MESSAGE = "Введите имена пользователей, которые будут использоваться в дальнейшем для" .
+    " разделение чека.";
+
+const INPUT_PERSONS_BILL_LIST_MESSAGE = "Список добавленных пользователей (для удаления пользователя нажмите на него).";
+
+const ERROR_MESSAGE_PERSON_INPUT = "Пожалуйста, введите корректное имя пользователя (его длина не должна превышать" .
+    " 50 символов.";
 
 const ROLLBACK_TO_MAIN_MENU = "Вы перешли в главное меню";
 
@@ -44,4 +51,5 @@ const SKIP_PASSWORD_BUTTON_TEXT = "Пропустить пароль";
 const CHANGE_PASSWORD_BUTTON_TEXT = "Изменить пароль";
 
 const PASSWORD_STATE_ARG = "password";
-const NAME_STATE_ARG = "name";
+const BILL_NAME_STATE_ARG = "name";
+const PERSON_NAME_STATE_ARG = "persons";

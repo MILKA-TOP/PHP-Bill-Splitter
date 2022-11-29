@@ -8,7 +8,6 @@ class ConfirmPasswordState extends BotState
 
         $input_password = $data["message"]["text"];
         $arg_password = $this->getPassword($user_id, $db);
-        vkApi_messagesSend($user_id, $arg_password, $this->keyboard);
 
         if ($input_password === $arg_password) {
             $this->confirmPasswordAction($user_id, $db);
@@ -56,7 +55,10 @@ class ConfirmPasswordState extends BotState
     }
 
     private function confirmPasswordAction($user_id, $db) {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(SET_BILL_PERSONS_STATE);
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_MESSAGE, INPUT_PERSONS_KEYBOARD);
     }
 
 }

@@ -56,7 +56,14 @@ class InputPasswordState extends BotState
 
     private function skipPassword($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $user->updateStateWithArgs(
+            SET_BILL_PERSONS_STATE,
+            setPasswordFieldToJson($user->stateArgs, null)
+        );
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_MESSAGE, INPUT_PERSONS_KEYBOARD);
     }
 
 

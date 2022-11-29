@@ -19,7 +19,7 @@ require_once 'bot/config/states.php';
 require_once 'bot/config/payloads.php';
 require_once 'bot/actions/BotState.php';
 require_once 'bot/actions/StartState.php';
-require_once 'bot/actions/InputNameState.php';
+require_once 'bot/actions/InputBillNameState.php';
 require_once 'bot/actions/ConfirmNameState.php';
 require_once 'bot/actions/InputPasswordState.php';
 require_once 'bot/actions/ConfirmPasswordState.php';

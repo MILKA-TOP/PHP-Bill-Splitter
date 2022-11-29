@@ -82,3 +82,33 @@ const CONFIRM_PASSWORD_KEYBOARD = [
                 "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
+const INPUT_PERSONS_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . CONFIRM_PAYLOAD . '"}',
+                "label" => CREATE_BILL_BUTTON_TEXT],
+            "color" => "positive"]],
+        [[
+            "action" => [
+                "type" => "text",
+                "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+                "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+
+const TEST_INLINE_KEYBOARD = [
+    "inline" => true,
+    "buttons" => [
+        [[
+            "action" => [
+                "type" => "text",
+                "label" => CREATE_BILL_BUTTON_TEXT],
+            "color" => "positive"]],
+        [[
+            "action" => [
+                "type" => "text",
+                "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+
