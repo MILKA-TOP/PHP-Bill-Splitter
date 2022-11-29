@@ -128,7 +128,7 @@ const NEXT_BUTTON = [
 
 const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 
-function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false)
+function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false): array
 {
     $buttons_array = array();
     foreach ($names_array as &$value) {
