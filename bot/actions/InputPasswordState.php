@@ -41,7 +41,7 @@ class InputPasswordState extends BotState
         $user->id = $user_id;
         $user->getSingleUser();
         $user->updateStateWithArgs(
-            SET_BILL_CONFIRM_NAME_STATE,
+            SET_BILL_PASSWORD_CONFIRM_STATE,
             setPasswordFieldToJson($user->stateArgs, $password)
         );
 
