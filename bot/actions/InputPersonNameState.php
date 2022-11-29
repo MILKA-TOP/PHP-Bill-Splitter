@@ -63,10 +63,8 @@ class InputPersonNameState extends BotState
             $name_array_full = $updated_person_array[PERSON_NAME_STATE_ARG];
         }
 
-        if (in_array($name, $name_array_full)) {
+        if (count($name_array_full) !== count(array_unique($name_array_full))) {
             vkApi_messagesSend($user_id, ERROR_MASSAGE_PERSON_SAME_NAME, $this->keyboard);
-            vkApi_messagesSend($user_id, print_r($name_array_full, true), $this->keyboard);
-            vkApi_messagesSend($user_id, $name, $this->keyboard);
             return;
         }
 
