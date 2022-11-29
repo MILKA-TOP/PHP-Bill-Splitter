@@ -37,22 +37,26 @@ class InputPasswordState extends BotState
 
     private function setCurrentPassword($user_id, $password, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $user->updateStateWithArgs(
+            SET_BILL_CONFIRM_NAME_STATE,
+            setPasswordFieldToJson($user->stateArgs, $password)
+        );
 
-        #$user = new User($db);
-        #$user->id = $user_id;
-        #$user->updateStateWithArgs(SET_BILL_CONFIRM_NAME_STATE, setNameStateJsonArgument($password));
-        #vkApi_messagesSend($user_id, sprintf(INPUT_NAME_CONFIRM, $password), CONFIRM_BILL_NAME_KEYBOARD);
+        vkApi_messagesSend(
+            $user_id,
+            sprintf(
+                INPUT_PASSWORD_CONFIRM_MESSAGE,
+                $password
+            ),
+            CONFIRM_PASSWORD_KEYBOARD);
     }
 
     private function skipPassword($user_id, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-
-        #$user = new User($db);
-        #$user->id = $user_id;
-        #$user->updateStateWithArgs(SET_BILL_CONFIRM_NAME_STATE, setNameStateJsonArgument($name));
-        #vkApi_messagesSend($user_id, sprintf(INPUT_NAME_CONFIRM, $name), CONFIRM_BILL_NAME_KEYBOARD);
     }
 
 

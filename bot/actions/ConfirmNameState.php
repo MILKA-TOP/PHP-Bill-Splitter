@@ -36,7 +36,6 @@ class ConfirmNameState extends BotState
 
     private function setConfirmState($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
         $user = new User($db);
         $user->id = $user_id;
         $user->updateState(SET_BILL_PASSWORD_INPUT_STATE);
