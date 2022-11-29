@@ -20,6 +20,7 @@ class InputPersonNameState extends BotState
         $data_payload = $this->getPayloadArgs($data);
         if (!empty($data_payload)) {
             $array = json_decode($data_payload, true);
+            vkApi_messagesSend($user_id, "SADASDASDAS", $this->keyboard);
             switch ($array[COMMAND_PAYLOAD]) {
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
@@ -37,6 +38,8 @@ class InputPersonNameState extends BotState
                     $this->nextPage($user_id, $db);
                     break;
                 default:
+                    vkApi_messagesSend($user_id, "DEF", $this->keyboard);
+
                     return false;
             }
             return true;
