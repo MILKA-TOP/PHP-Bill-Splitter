@@ -131,7 +131,7 @@ const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false): array
 {
     $buttons_array = array();
-    foreach ($names_array as &$value) {
+    foreach ($names_array as $value) {
         $buttons_array[] = [[
             "action" => [
                 "type" => "callback",
@@ -150,6 +150,6 @@ function arrayOfPersonButtons($names_array, $with_back = false, $with_next = fal
 
     return [
         "inline" => true,
-        "buttons" => [$buttons_array]];
+        "buttons" => $buttons_array];
 }
 

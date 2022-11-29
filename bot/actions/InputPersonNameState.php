@@ -58,15 +58,12 @@ class InputPersonNameState extends BotState
 
         $updated_person_list_json = addPersonNameFieldToJson($user->stateArgs, $name);
         $updated_person_array = json_decode($updated_person_list_json, true);
-        vkApi_messagesSend($user_id, $updated_person_list_json);
-        vkApi_messagesSend($user_id, $updated_person_array);
 
         $user->updateStateWithArgs(
             SET_BILL_PERSONS_STATE,
             $updated_person_list_json
         );
         vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, arrayOfPersonButtons($updated_person_array));
-        vkApi_messagesSend($user_id, $updated_person_array);
         vkApi_messagesSend($user_id, $updated_person_list_json);
     }
 
