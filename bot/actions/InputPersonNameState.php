@@ -54,6 +54,7 @@ class InputPersonNameState extends BotState
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
+        vkApi_messagesSend($user_id, $user->stateArgs);
 
         $updated_person_list_json = addPersonNameFieldToJson($user->stateArgs, $name);
         $updated_person_array = json_decode($updated_person_list_json, true);
