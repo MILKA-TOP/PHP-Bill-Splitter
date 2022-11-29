@@ -23,6 +23,7 @@ require_once 'bot/actions/InputBillNameState.php';
 require_once 'bot/actions/ConfirmNameState.php';
 require_once 'bot/actions/InputPasswordState.php';
 require_once 'bot/actions/ConfirmPasswordState.php';
+require_once 'bot/actions/InputPersonNameState.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/res/numbers.php';
