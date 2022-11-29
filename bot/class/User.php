@@ -57,8 +57,8 @@ class User
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->stateId = $dataRow['stateId'];
         $this->stateArgs = $dataRow['stateArgs'];
+        $this->stateId = $dataRow['stateId'];
         $this->bills = $dataRow['bills'];
     }
 
