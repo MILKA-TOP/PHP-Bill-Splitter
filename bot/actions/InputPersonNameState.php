@@ -64,6 +64,7 @@ class InputPersonNameState extends BotState
             $name_array = $updated_person_array[PERSON_NAME_STATE_ARG];
         }
 
+        vkApi_messagesSend($user_id, print_r($name_array, true));
         $user->updateStateWithArgs(
             SET_BILL_PERSONS_STATE,
             $updated_person_list_json
