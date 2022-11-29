@@ -17,12 +17,12 @@ class InputPersonNameState extends BotState
 
     private function payloadSwitch($user_id, $data, $db)
     {
-        $data_payload = $this->getPayloadArgs($data);
-        if (!empty($data_payload)) {
+        $array = $this->getPayloadArgs($data);
+        if (!empty($array)) {
             vkApi_messagesSend($user_id, "111", $this->keyboard);
-            $array = json_decode($data_payload, true);
+            //$array = json_decode($data_payload, true);
             vkApi_messagesSend($user_id, "222", $this->keyboard);
-            vkApi_messagesSend($user_id, print_r($data_payload, true), $this->keyboard);
+            //vkApi_messagesSend($user_id, print_r($array, true), $this->keyboard);
             //vkApi_messagesSend($user_id, print_r($array, true), $this->keyboard);
             vkApi_messagesSend($user_id, "333", $this->keyboard);
             switch ($array[COMMAND_PAYLOAD]) {
