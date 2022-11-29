@@ -58,23 +58,15 @@ class InputPersonNameState extends BotState
                 return;
             }
             $current_page = $current_page - 1;
+            $updated_person_list_json = $user->stateArgs;
             $name_array_full = array();
             if (isset($state_args[PERSON_NAME_STATE_ARG])) {
                 $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
             }
             $max_page_number = $this->maxPageNumber($name_array_full);
-            $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-            $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
-            $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
-
-            $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
-
-            $user->updateStateWithArgs(
-                SET_BILL_PERSONS_STATE,
-                $updated_person_list_json
+            $this->showMessageWithCorrectPersonsList($name_array_full,
+                $current_page, $max_page_number, $updated_person_list_json, $user, $user_id
             );
-            $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
-            vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
             return;
         }
 
@@ -101,19 +93,10 @@ class InputPersonNameState extends BotState
                 return;
             }
             $current_page = $current_page + 1;
-
-            $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-            $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
-            $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
-
-            $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
-
-            $user->updateStateWithArgs(
-                SET_BILL_PERSONS_STATE,
-                $updated_person_list_json
+            $updated_person_list_json = $user->stateArgs;
+            $this->showMessageWithCorrectPersonsList($name_array_full,
+                $current_page, $max_page_number, $updated_person_list_json, $user, $user_id
             );
-            $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
-            vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
             return;
         }
 
@@ -150,17 +133,11 @@ class InputPersonNameState extends BotState
         }
 
         $max_page_number = $this->maxPageNumber($name_array_full);
-        $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
-        $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+        $current_page = $max_page_number;
 
-        $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $max_page_number);
-
-        $user->updateStateWithArgs(
-            SET_BILL_PERSONS_STATE,
-            $updated_person_list_json
+        $this->showMessageWithCorrectPersonsList($name_array_full,
+            $current_page, $max_page_number, $updated_person_list_json, $user, $user_id
         );
-        $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page);
-        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
     }
 
     private function maxPageNumber($array): int
@@ -181,6 +158,31 @@ class InputPersonNameState extends BotState
     private function containsPrevPage($array, $page): bool
     {
         return $page !== 0;
+    }
+
+    /**
+     * @param $name_array_full
+     * @param int $current_page
+     * @param int $max_page_number
+     * @param $updated_person_list_json
+     * @param User $user
+     * @param $user_id
+     * @return void
+     */
+    private function showMessageWithCorrectPersonsList($name_array_full, int $current_page, int $max_page_number, $updated_person_list_json, User $user, $user_id)
+    {
+        $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
+        $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
+        $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
+
+        $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $current_page);
+
+        $user->updateStateWithArgs(
+            SET_BILL_PERSONS_STATE,
+            $updated_person_list_json
+        );
+        $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
     }
 
 
