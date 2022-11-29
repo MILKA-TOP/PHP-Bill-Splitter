@@ -5,7 +5,7 @@ function bot_sendMessage($user_id, $data)
 {
     $database = new Database();
     $db = $database->getConnection();
-    vkApi_messagesSend($user_id, $data["message"]["text"]);
+    if (isset($data["message"]["text"])) vkApi_messagesSend($user_id, $data["message"]["text"]);
     $currentState = stateById($user_id, $db);
     actionByState($user_id, $currentState, $data, $db);
 }
