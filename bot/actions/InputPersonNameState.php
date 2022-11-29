@@ -45,11 +45,78 @@ class InputPersonNameState extends BotState
         return false;
     }
 
-    private function prevPage($user_id, $db) {
+    private function prevPage($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $state_args = json_decode($user->stateArgs, true);
+        if (isset($state_args[PAGE_NUMBER_PERSON_STATE_ARG])) {
+            $current_page = $state_args[PAGE_NUMBER_PERSON_STATE_ARG];
+            if ($current_page === 0) {
+                vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+                return;
+            }
+            $current_page = $current_page - 1;
+            $name_array_full = array();
+            if (isset($state_args[PERSON_NAME_STATE_ARG])) {
+                $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
+            }
+            $max_page_number = $this->maxPageNumber($name_array_full);
+            $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
+            $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+            $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
+
+            $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
+
+            $user->updateStateWithArgs(
+                SET_BILL_PERSONS_STATE,
+                $updated_person_list_json
+            );
+            $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
+            vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
+            return;
+        }
+
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
-    private function nextPage($user_id, $db) {
+    private function nextPage($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $state_args = json_decode($user->stateArgs, true);
+        if (isset($state_args[PAGE_NUMBER_PERSON_STATE_ARG])) {
+            $current_page = $state_args[PAGE_NUMBER_PERSON_STATE_ARG];
+
+            $name_array_full = array();
+            if (isset($state_args[PERSON_NAME_STATE_ARG])) {
+                $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
+            }
+            $max_page_number = $this->maxPageNumber($name_array_full);
+
+            if ($current_page >= $max_page_number) {
+                vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+                return;
+            }
+            $current_page = $current_page + 1;
+
+            $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
+            $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+            $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
+
+            $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
+
+            $user->updateStateWithArgs(
+                SET_BILL_PERSONS_STATE,
+                $updated_person_list_json
+            );
+            $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
+            vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
+            return;
+        }
+
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
@@ -85,6 +152,8 @@ class InputPersonNameState extends BotState
         $max_page_number = $this->maxPageNumber($name_array_full);
         $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
         $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+
+        $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $max_page_number);
 
         $user->updateStateWithArgs(
             SET_BILL_PERSONS_STATE,
