@@ -29,7 +29,7 @@ class InputPersonNameState extends BotState
                     $this->creatingBill($user_id, $db);
                     break;
                 case REMOVE_PERSON_PAYLOAD:
-                    $this->removePerson($user_id, $db);
+                    $this->removePerson($user_id, $array, $db);
                     break;
                 default:
                     return false;
@@ -44,7 +44,7 @@ class InputPersonNameState extends BotState
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
-    private function removePerson($user_id, $db)
+    private function removePerson($user_id, $payload, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
@@ -61,6 +61,11 @@ class InputPersonNameState extends BotState
         $name_array_full = array();
         if (isset($updated_person_array[PERSON_NAME_STATE_ARG])) {
             $name_array_full = $updated_person_array[PERSON_NAME_STATE_ARG];
+        }
+
+        if (in_array($name, $name_array_full)) {
+            vkApi_messagesSend($user_id, ERROR_MASSAGE_PERSON_SAME_NAME, $this->keyboard);
+            return;
         }
 
         $max_page_number = $this->maxPageNumber($name_array_full);

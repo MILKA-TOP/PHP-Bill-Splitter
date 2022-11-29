@@ -2,6 +2,7 @@
 
 const CALLBACK_API_EVENT_CONFIRMATION = 'confirmation';
 const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
+const CALLBACK_API_EVENT_MESSAGE_EVENT = 'message_event';
 
 require_once 'config.php';
 require_once 'global.php';
@@ -49,6 +50,7 @@ function callback_handleEvent()
                 break;
 
             //Получение нового сообщения
+            case CALLBACK_API_EVENT_MESSAGE_EVENT:
             case CALLBACK_API_EVENT_MESSAGE_NEW:
                 _callback_handleMessageNew($event['object']);
                 break;

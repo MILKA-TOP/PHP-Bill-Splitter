@@ -135,7 +135,7 @@ function arrayOfPersonButtons($names_array, $with_back = false, $with_next = fal
         $buttons_array[] = [[
             "action" => [
                 "type" => "callback",
-                "payload" => '{"command": "' . REMOVE_PERSON_PAYLOAD . '"}',
+                "payload" => '{"command": "' . REMOVE_PERSON_PAYLOAD . '", "name":"' . $value . '"}',
                 "label" => $value],
             "color" => "positive"]];
     }
