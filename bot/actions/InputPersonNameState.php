@@ -77,7 +77,7 @@ class InputPersonNameState extends BotState
 
     private function maxPageNumber($array): int
     {
-        return intdiv(count($array), MAX_INLINE_BUTTONS_COUNT);
+        return intdiv(count($array) - 1, MAX_INLINE_BUTTONS_COUNT);
     }
 
     private function lastArrayRanges($array, $page): array
