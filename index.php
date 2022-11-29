@@ -49,8 +49,10 @@ function callback_handleEvent()
                 _callback_handleConfirmation();
                 break;
 
-            //Получение нового сообщения
             case CALLBACK_API_EVENT_MESSAGE_EVENT:
+                _callback_handleMessageEvent($event['object']);
+                break;
+            //Получение нового сообщения
             case CALLBACK_API_EVENT_MESSAGE_NEW:
                 _callback_handleMessageNew($event['object']);
                 break;
@@ -79,6 +81,13 @@ function _callback_handleConfirmation()
 function _callback_handleMessageNew($data)
 {
     $user_id = $data['message']['peer_id'];
+    bot_sendMessage($user_id, $data);
+    _callback_okResponse();
+}
+
+function _callback_handleMessageEvent($data)
+{
+    $user_id = $data['peer_id'];
     bot_sendMessage($user_id, $data);
     _callback_okResponse();
 }
