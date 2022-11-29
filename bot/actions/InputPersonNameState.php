@@ -13,16 +13,16 @@ class InputPersonNameState extends BotState
         } else {
             vkApi_messagesSend($user_id, ERROR_MESSAGE_PERSON_INPUT, $this->keyboard);
         }
-        vkApi_messagesSend($user_id, print_r($data, true), $this->keyboard);
     }
 
     private function payloadSwitch($user_id, $data, $db)
     {
         $data_payload = $this->getPayloadArgs($data);
-        if (empty($data_payload))vkApi_messagesSend($user_id, "NULL");
         if (!empty($data_payload)) {
             $array = json_decode($data_payload, true);
+            if (empty($data_payload))vkApi_messagesSend($user_id, "NULL 1");
             if (!isset($array[COMMAND_PAYLOAD])) return false;
+            if (empty($data_payload))vkApi_messagesSend($user_id, "NULL 2");
             switch ($array[COMMAND_PAYLOAD]) {
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
