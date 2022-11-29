@@ -103,12 +103,12 @@ const TEST_INLINE_KEYBOARD = [
     "buttons" => [
         [[
             "action" => [
-                "type" => "text",
+                "type" => "test_callback",
                 "label" => CREATE_BILL_BUTTON_TEXT],
             "color" => "positive"]],
         [[
             "action" => [
-                "type" => "text",
+                "type" => "test_callback",
                 "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
