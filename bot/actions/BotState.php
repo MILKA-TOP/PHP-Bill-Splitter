@@ -21,8 +21,8 @@ abstract class BotState
     }
 
     protected function getPayloadArgs($data) {
-        if (isset($data["message"]["payload"])) return $data["message"]["payload"];
-        if (isset($data["payload"])) return $data["payload"];
+        if (isset($data["message"]["payload"])) return $data["message"];
+        if (isset($data["payload"])) return $data;
         return null;
     }
 
