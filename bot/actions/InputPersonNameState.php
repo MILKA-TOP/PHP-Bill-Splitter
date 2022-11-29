@@ -13,6 +13,7 @@ class InputPersonNameState extends BotState
         } else {
             vkApi_messagesSend($user_id, ERROR_MESSAGE_PERSON_INPUT, $this->keyboard);
         }
+        vkApi_messagesSend($user_id, print_r($data, true), $this->keyboard);
     }
 
     private function payloadSwitch($user_id, $data, $db)
