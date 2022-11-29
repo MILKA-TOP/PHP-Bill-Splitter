@@ -29,6 +29,14 @@ function addPersonNameFieldToJson($input_json, $personName)
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
 }
 
+function removePersonNameFieldToJson($input_json, $personName) {
+    $current_json_array = json_decode($input_json, true);
+    $current_person_names = $current_json_array[PERSON_NAME_STATE_ARG];
+    unset($current_person_names[$personName]);
+    $current_json_array[PERSON_NAME_STATE_ARG] = $current_person_names;
+    return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
+}
+
 function addPersonPageNumberFieldToJson($input_json, $pageNumber = 0)
 {
     $current_json_array = json_decode($input_json, true);

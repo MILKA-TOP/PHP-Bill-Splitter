@@ -37,6 +37,8 @@ const ERROR_MESSAGE_PERSON_INPUT = "Пожалуйста, введите кор�
 
 const ERROR_MASSAGE_PERSON_SAME_NAME = "Вы уже вводили данное имя. Пожалуйста, введите другое.";
 
+const ERROR_MASSAGE_PERSON_REMOVE_NAME = "Данный пользователь не найден.";
+
 const ROLLBACK_TO_MAIN_MENU = "Вы перешли в главное меню";
 
 const ERROR_MAIN_MESSAGE = "Пожалуйста, введите корректную команду";
@@ -56,5 +58,6 @@ const PREV_PAGE_INLINE = " ◀";
 
 const PASSWORD_STATE_ARG = "password";
 const BILL_NAME_STATE_ARG = "name";
+const REMOVE_PERSON_NAME_STATE_ARG = "name";
 const PERSON_NAME_STATE_ARG = "persons";
 const PAGE_NUMBER_PERSON_STATE_ARG = "page";
