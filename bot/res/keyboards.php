@@ -150,6 +150,6 @@ function arrayOfPersonButtons($names_array, $with_back = false, $with_next = fal
 
     return [
         "inline" => true,
-        "buttons" => $buttons_array];
+        "buttons" => [$buttons_array]];
 }
 
