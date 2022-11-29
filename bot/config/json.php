@@ -18,7 +18,8 @@ function setPasswordFieldToJson($input_json, $password)
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
 }
 
-function addPersonNameFieldToJson($input_json, $personName) {
+function addPersonNameFieldToJson($input_json, $personName)
+{
     $current_json_array = json_decode($input_json, true);
     if (!isset($current_json_array[PERSON_NAME_STATE_ARG])) {
         $current_json_array[PERSON_NAME_STATE_ARG] = array($personName);
@@ -26,4 +27,12 @@ function addPersonNameFieldToJson($input_json, $personName) {
         $current_json_array[PERSON_NAME_STATE_ARG][] = $personName;
     }
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
+}
+
+function addPersonPageNumberFieldToJson($input_json, $pageNumber = 0)
+{
+    $current_json_array = json_decode($input_json, true);
+    $current_json_array[PAGE_NUMBER_PERSON_STATE_ARG] = $pageNumber;
+    return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
+
 }
