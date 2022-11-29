@@ -63,7 +63,7 @@ class InputPersonNameState extends BotState
                 $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
             }
             $max_page_number = $this->maxPageNumber($name_array_full);
-            $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
+            $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
             $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
             $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
 
@@ -102,7 +102,7 @@ class InputPersonNameState extends BotState
             }
             $current_page = $current_page + 1;
 
-            $name_array_cut = $this->lastArrayRanges($name_array_full, $max_page_number);
+            $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
             $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
             $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
 
