@@ -32,7 +32,7 @@ function addPersonNameFieldToJson($input_json, $personName)
 function removePersonNameFieldToJson($input_json, $personName) {
     $current_json_array = json_decode($input_json, true);
     $current_person_names = $current_json_array[PERSON_NAME_STATE_ARG];
-    unset($current_person_names[$personName]);
+    unset($current_person_names[array_search($personName, $current_person_names)]);
     $current_json_array[PERSON_NAME_STATE_ARG] = $current_person_names;
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
 }
