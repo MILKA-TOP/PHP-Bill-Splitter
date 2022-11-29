@@ -49,8 +49,8 @@ class InputPersonNameState extends BotState
             SET_BILL_PASSWORD_CONFIRM_STATE,
             setPasswordFieldToJson($user->stateArgs, $name)
         );*/
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, TEST_INLINE_KEYBOARD);
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, CONFIRM_BILL_NAME_KEYBOARD);
     }
 
 }
