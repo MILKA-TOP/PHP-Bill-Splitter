@@ -8,6 +8,7 @@ class ConfirmPasswordState extends BotState
 
         $input_password = $data["message"]["text"];
         $arg_password = $this->getPassword($user_id, $db);
+        vkApi_messagesSend($user_id, $arg_password, $this->keyboard);
 
         if ($input_password === $arg_password) {
             $this->confirmPasswordAction($user_id, $db);
