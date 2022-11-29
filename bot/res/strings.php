@@ -49,6 +49,8 @@ const OK_BUTTON_TEXT = "Ок";
 const CANCEL_BUTTON_TEXT = "Отмена";
 const SKIP_PASSWORD_BUTTON_TEXT = "Пропустить пароль";
 const CHANGE_PASSWORD_BUTTON_TEXT = "Изменить пароль";
+const NEXT_PAGE_INLINE = " ▶";
+const PREV_PAGE_INLINE = " ◀";
 
 const PASSWORD_STATE_ARG = "password";
 const BILL_NAME_STATE_ARG = "name";

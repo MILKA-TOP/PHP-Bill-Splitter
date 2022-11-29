@@ -112,3 +112,42 @@ const TEST_INLINE_KEYBOARD = [
                 "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
+const BACK_BUTTON = [
+    "action" => [
+        "type" => "callback",
+        "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+        "label" => PREV_PAGE_INLINE],
+    "color" => "positive"];
+
+const NEXT_BUTTON = [
+    "action" => [
+        "type" => "callback",
+        "payload" => '{"command": "' . CONFIRM_PAYLOAD . '"}',
+        "label" => NEXT_PAGE_INLINE],
+    "color" => "positive"];
+
+const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
+
+function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false)
+{
+    $buttons_array = array();
+    foreach ($names_array as &$value) {
+        $buttons_array[] = [[
+            "action" => [
+                "type" => "callback",
+                "payload" => '{"command": "' . REMOVE_PERSON_PAYLOAD . '"}',
+                "label" => $value],
+            "color" => "positive"]];
+    }
+
+    if ($with_back && $with_next) {
+        $buttons_array[] = BACK_NEXT_BUTTONS;
+    } else if ($with_back) {
+        $buttons_array[] = [BACK_BUTTON];
+    } else if ($with_next) {
+        $buttons_array[] = [NEXT_BUTTON];
+    }
+
+    return $buttons_array;
+}
+

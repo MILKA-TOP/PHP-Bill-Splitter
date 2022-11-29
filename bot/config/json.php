@@ -20,7 +20,7 @@ function setPasswordFieldToJson($input_json, $password)
 
 function addPersonNameFieldToJson($input_json, $personName) {
     $current_json_array = json_decode($input_json, true);
-    if (!isset($current_json_array['persons'])) {
+    if (!isset($current_json_array[PERSON_NAME_STATE_ARG])) {
         $current_json_array[PERSON_NAME_STATE_ARG] = array($personName);
     } else {
         $current_json_array[PERSON_NAME_STATE_ARG][] = $personName;

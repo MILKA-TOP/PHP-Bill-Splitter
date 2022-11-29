@@ -28,6 +28,9 @@ class InputPersonNameState extends BotState
                 case CONFIRM_PAYLOAD:
                     $this->creatingBill($user_id, $db);
                     break;
+                case REMOVE_PERSON_PAYLOAD:
+                    $this->removePerson($user_id, $db);
+                    break;
                 default:
                     return false;
             }
@@ -36,21 +39,30 @@ class InputPersonNameState extends BotState
         return false;
     }
 
-    private function creatingBill($user_id, $db) {
+    private function creatingBill($user_id, $db)
+    {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+    }
+
+    private function removePerson($user_id, $db)
+    {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
     private function addPersonToArgs($user_id, $name, $db)
     {
-        /*$user = new User($db);
+        $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
+
+        $updated_person_list_json = addPersonNameFieldToJson($user->stateArgs, $name);
+        $updated_person_array = json_decode($updated_person_list_json, true);
+
         $user->updateStateWithArgs(
             SET_BILL_PASSWORD_CONFIRM_STATE,
-            setPasswordFieldToJson($user->stateArgs, $name)
-        );*/
-        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, TEST_INLINE_KEYBOARD);
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+            $updated_person_list_json
+        );
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, arrayOfPersonButtons($updated_person_array));
     }
 
 }
