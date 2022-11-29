@@ -65,6 +65,8 @@ class InputPersonNameState extends BotState
 
         if (in_array($name, $name_array_full)) {
             vkApi_messagesSend($user_id, ERROR_MASSAGE_PERSON_SAME_NAME, $this->keyboard);
+            vkApi_messagesSend($user_id, print_r($name_array_full, true), $this->keyboard);
+            vkApi_messagesSend($user_id, $name, $this->keyboard);
             return;
         }
 
