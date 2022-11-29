@@ -120,8 +120,10 @@ class InputPersonNameState extends BotState
             vkApi_messagesSend($user_id, ERROR_MASSAGE_PERSON_REMOVE_NAME, $this->keyboard);
             return;
         }
+        vkApi_messagesSend($user_id, print_r($persons_names, true), $this->keyboard);
 
         unset($persons_names[$remove_person_name]);
+        vkApi_messagesSend($user_id, print_r($persons_names, true), $this->keyboard);
 
         $name_array_full = removePersonNameFieldToJson($user->stateArgs, $remove_person_name);
         $max_page_number = $this->maxPageNumber($persons_names);
