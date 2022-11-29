@@ -20,6 +20,12 @@ abstract class BotState
         vkApi_messagesSend($user_id, ROLLBACK_TO_MAIN_MENU, MAIN_KEYBOARD);
     }
 
+    protected function getPayloadArgs($data) {
+        if (isset($data["message"]["payload"])) return $data["message"]["payload"];
+        if (isset($data["payload"])) return $data["payload"];
+        return null;
+    }
+
 
     abstract public function stateAction($user_id, $data, $db);
 }

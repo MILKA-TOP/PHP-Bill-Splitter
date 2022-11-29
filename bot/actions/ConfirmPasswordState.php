@@ -18,8 +18,8 @@ class ConfirmPasswordState extends BotState
 
     private function payloadSwitch($user_id, $data, $db): bool
     {
-        if (isset($data["message"]["payload"])) {
-            $data_payload = $data["message"]["payload"];
+        $data_payload = $this->getPayloadArgs($data);
+        if ($data_payload != null) {
             $array = json_decode($data_payload, true);
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
