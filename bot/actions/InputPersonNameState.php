@@ -18,8 +18,7 @@ class InputPersonNameState extends BotState
     private function payloadSwitch($user_id, $data, $db)
     {
         $data_payload = $this->getPayloadArgs($data);
-        vkApi_messagesSend($user_id, print_r($data_payload, true));
-        if ($data_payload != null) {
+        if (!empty($data_payload)) {
             $array = json_decode($data_payload, true);
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
