@@ -63,6 +63,8 @@ class InputPersonNameState extends BotState
             $updated_person_list_json
         );
         vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, arrayOfPersonButtons($updated_person_array));
+        vkApi_messagesSend($user_id, $updated_person_array);
+        vkApi_messagesSend($user_id, $updated_person_list_json);
     }
 
 }
