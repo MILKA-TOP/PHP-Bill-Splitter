@@ -75,13 +75,14 @@ class InputPersonNameState extends BotState
         vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
     }
 
-    private function maxPageNumber($array) {
-        return count($array) / 5;
+    private function maxPageNumber($array): int
+    {
+        return intdiv(count($array), MAX_INLINE_BUTTONS_COUNT);
     }
 
     private function lastArrayRanges($array, $page): array
     {
-        return array_slice($array, $page * 5, 5);
+        return array_slice($array, $page * MAX_INLINE_BUTTONS_COUNT, MAX_INLINE_BUTTONS_COUNT);
     }
 
     private function containsNextPage($array, $page, $max_page): bool
