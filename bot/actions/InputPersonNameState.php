@@ -64,7 +64,7 @@ class InputPersonNameState extends BotState
             }
             $max_page_number = $this->maxPageNumber($name_array_full);
             $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-            $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+            $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
             $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
 
             $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
@@ -103,7 +103,7 @@ class InputPersonNameState extends BotState
             $current_page = $current_page + 1;
 
             $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-            $contains_prev_page = $this->containsPrevPage($name_array_full, $max_page_number);
+            $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
             $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
 
             $updated_person_list_json = addPersonPageNumberFieldToJson($user->stateArgs, $current_page);
