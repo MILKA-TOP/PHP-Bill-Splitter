@@ -33,10 +33,14 @@ class Bill
     // CREATE
     public function createBill()
     {
+        $password_string = $this->password;
+        if (!is_null($this->password)) {
+            $password_string = "'" . $this->password . "'";
+        }
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (adminId, password, persons, name, singleBillsIds)
-                    VALUES ($this->adminId, $this->password, '$this->persons', $this->name, '$this->singleBillsIds');";
+                    VALUES ($this->adminId, $password_string, '$this->persons', '$this->name', '$this->singleBillsIds');";
 
         vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
@@ -67,9 +71,9 @@ class Bill
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->adminId = $dataRow['adminId'];
-        $this->password  = $dataRow['password'];
-        $this->persons  = $dataRow['persons'];
-        $this->name  = $dataRow['name'];
+        $this->password = $dataRow['password'];
+        $this->persons = $dataRow['persons'];
+        $this->name = $dataRow['name'];
         $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
 
