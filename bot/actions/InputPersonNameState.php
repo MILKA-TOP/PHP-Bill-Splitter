@@ -174,9 +174,6 @@ class InputPersonNameState extends BotState
             return;
         }
 
-        $keyboard_model_result = getKeyboardLastPage(array_combine($name_array_full, $name_array_full));
-        $inline_keyboard = $keyboard_model_result[0];
-        $inline_keyboard = $keyboard_model_result[0];
         $max_page_number = maxPageNumber($name_array_full);
         $current_page = $max_page_number;
 
@@ -185,16 +182,24 @@ class InputPersonNameState extends BotState
         );
     }
 
-    private function showMessageWithCorrectPersonsList($inline_keyboard,
-                                                       $current_page, $updated_person_list_json, User $user, $user_id)
+    private function showMessageWithCorrectPersonsList($name_array_full, int $current_page, int $max_page_number, $updated_person_list_json, User $user, $user_id)
     {
+        $name_array_cut = lastArrayRanges($name_array_full, $current_page);
+        $contains_prev_page = containsPrevPage($name_array_full, $current_page);
+        $contains_next_page = containsNextPage($name_array_full, $current_page, $max_page_number);
+
         $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $current_page);
+
         $user->updateStateWithArgs(
             SET_BILL_PERSONS_STATE,
             $updated_person_list_json
         );
 
-        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard);
+        $inline_keyboard_generated = arrayOfPersonButtons(array_combine(
+            $name_array_cut, $name_array_cut),
+            $contains_prev_page, $contains_next_page
+        );
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
     }
 
 
