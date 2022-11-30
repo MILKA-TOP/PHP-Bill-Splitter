@@ -94,6 +94,7 @@ function _callback_handleMessageEvent($data)
 
 function _callback_okResponse()
 {
+    log_msg("Hello, log!");
     _callback_response('ok');
 }
 
