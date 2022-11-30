@@ -54,3 +54,7 @@ function addElementToJsonArray($input_json, $element) {
     $array_regular[] = $element;
     return json_encode($array_regular, JSON_UNESCAPED_UNICODE);
 }
+
+function setIdBillArgState($billId) {
+    return json_encode(array(BILL_ID_STATE_ARG => $billId), JSON_UNESCAPED_UNICODE);
+}

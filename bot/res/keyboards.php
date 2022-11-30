@@ -151,3 +151,27 @@ function arrayOfPersonButtons($names_array, $with_back = false, $with_next = fal
     return ["inline" => true, "buttons" => $buttons_array];
 }
 
+const BILL_MAIN_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BILL_SHOW_ALL_PAYLOAD . '"}',
+            "label" => MAIN_BILL_SHOW_ALL],
+            "color" => "positive"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BILL_CHANGE_SINGLE_BILL_PAYLOAD . '"}',
+            "label" => MAIN_BILL_CHANGE_SINGLE_BILL],
+            "color" => "primary"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BILL_SHOW_SINGLE_PAYLOAD . '"}',
+            "label" => MAIN_BILL_SHOW_SINGLE],
+            "color" => "primary"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . CANCEL_PAYLOAD . '"}',
+            "label" => CANCEL_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+

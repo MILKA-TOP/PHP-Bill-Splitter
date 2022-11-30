@@ -128,7 +128,8 @@ class InputPersonNameState extends BotState
         $this->updateUserBillList($user_id, $billId, $db);
         // navigate to create;
 
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $this->toMainBillMenuState($user_id, $db, $billId);
+        //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
     private function removePerson($user_id, $payload, $db)

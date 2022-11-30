@@ -82,7 +82,7 @@ class StartState extends BotState
         $user->getSingleUser();
         $bill_id_list = json_decode($user->bills, true);
         if (in_array($message, $bill_id_list)) {
-            vkApi_messagesSend($user_id, "INPUT_NAME_MESSAGE", $this->keyboard);
+            $this->toMainBillMenuState($user_id, $db, $message);
             return true;
         }
         return false;

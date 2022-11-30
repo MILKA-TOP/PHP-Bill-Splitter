@@ -51,9 +51,15 @@ const ROLLBACK_TO_MAIN_MENU = "Вы перешли в главное меню";
 
 const ERROR_MAIN_MESSAGE = "Пожалуйста, введите корректную команду";
 
+const MAIN_BILL_INFO_MESSAGE = "Название чека: '%s';\nID: '%s';\nУчастники:\n%s";
+
 const CREATE_BILL_BUTTON_TEXT = "Создать счёт";
 const SHOW_BILLS_BUTTON_TEXT = "Показать доступные счета";
 const HELP_TEXT = "Помощь";
+
+const MAIN_BILL_SHOW_ALL = "Вывести все чеки";
+const MAIN_BILL_CHANGE_SINGLE_BILL = "Редактировать чек";
+const MAIN_BILL_SHOW_SINGLE = "Вывести чек пользователя";
 
 const NEXT_BUTTON_TEXT = "Далее";
 const RENAME_BUTTON_TEXT = "Переименовать";
@@ -69,3 +75,4 @@ const BILL_NAME_STATE_ARG = "name";
 const ACTION_STATE_PAYLOAD_ARG = "value";
 const PERSON_NAME_STATE_ARG = "persons";
 const PAGE_NUMBER_PERSON_STATE_ARG = "page";
+const BILL_ID_STATE_ARG = "bill_id";
