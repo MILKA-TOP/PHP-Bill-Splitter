@@ -54,7 +54,16 @@ class StartState extends BotState
         $bill = new Bill($db);
         $bill_id_list = json_decode($user->bills, true);
         $bill_name_list = $bill->getNameBillList($bill_id_list);
-        vkApi_messagesSend($user_id, print_r($bill_name_list, true), $this->keyboard);
+        vkApi_messagesSend($user_id, START_SHOW_BILLS_FOR_USER, $this->keyboard);
+        if (count($bill_name_list) === 0)
+            vkApi_messagesSend($user_id, START_SHOW_BILLS_FOR_EMPTY, $this->keyboard);
+        else {
+            $result = '';
+            foreach ($bill_name_list as $curr_id => $curr_label) {
+                $result = $result . '[' . $curr_id . ']: ' . $curr_label . '\n';
+            }
+            vkApi_messagesSend($user_id, $result, $this->keyboard);
+        }
     }
 
     private function startCreateUserBills($user_id, $db)
@@ -65,19 +74,18 @@ class StartState extends BotState
         vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
     }
 
-    private function prevPage($user_id, $array, $db) {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
+    private function prevPage($user_id, $array, $db)
+    {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
-    private function nextPage($user_id, $array, $db) {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
+    private function nextPage($user_id, $array, $db)
+    {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
-    private function openBill($user_id, $array, $db) {
+    private function openBill($user_id, $array, $db)
+    {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 }
