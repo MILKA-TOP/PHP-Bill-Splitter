@@ -276,24 +276,4 @@ class InputPersonNameState extends BotState
         $user->updateBillIdsArray($updated_array_json);
     }
 
-    private function maxPageNumber($array): int
-    {
-        return intdiv(count($array) - 1, MAX_INLINE_BUTTONS_COUNT);
-    }
-
-    private function lastArrayRanges($array, $page): array
-    {
-        return array_slice($array, $page * MAX_INLINE_BUTTONS_COUNT, MAX_INLINE_BUTTONS_COUNT);
-    }
-
-    private function containsNextPage($array, $page, $max_page): bool
-    {
-        return $page !== $max_page;
-    }
-
-    private function containsPrevPage($array, $page): bool
-    {
-        return $page !== 0;
-    }
-
 }

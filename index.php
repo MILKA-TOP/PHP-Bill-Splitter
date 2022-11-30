@@ -28,8 +28,9 @@ require_once 'bot/actions/InputPersonNameState.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/res/numbers.php';
-require_once 'bot/model/KeyboardModel.php';
-require_once 'bot/model/StateModel.php';
+require_once 'bot/di/KeyboardModel.php';
+require_once 'bot/di/StateModel.php';
+require_once 'bot/models/InlineKeyboardPageModel.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
