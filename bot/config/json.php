@@ -48,3 +48,9 @@ function addPersonPageNumberFieldToJson($input_json, $pageNumber = 0)
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
 
 }
+
+function addElementToJsonArray($input_json, $element) {
+    $array_regular = json_decode($input_json, true);
+    $array_regular[] = $element;
+    return json_encode($array_regular, JSON_UNESCAPED_UNICODE);
+}

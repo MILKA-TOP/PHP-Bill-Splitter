@@ -125,6 +125,7 @@ class InputPersonNameState extends BotState
         // Add singleBillsToBill;
         $this->addSingleBillsToBill($user_id, $single_bill_id_array, $billId, $db);
         // Connect bill to User;
+        $this->updateUserBillList($user_id, $billId, $db);
         // navigate to create;
 
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
@@ -262,6 +263,16 @@ class InputPersonNameState extends BotState
         $bill = new Bill($db);
         $bill->id = $billId;
         $bill->updateSingleBillId(arrayToJson($single_bill_id_array));
+    }
+
+    private function updateUserBillList($user_id, $billId, $db)
+    {
+        $user = new User($db);
+        $user->id=$user_id;
+        $user->getSingleUser();
+
+        $updated_array_json = addElementToJsonArray($user->bills, $billId);
+        $user->updateBillIdsArray($updated_array_json);
     }
 
     private function maxPageNumber($array): int

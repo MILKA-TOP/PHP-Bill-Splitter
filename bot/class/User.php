@@ -80,5 +80,15 @@ class User
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
     }
+
+    public function updateBillIdsArray($newArray)
+    {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET bills = '" . $newArray . "'
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+
+    }
 }
 
