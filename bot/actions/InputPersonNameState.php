@@ -31,10 +31,10 @@ class InputPersonNameState extends BotState
                 case REMOVE_PERSON_PAYLOAD:
                     $this->removePerson($user_id, $array, $db);
                     break;
-                case PREV_PAGE_PAYLOAD:
+                case PREV_PAGE_NAME_PAYLOAD:
                     $this->prevPage($user_id, $db);
                     break;
-                case NEXT_PAGE_PAYLOAD:
+                case NEXT_PAGE_NAME_PAYLOAD:
                     $this->nextPage($user_id, $db);
                     break;
                 default:
@@ -133,7 +133,7 @@ class InputPersonNameState extends BotState
 
     private function removePerson($user_id, $payload, $db)
     {
-        $remove_person_name = $payload[REMOVE_PERSON_NAME_STATE_ARG];
+        $remove_person_name = $payload[ACTION_STATE_PAYLOAD_ARG];
 
         $user = new User($db);
         $user->id = $user_id;

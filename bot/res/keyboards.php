@@ -115,29 +115,29 @@ const TEST_INLINE_KEYBOARD = [
 const BACK_BUTTON = [
     "action" => [
         "type" => "callback",
-        "payload" => '{"command": "' . PREV_PAGE_PAYLOAD . '"}',
+        "payload" => '{"command": "' . PREV_PAGE_NAME_PAYLOAD . '"}',
         "label" => PREV_PAGE_INLINE],
     "color" => "positive"];
 
 const NEXT_BUTTON = [
     "action" => [
         "type" => "callback",
-        "payload" => '{"command": "' . NEXT_PAGE_PAYLOAD . '"}',
+        "payload" => '{"command": "' . NEXT_PAGE_NAME_PAYLOAD . '"}',
         "label" => NEXT_PAGE_INLINE],
     "color" => "positive"];
 
 const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 
-function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false): array
+function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false, $payload = REMOVE_PERSON_PAYLOAD): array
 {
     $buttons_array = array();
     foreach ($names_array as $value) {
         $buttons_array[] = [[
             "action" => [
                 "type" => "callback",
-                "payload" => '{"command": "' . REMOVE_PERSON_PAYLOAD . '", "name":"' . $value . '"}',
+                "payload" => '{"command": "' . $payload . '", "value":"' . $value . '"}',
                 "label" => $value],
-            "color" => "positive"]];
+            "color" => "primary"]];
     }
 
     if ($with_back && $with_next) {

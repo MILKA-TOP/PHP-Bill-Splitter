@@ -28,6 +28,15 @@ class StartState extends BotState
                 case HELP_PAYLOAD:
                     vkApi_messagesSend($user_id, START_MESSAGE, $this->keyboard);
                     break;
+                case PREV_PAGE_BILL_PAYLOAD:
+                    $this->prevPage($user_id, $array, $db);
+                    break;
+                case NEXT_PAGE_BILL_PAYLOAD:
+                    $this->nextPage($user_id, $array, $db);
+                    break;
+                case OPEN_BILL_PAYLOAD:
+                    $this->openBill($user_id, $array, $db);
+                    break;
                 default:
                     return false;
             }
@@ -54,5 +63,21 @@ class StartState extends BotState
         $user->id = $user_id;
         $user->updateState(SET_BILL_NAME_STATE);
         vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
+    }
+
+    private function prevPage($user_id, $array, $db) {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+    }
+
+    private function nextPage($user_id, $array, $db) {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+    }
+
+    private function openBill($user_id, $array, $db) {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 }

@@ -61,6 +61,6 @@ const PREV_PAGE_INLINE = " ◀";
 
 const PASSWORD_STATE_ARG = "password";
 const BILL_NAME_STATE_ARG = "name";
-const REMOVE_PERSON_NAME_STATE_ARG = "name";
+const ACTION_STATE_PAYLOAD_ARG = "value";
 const PERSON_NAME_STATE_ARG = "persons";
 const PAGE_NUMBER_PERSON_STATE_ARG = "page";
