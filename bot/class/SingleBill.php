@@ -59,7 +59,6 @@ class SingleBill
                         " . $this->db_table . "
                     WHERE
                        id = " . $this->id . ";";
-        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);

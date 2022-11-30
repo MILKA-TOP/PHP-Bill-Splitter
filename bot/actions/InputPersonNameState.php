@@ -209,7 +209,6 @@ class InputPersonNameState extends BotState
         $bill->singleBillsIds = EMPTY_JSON_ARRAY;
 
         $bill->createBill();
-        vkApi_messagesSend($user_id, $bill->id);
         return $bill->id;
     }
 
@@ -227,7 +226,6 @@ class InputPersonNameState extends BotState
             $person_id_array[] = $person->id;
         }
 
-        vkApi_messagesSend($user_id, print_r($person_id_array, true));
         return $person_id_array;
     }
 
@@ -254,7 +252,6 @@ class InputPersonNameState extends BotState
             $single_bill_id_array[] = $single_bill->id;
         }
 
-        vkApi_messagesSend($user_id, print_r($single_bill_id_array, true));
         return $single_bill_id_array;
     }
 

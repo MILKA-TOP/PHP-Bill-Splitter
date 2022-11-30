@@ -45,7 +45,7 @@ class StartState extends BotState
         $bill = new Bill($db);
         $bill_id_list = json_decode($user->bills);
         $bill_name_list = $bill->getNameBillList($bill_id_list);
-        vkApi_messagesSend($user_id, $bill_name_list, $this->keyboard);
+        vkApi_messagesSend($user_id, print_r($bill_name_list, true), $this->keyboard);
     }
 
     private function startCreateUserBills($user_id, $db)
