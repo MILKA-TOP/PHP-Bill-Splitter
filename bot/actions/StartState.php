@@ -6,6 +6,7 @@ class StartState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
+        if ($this->billOpenTry($user_id, $data["message"]["text"], $db)) return;
         switch ($data["message"]["text"]) {
             default:
                 vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
@@ -60,7 +61,7 @@ class StartState extends BotState
         else {
             $result = '';
             foreach ($bill_name_list as $curr_id => $curr_label) {
-                $result = $result . '[' . $curr_id . ']: ' . $curr_label . '\n';
+                $result = $result . '[' . $curr_id . ']: ' . $curr_label . "\n";
             }
             vkApi_messagesSend($user_id, $result, $this->keyboard);
         }
@@ -72,6 +73,18 @@ class StartState extends BotState
         $user->id = $user_id;
         $user->updateState(SET_BILL_NAME_STATE);
         vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
+    }
+
+    private function billOpenTry($user_id, $message, $db) {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $bill_id_list = json_decode($user->bills, true);
+        if (in_array($message, $bill_id_list)) {
+            vkApi_messagesSend($user_id, "INPUT_NAME_MESSAGE", CREATE_BILL_INPUT);
+            return true;
+        }
+        return false;
     }
 
     private function prevPage($user_id, $array, $db)
