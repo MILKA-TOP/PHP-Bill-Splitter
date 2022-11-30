@@ -56,7 +56,7 @@ class InputPersonNameState extends BotState
             $current_page = $state_args[PAGE_NUMBER_PERSON_STATE_ARG];
             if (isset($state_args[PERSON_NAME_STATE_ARG])) $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
 
-            $max_page_number = $this->maxPageNumber($name_array_full);
+            $max_page_number = maxPageNumber($name_array_full);
             if ($current_page <= 0) {
                 vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
                 return;
@@ -85,7 +85,7 @@ class InputPersonNameState extends BotState
             if (isset($state_args[PERSON_NAME_STATE_ARG])) {
                 $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
             }
-            $max_page_number = $this->maxPageNumber($name_array_full);
+            $max_page_number = maxPageNumber($name_array_full);
             if ($current_page >= $max_page_number) {
                 vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
                 return;
@@ -149,7 +149,7 @@ class InputPersonNameState extends BotState
         unset($persons_names[array_search($remove_person_name, $persons_names)]);
 
         $name_array_full = removePersonNameFieldToJson($user->stateArgs, $remove_person_name);
-        $max_page_number = $this->maxPageNumber($persons_names);
+        $max_page_number = maxPageNumber($persons_names);
         $this->showMessageWithCorrectPersonsList($persons_names,
             $max_page_number, $max_page_number, $name_array_full, $user, $user_id
         );
@@ -174,7 +174,7 @@ class InputPersonNameState extends BotState
             return;
         }
 
-        $max_page_number = $this->maxPageNumber($name_array_full);
+        $max_page_number = maxPageNumber($name_array_full);
         $current_page = $max_page_number;
 
         $this->showMessageWithCorrectPersonsList($name_array_full,
@@ -184,9 +184,9 @@ class InputPersonNameState extends BotState
 
     private function showMessageWithCorrectPersonsList($name_array_full, int $current_page, int $max_page_number, $updated_person_list_json, User $user, $user_id)
     {
-        $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-        $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
-        $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
+        $name_array_cut = lastArrayRanges($name_array_full, $current_page);
+        $contains_prev_page = containsPrevPage($name_array_full, $current_page);
+        $contains_next_page = containsNextPage($name_array_full, $current_page, $max_page_number);
 
         $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $current_page);
 
