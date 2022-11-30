@@ -219,8 +219,8 @@ class InputPersonNameState extends BotState
             $person->name = $value;
             $person->singleBillsIds = EMPTY_JSON_ARRAY;
             $person->billId = $bill_id;
-            $peron_id = $person->createPerson();
-            $person_id_array[] = [$peron_id];
+            $person->createPerson();
+            $person_id_array[] = $person->id;
         }
 
         vkApi_messagesSend($user_id, print_r($person_id_array, true));
