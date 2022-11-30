@@ -43,7 +43,7 @@ class StartState extends BotState
         $user->getSingleUser();
 
         $bill = new Bill($db);
-        $bill_id_list = json_decode($user->bills);
+        $bill_id_list = json_decode($user->bills, true);
         $bill_name_list = $bill->getNameBillList($bill_id_list);
         vkApi_messagesSend($user_id, print_r($bill_name_list, true), $this->keyboard);
     }
