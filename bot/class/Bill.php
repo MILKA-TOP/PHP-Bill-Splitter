@@ -34,9 +34,8 @@ class Bill
     public function createBill()
     {
         $password_string = $this->password;
-        if (!is_null($this->password)) {
-            $password_string = "'" . $this->password . "'";
-        }
+        if (!is_null($password_string)) $password_string = "'" . $password_string . "'";
+        else $password_string = 'null';
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (adminId, password, persons, name, singleBillsIds)
