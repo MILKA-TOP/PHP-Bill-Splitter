@@ -101,11 +101,9 @@ class Bill
                         " . $this->db_table . "
                     WHERE 
                        id in (" . implode(', ', $id_array) . ");";
-        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        vkApi_messagesSend(ADMIN_ID, print_r($dataRow, true));
         return $dataRow;
     }
 
