@@ -114,9 +114,10 @@ class InputPersonNameState extends BotState
         }
 
         // Create bill;
-        $this->createMainBill($user_id, $state_args, $db);
+        $billId = $this->createMainBill($user_id, $state_args, $db);
 
         // Crate persons
+        $persons_id_array = $this->createPersons($user_id, $state_args, $billId, $db);
         // Add persons to bill;
         // Create single bills;
         // Connect bill to User;
@@ -204,7 +205,27 @@ class InputPersonNameState extends BotState
 
         $bill->createBill();
         vkApi_messagesSend($user_id, $bill->id);
+        return $bill->id;
     }
+
+    private function createPersons($user_id, $bill_data, $bill_id, $db)
+    {
+        $person = new Person($db);
+        $person_names = $bill_data[PERSON_NAME_STATE_ARG];
+        $person_id_array = [];
+
+        foreach ($person_names as $value) {
+            $person->name = $value;
+            $person->singleBillsIds = EMPTY_JSON_ARRAY;
+            $person->billId = $bill_id;
+            $peron_id = $person->createPerson();
+            $person_id_array[$value] = [$peron_id];
+        }
+
+        vkApi_messagesSend($user_id, print_r($person_id_array, true));
+        return $person_id_array;
+    }
+
 
     private function maxPageNumber($array): int
     {

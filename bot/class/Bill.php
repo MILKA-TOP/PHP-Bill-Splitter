@@ -41,7 +41,6 @@ class Bill
                     (adminId, password, persons, name, singleBillsIds)
                     VALUES ($this->adminId, $password_string, '$this->persons', '$this->name', '$this->singleBillsIds');";
 
-        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();

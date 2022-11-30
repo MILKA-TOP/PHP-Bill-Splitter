@@ -32,10 +32,11 @@ class Person
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (name, singleBillsIds, billId)
-                    VALUES ($this->name, '$this->singleBillsIds', $this->billId);";
-
+                    VALUES ('$this->name', '$this->singleBillsIds', $this->billId);";
+        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
