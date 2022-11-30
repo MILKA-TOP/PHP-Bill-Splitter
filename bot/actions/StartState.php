@@ -75,13 +75,14 @@ class StartState extends BotState
         vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
     }
 
-    private function billOpenTry($user_id, $message, $db) {
+    private function billOpenTry($user_id, $message, $db): bool
+    {
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
         $bill_id_list = json_decode($user->bills, true);
         if (in_array($message, $bill_id_list)) {
-            vkApi_messagesSend($user_id, "INPUT_NAME_MESSAGE", CREATE_BILL_INPUT);
+            vkApi_messagesSend($user_id, "INPUT_NAME_MESSAGE", $this->keyboard);
             return true;
         }
         return false;
