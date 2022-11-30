@@ -20,7 +20,7 @@ function stateById($user_id, $db)
     if ($item->stateId == null) {
         $item->stateId = 0;
         $item->stateArgs = EMPTY_JSON_STATE;
-        $item->bills = EMPTY_JSON_IDS_ARRAY;
+        $item->bills = EMPTY_JSON_ARRAY;
         $item->createUser();
     }
 

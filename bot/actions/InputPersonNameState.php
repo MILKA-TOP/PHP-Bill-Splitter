@@ -103,6 +103,25 @@ class InputPersonNameState extends BotState
 
     private function creatingBill($user_id, $db)
     {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $state_args = json_decode($user->stateArgs, true);
+        $persons_names = $state_args[PERSON_NAME_STATE_ARG];
+        if (count($persons_names) === 0) {
+            vkApi_messagesSend($user_id, ERROR_MESSAGE_PERSON_ZERO_LIST_INPUT, $this->keyboard);
+            return;
+        }
+
+        // Create bill;
+        $this->createMainBill($user_id, $state_args, $db);
+
+        // Crate persons
+        // Add persons to bill;
+        // Create single bills;
+        // Connect bill to User;
+        // navigate to create;
+
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
@@ -157,6 +176,36 @@ class InputPersonNameState extends BotState
         );
     }
 
+    private function showMessageWithCorrectPersonsList($name_array_full, int $current_page, int $max_page_number, $updated_person_list_json, User $user, $user_id)
+    {
+        $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
+        $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
+        $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
+
+        $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $current_page);
+
+        $user->updateStateWithArgs(
+            SET_BILL_PERSONS_STATE,
+            $updated_person_list_json
+        );
+        $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
+        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
+    }
+
+
+    private function createMainBill($user_id, $bill_data, $db)
+    {
+        $bill = new Bill($db);
+        $bill->adminId = $user_id;
+        $bill->password = $bill_data[PASSWORD_STATE_ARG];
+        $bill->name = $bill_data[BILL_NAME_STATE_ARG];
+        $bill->persons = EMPTY_JSON_ARRAY;
+        $bill->singleBillsIds = EMPTY_JSON_ARRAY;
+
+        $bill->createBill();
+        vkApi_messagesSend($user_id, $bill->id);
+    }
+
     private function maxPageNumber($array): int
     {
         return intdiv(count($array) - 1, MAX_INLINE_BUTTONS_COUNT);
@@ -176,22 +225,5 @@ class InputPersonNameState extends BotState
     {
         return $page !== 0;
     }
-
-    private function showMessageWithCorrectPersonsList($name_array_full, int $current_page, int $max_page_number, $updated_person_list_json, User $user, $user_id)
-    {
-        $name_array_cut = $this->lastArrayRanges($name_array_full, $current_page);
-        $contains_prev_page = $this->containsPrevPage($name_array_full, $current_page);
-        $contains_next_page = $this->containsNextPage($name_array_full, $current_page, $max_page_number);
-
-        $updated_person_list_json = addPersonPageNumberFieldToJson($updated_person_list_json, $current_page);
-
-        $user->updateStateWithArgs(
-            SET_BILL_PERSONS_STATE,
-            $updated_person_list_json
-        );
-        $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
-        vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
-    }
-
 
 }
