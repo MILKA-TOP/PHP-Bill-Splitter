@@ -84,6 +84,15 @@ class Bill
         $stmt->execute();
     }
 
+    public function updateSingleBillId($newSingleBillIdsJson)
+    {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET singleBillsIds = '" . $newSingleBillIdsJson . "'
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
     public function getNameBillList($id_array)
     {
         $sqlQuery = "SELECT

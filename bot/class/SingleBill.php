@@ -39,6 +39,7 @@ class SingleBill
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 

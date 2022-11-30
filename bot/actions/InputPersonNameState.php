@@ -121,6 +121,9 @@ class InputPersonNameState extends BotState
         // Add persons to bill;
         $this->addPersonsToBill($user_id, $persons_id_array, $billId, $db);
         // Create single bills;
+        $single_bill_id_array = $this->createSingleBills($user_id, $persons_id_array, $billId, $db);
+        // Add singleBillsToBill;
+        $this->addSingleBillsToBill($user_id, $single_bill_id_array, $billId, $db);
         // Connect bill to User;
         // navigate to create;
 
@@ -234,6 +237,32 @@ class InputPersonNameState extends BotState
         $bill->updatePersonId(arrayToJson($persons_id_array));
     }
 
+    private function createSingleBills($user_id, array $persons_id_array, $billId, $db)
+    {
+        $single_bill = new SingleBill($db);
+        $single_bill_id_array = [];
+
+        foreach ($persons_id_array as $value) {
+            $single_bill->billId = $billId;
+            $single_bill->persons = arrayToJson([$value]);
+            $single_bill->fields = EMPTY_JSON_ARRAY;
+            $single_bill->isPersonField = 1;
+            $single_bill->fullValue = 0.0;
+            $single_bill->createSingleBill();
+
+            $single_bill_id_array[] = $single_bill->id;
+        }
+
+        vkApi_messagesSend($user_id, print_r($single_bill_id_array, true));
+        return $single_bill_id_array;
+    }
+
+    private function addSingleBillsToBill($user_id, array $single_bill_id_array, $billId, $db)
+    {
+        $bill = new Bill($db);
+        $bill->id = $billId;
+        $bill->updateSingleBillId(arrayToJson($single_bill_id_array));
+    }
 
     private function maxPageNumber($array): int
     {
