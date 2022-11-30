@@ -105,6 +105,7 @@ class Bill
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        vkApi_messagesSend(ADMIN_ID, print_r($dataRow, true));
         return $dataRow;
     }
 
