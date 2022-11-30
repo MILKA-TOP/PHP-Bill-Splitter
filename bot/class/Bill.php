@@ -104,7 +104,12 @@ class Bill
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $dataRow;
+
+        $output_array = [];
+        foreach ($dataRow as $sub_array) {
+            $output_array[$sub_array['id']] = $sub_array['name'];
+        }
+        return $output_array;
     }
 
 }

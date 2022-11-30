@@ -194,7 +194,11 @@ class InputPersonNameState extends BotState
             SET_BILL_PERSONS_STATE,
             $updated_person_list_json
         );
-        $inline_keyboard_generated = arrayOfPersonButtons($name_array_cut, $contains_prev_page, $contains_next_page);
+
+        $inline_keyboard_generated = arrayOfPersonButtons(array_combine(
+            $name_array_cut, $name_array_cut),
+            $contains_prev_page, $contains_next_page
+        );
         vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
     }
 
@@ -265,7 +269,7 @@ class InputPersonNameState extends BotState
     private function updateUserBillList($user_id, $billId, $db)
     {
         $user = new User($db);
-        $user->id=$user_id;
+        $user->id = $user_id;
         $user->getSingleUser();
 
         $updated_array_json = addElementToJsonArray($user->bills, $billId);
