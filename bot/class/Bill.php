@@ -75,6 +75,15 @@ class Bill
         $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
 
+    public function updatePersonId($newPersonIdsJson)
+    {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET persons = '" . $newPersonIdsJson . "'
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
     public function getNameBillList($id_array)
     {
         $sqlQuery = "SELECT

@@ -119,6 +119,7 @@ class InputPersonNameState extends BotState
         // Crate persons
         $persons_id_array = $this->createPersons($user_id, $state_args, $billId, $db);
         // Add persons to bill;
+        $this->addPersonsToBill($user_id, $persons_id_array, $billId, $db);
         // Create single bills;
         // Connect bill to User;
         // navigate to create;
@@ -219,11 +220,18 @@ class InputPersonNameState extends BotState
             $person->singleBillsIds = EMPTY_JSON_ARRAY;
             $person->billId = $bill_id;
             $peron_id = $person->createPerson();
-            $person_id_array[$value] = [$peron_id];
+            $person_id_array[] = [$peron_id];
         }
 
         vkApi_messagesSend($user_id, print_r($person_id_array, true));
         return $person_id_array;
+    }
+
+    private function addPersonsToBill($user_id, array $persons_id_array, $billId, $db)
+    {
+        $bill = new Bill($db);
+        $bill->id = $billId;
+        $bill->updatePersonId(arrayToJson($persons_id_array));
     }
 
 
