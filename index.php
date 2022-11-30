@@ -18,6 +18,8 @@ require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
 require_once 'bot/config/states.php';
 require_once 'bot/config/payloads.php';
+require_once 'bot/res/numbers.php';
+require_once 'bot/models/InlineKeyboardPageModel.php';
 require_once 'bot/actions/BotState.php';
 require_once 'bot/actions/StartState.php';
 require_once 'bot/actions/InputBillNameState.php';
@@ -27,10 +29,8 @@ require_once 'bot/actions/ConfirmPasswordState.php';
 require_once 'bot/actions/InputPersonNameState.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
-require_once 'bot/res/numbers.php';
 require_once 'bot/di/KeyboardModel.php';
 require_once 'bot/di/StateModel.php';
-require_once 'bot/models/InlineKeyboardPageModel.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
