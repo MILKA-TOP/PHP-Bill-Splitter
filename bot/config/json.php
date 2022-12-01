@@ -6,7 +6,8 @@ $empty_json = array();
 define("EMPTY_JSON_ARRAY", json_encode($empty_ids_array));
 define("EMPTY_JSON_STATE", json_encode($empty_json));
 
-function arrayToJson($array) {
+function arrayToJson($array)
+{
     return json_encode($array, JSON_UNESCAPED_UNICODE);
 }
 
@@ -33,7 +34,8 @@ function addPersonNameFieldToJson($input_json, $personName)
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
 }
 
-function removePersonNameFieldToJson($input_json, $personName) {
+function removePersonNameFieldToJson($input_json, $personName)
+{
     $current_json_array = json_decode($input_json, true);
     $current_person_names = $current_json_array[PERSON_NAME_STATE_ARG];
     unset($current_person_names[array_search($personName, $current_person_names)]);
@@ -49,19 +51,37 @@ function addPersonPageNumberFieldToJson($input_json, $pageNumber = 0)
 
 }
 
-function addElementToJsonArray($input_json, $element) {
+function addElementToJsonArray($input_json, $element)
+{
     $array_regular = json_decode($input_json, true);
     $array_regular[] = $element;
     return json_encode($array_regular, JSON_UNESCAPED_UNICODE);
 }
 
-function setIdBillArgState($billId) {
+function setIdBillArgState($billId)
+{
     return json_encode(array(BILL_ID_STATE_ARG => $billId), JSON_UNESCAPED_UNICODE);
 }
 
-function setJsonChoosePersons($input_json) {
+function setJsonChoosePersons($input_json)
+{
     $input_json = addPersonPageNumberFieldToJson($input_json);
     $current_json_array = json_decode($input_json, true);
-    $current_json_array[SINGLE_PERSONS_STATE_ARG] = Array();
+    $current_json_array[SINGLE_PERSONS_STATE_ARG] = array();
     return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
+}
+
+function updatePersonsSingleBillArray($input_json, $person_id, $bool)
+{
+    $args_array = json_decode($input_json, true);
+
+    $selected_array = $args_array[SINGLE_PERSONS_STATE_ARG];
+    if ($bool) {
+        $selected_array[] = $person_id;
+    } else {
+        unset($person_id, $selected_array);
+    }
+    $args_array[SINGLE_PERSONS_STATE_ARG] = $selected_array;
+
+    return json_encode($args_array, JSON_UNESCAPED_UNICODE);
 }
