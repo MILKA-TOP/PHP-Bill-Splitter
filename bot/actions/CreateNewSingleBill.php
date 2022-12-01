@@ -6,18 +6,24 @@ class CreateNewSingleBill extends BotState
 
     static function showPersonTable($user_id, $db)
     {
-        $bill_persons = getSingleBillPersonIds($user_id, $db)[1];
-
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
         $updated_json = setJsonChoosePersons($user->stateArgs);
 
+        self::sendInlineKeyboard($user_id, $db, $updated_json);
+        vkApi_messagesSend($user_id, SELECT_PERSONS_FOR_SINGLE_BILL, SINGLE_BILL_CREATE_KEYBOARD);
+    }
+
+    static function sendInlineKeyboard($user_id, $db, $updated_json)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $bill_persons = getSingleBillPersonIds($user_id, $db)[1];
 
         $inline_keyboard = self::getArraysForInlineKeyboard($updated_json, $bill_persons, $db);
         $user->updateStateWithArgs(CREATE_SINGLE_BILL_STATE, $updated_json);
         vkApi_messagesSend($user_id, CHOOSE_PERSONS_FOR_SINGLE_BILL, $inline_keyboard);
-        vkApi_messagesSend($user_id, SELECT_PERSONS_FOR_SINGLE_BILL, SINGLE_BILL_CREATE_KEYBOARD);
     }
 
 
@@ -84,11 +90,11 @@ class CreateNewSingleBill extends BotState
 
         $click_element_id = $payload[ACTION_STATE_PAYLOAD_ARG];
         $updated_element_status = $payload[SINGLE_BILL_PERSON_STATUS_STATE_PAYLOAD_ARG];
+        log_msg("ID: " . $click_element_id);
+        log_msg(print_r($updated_element_status, true));
         $update_json = updatePersonsSingleBillArray($user->stateArgs, $click_element_id, $updated_element_status);
 
-        $user->updateStateWithArgs(CREATE_SINGLE_BILL_STATE, $update_json);
-
-        self::showPersonTable($user_id, $db);
+        self::sendInlineKeyboard($user_id, $db, $update_json);
         //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
