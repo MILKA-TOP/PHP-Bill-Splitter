@@ -68,6 +68,11 @@ const SELECT_SINGLE_BILL_INFO_INCORRECT_MESSAGE = "Группы с таким [i
 const SELECT_PERSONS_FOR_SINGLE_BILL = "Выберите людей для соответствующей группы. Чтобы выбрать человека, необходимо" .
     " нажать на него. Если вы хотите удалить его из группы, то также нажмите на него.";
 
+const SINGLE_BILL_REMOVE_POSITION_MESSAGE = "ИНФОРМАЦИЯ О ГРУППЕ\n\nКоличество участников: %s;\nСумма на всю группу: %s руб." .
+    "\nСписок участников: %s;\nПозиции:\n%s";
+
+const SINGLE_BILL_POSITIONS = "[%s] | %s | %s руб.";
+
 const CREATE_BILL_BUTTON_TEXT = "Создать счёт";
 const SHOW_BILLS_BUTTON_TEXT = "Показать доступные счета";
 const HELP_TEXT = "Помощь";
@@ -85,6 +90,8 @@ const CANCEL_BUTTON_TEXT = "Отмена";
 const SKIP_PASSWORD_BUTTON_TEXT = "Пропустить пароль";
 const CHANGE_PASSWORD_BUTTON_TEXT = "Изменить пароль";
 const CREATE_NEW_SINGLE_BILL_BUTTON_TEXT = "Создать новую группу";
+const SINGLE_BILL_ADD_POSITION_BUTTON_TEXT = "Добавить позицию";
+const SINGLE_BILL_REMOVE_POSITION_BUTTON_TEXT = "Удалить позицию";
 const NEXT_PAGE_INLINE = " ▶";
 const PREV_PAGE_INLINE = " ◀";
 

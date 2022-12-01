@@ -237,3 +237,23 @@ function arrayOfPersonStatusButtons($names_array,
 
     return ["inline" => true, "buttons" => $buttons_array];
 }
+
+const SINGLE_BILL_DATA_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . SINGLE_BILL_ADD_POSITION_PAYLOAD . '"}',
+            "label" => SINGLE_BILL_ADD_POSITION_BUTTON_TEXT],
+            "color" => "positive"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . SINGLE_BILL_REMOVE_POSITION_PAYLOAD . '"}',
+            "label" => SINGLE_BILL_REMOVE_POSITION_BUTTON_TEXT],
+            "color" => "primary"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+            "label" => BACK_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+

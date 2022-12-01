@@ -108,6 +108,7 @@ class CreateNewSingleBill extends BotState
     private function creatingSingleBill($user_id, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        //MainSingleBillState::MainSingleBillState()
     }
 
     private function personClick($user_id, $payload, $db)
