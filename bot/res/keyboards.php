@@ -209,13 +209,12 @@ const SINGLE_BILL_CREATE_KEYBOARD = [
             "label" => BACK_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
-const STATUS_ARRAY = array(true => "positive", false => "negative");
-
 function arrayOfPersonStatusButtons($names_array,
                                     $status_array,
                                     $with_back = false,
                                     $with_next = false): array
 {
+    $STATUS_ARRAY = array(true => "positive", false => "negative");
     $buttons_array = array();
     foreach ($names_array as $value => $label) {
         $buttons_array[] = [[
@@ -224,7 +223,7 @@ function arrayOfPersonStatusButtons($names_array,
                 "payload" => '{"command": "' . CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD
                     . '", "value":"' . $value . '", "status:"' . $status_array[$value] . '"}',
                 "label" => $label],
-            "color" => STATUS_ARRAY[$status_array[$value]]]];
+            "color" => $STATUS_ARRAY[$status_array[$value]]]];
     }
 
     if ($with_back && $with_next) {
