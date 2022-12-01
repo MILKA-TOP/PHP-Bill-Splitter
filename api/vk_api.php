@@ -12,6 +12,17 @@ function vkApi_messagesSend($peer_id, $message, $keyboard = array(), $attachment
   ));
 }
 
+function vkApi_messageEdit($peer_id, $conversation_message_id, $message, $keyboard = array(), $attachments = array()) {
+    return _vkApi_call('messages.edit', array(
+        'peer_id'    => $peer_id,
+        'conversation_message_id'=>$conversation_message_id,
+        'message'    => $message,
+        'keyboard'    => json_encode($keyboard, JSON_UNESCAPED_UNICODE),
+        'attachment' => implode(',', $attachments)
+    ));
+}
+
+
 function vkApi_messagesSendWithKeyBoard($peer_id, $message, $keyboard, $attachments = array()) {
     return _vkApi_call('messages.send', array(
         'peer_id'    => $peer_id,

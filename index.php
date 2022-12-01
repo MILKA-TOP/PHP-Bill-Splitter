@@ -2,6 +2,7 @@
 
 const CALLBACK_API_EVENT_CONFIRMATION = 'confirmation';
 const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
+const CALLBACK_API_EVENT_MESSAGE_EVENT = 'message_event';
 
 require_once 'config.php';
 require_once 'global.php';
@@ -15,10 +16,25 @@ require_once 'bot/class/Field.php';
 require_once 'bot/class/Bill.php';
 require_once 'bot/config/database.php';
 require_once 'bot/config/json.php';
-require_once 'bot/config/message_examples.php';
 require_once 'bot/config/states.php';
-require_once 'bot/actions/MainScreen.php';
+require_once 'bot/config/payloads.php';
+require_once 'bot/res/numbers.php';
+require_once 'bot/models/InlineKeyboardPageModel.php';
+require_once 'bot/models/SingleBillModel.php';
+require_once 'bot/actions/BotState.php';
+require_once 'bot/actions/StartState.php';
+require_once 'bot/actions/InputBillNameState.php';
+require_once 'bot/actions/ConfirmNameState.php';
+require_once 'bot/actions/InputPasswordState.php';
+require_once 'bot/actions/ConfirmPasswordState.php';
+require_once 'bot/actions/InputPersonNameState.php';
+require_once 'bot/actions/MainBillState.php';
+require_once 'bot/actions/SelectSingleBillState.php';
+require_once 'bot/actions/CreateNewSingleBill.php';
+require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
+require_once 'bot/di/KeyboardModel.php';
+require_once 'bot/di/StateModel.php';
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {
@@ -38,6 +54,9 @@ function callback_handleEvent()
                 _callback_handleConfirmation();
                 break;
 
+            case CALLBACK_API_EVENT_MESSAGE_EVENT:
+                _callback_handleMessageEvent($event['object']);
+                break;
             //Получение нового сообщения
             case CALLBACK_API_EVENT_MESSAGE_NEW:
                 _callback_handleMessageNew($event['object']);
@@ -71,8 +90,16 @@ function _callback_handleMessageNew($data)
     _callback_okResponse();
 }
 
+function _callback_handleMessageEvent($data)
+{
+    $user_id = $data['peer_id'];
+    bot_sendMessage($user_id, $data);
+    _callback_okResponse();
+}
+
 function _callback_okResponse()
 {
+    log_msg("Hello, log!");
     _callback_response('ok');
 }
 

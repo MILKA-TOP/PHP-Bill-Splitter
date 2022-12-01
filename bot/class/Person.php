@@ -32,10 +32,10 @@ class Person
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (name, singleBillsIds, billId)
-                    VALUES ($this->name, '$this->singleBillsIds', $this->billId);";
-
+                    VALUES ('$this->name', '$this->singleBillsIds', $this->billId);";
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
@@ -60,6 +60,26 @@ class Person
         $this->name = $dataRow['name'];
         $this->singleBillsIds = $dataRow['singleBillsIds'];
         $this->billId = $dataRow['billId'];
+    }
+
+    public function getPersonsBillList($id_array)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        name 
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id in (" . implode(', ', $id_array) . ");";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $output_array = [];
+        foreach ($dataRow as $sub_array) {
+            $output_array[$sub_array['id']] = $sub_array['name'];
+        }
+        return $output_array;
     }
 }
 

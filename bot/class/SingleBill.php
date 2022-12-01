@@ -39,6 +39,7 @@ class SingleBill
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
@@ -58,7 +59,6 @@ class SingleBill
                         " . $this->db_table . "
                     WHERE
                        id = " . $this->id . ";";
-        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -69,5 +69,21 @@ class SingleBill
         $this->name  = $dataRow['name'];
         $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
+
+    public function getPersonsBillList($billId)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        persons,
+                        fullValue
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       billId = " . $billId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 
