@@ -7,7 +7,7 @@ function maxPageNumber($array): int
 
 function lastArrayRanges($array, $page): array
 {
-    return array_slice($array, $page * MAX_INLINE_BUTTONS_COUNT, MAX_INLINE_BUTTONS_COUNT);
+    return array_slice($array, $page * MAX_INLINE_BUTTONS_COUNT, MAX_INLINE_BUTTONS_COUNT, true);
 }
 
 function containsNextPage($array, $page, $max_page): bool
