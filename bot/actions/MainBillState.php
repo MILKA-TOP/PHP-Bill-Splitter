@@ -23,7 +23,7 @@ class MainBillState extends BotState
                     $this->showAllBills($user_id, $db);
                     break;
                 case BILL_CHANGE_SINGLE_BILL_PAYLOAD:
-                    $this->updateBill($user_id, $db);
+                    $this->toSingleBillList($user_id, $db);
                     break;
                 case BILL_SHOW_SINGLE_PAYLOAD:
                     $this->showSingleBill($user_id, $db);
@@ -42,14 +42,6 @@ class MainBillState extends BotState
     private function showAllBills($user_id, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-    }
-
-    private function updateBill($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateState(SELECT_SINGLE_BILL_STATE);
-        sendSingleBillListMessage($user_id, $db);
     }
 
     private function showSingleBill($user_id, $db)

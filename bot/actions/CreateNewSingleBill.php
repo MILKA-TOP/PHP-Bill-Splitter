@@ -39,7 +39,7 @@ class CreateNewSingleBill extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case BACK_PAYLOAD:
-                    $this->backToBillMenu($user_id, $db);
+                    $this->toSingleBillList($user_id, $db);
                     break;
                 case BILL_CREATE_SINGLE_BILL_PAYLOAD:
                     $this->creatingSingleBill($user_id, $db);

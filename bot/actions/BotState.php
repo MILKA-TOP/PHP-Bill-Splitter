@@ -28,6 +28,15 @@ abstract class BotState
         vkApi_messagesSend($user_id, BACK_TO_BILL_MENU_MESSAGE, BILL_MAIN_KEYBOARD);
     }
 
+    protected function toSingleBillList($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(SELECT_SINGLE_BILL_STATE);
+        sendSingleBillListMessage($user_id, $db);
+
+    }
+
     protected function toMainBillMenuState($user_id, $db, $billId)
     {
         $user = new User($db);
