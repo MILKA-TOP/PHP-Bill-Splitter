@@ -33,7 +33,7 @@ function getSingleBillDataString($user_id, $db): string
                 $curr_single_id,
                 getSeparatedPersonNamesLine($persons_names, $person_array),
                 $id_fullValue_array[$curr_single_id]
-            ) . $output_string;
+            );
     }
 
     return $output_string;
