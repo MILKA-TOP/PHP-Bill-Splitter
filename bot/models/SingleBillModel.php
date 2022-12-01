@@ -19,9 +19,9 @@ function getSingleBillDataString($user_id, $db): string
     $singleBillArray = $singleBill->getPersonsBillList($bill_id);
     log_msg(print_r($singleBillArray, true));
     $single_bill_data_array = getIdArrayFromSingleBillArray($singleBillArray);
-    $id_array = $single_bill_data_array[0];
-    $id_persons_array = array_combine($id_array, $single_bill_data_array[1]);
-    $id_fullValue_array = array_combine($id_array, $single_bill_data_array[2]);
+    log_msg(print_r($single_bill_data_array, true));
+    $id_persons_array = $single_bill_data_array[1];
+    $id_fullValue_array = $single_bill_data_array[2];
     log_msg(print_r($id_persons_array, true));
     log_msg(print_r($id_fullValue_array, true));
 
@@ -43,15 +43,13 @@ function getSingleBillDataString($user_id, $db): string
 
 function getIdArrayFromSingleBillArray($array)
 {
-    $id_array = [];
     $persons_array = [];
     $fullValue_array = [];
     foreach ($array as $sub_array) {
-        $id_array[] = $sub_array['id'];
-        $persons_array[] = json_decode($sub_array['persons'], true);
-        $fullValue_array[] = $sub_array['fullValue'];
+        $persons_array[$sub_array['id']] = json_decode($sub_array['persons'], true);
+        $fullValue_array[$sub_array['id']] = $sub_array['fullValue'];
     }
-    return [$id_array, $persons_array, $fullValue_array];
+    return [$persons_array, $fullValue_array];
 }
 
 function getSeparatedPersonNamesLine($full_person_names, $person_ids): string
