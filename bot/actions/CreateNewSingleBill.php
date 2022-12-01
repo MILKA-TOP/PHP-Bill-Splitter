@@ -90,22 +90,25 @@ class CreateNewSingleBill extends BotState
 
         $person = new Person($db);
         $person_name_array = $person->getPersonsBillList($personsIds);
+        log_msg(print_r($person_name_array, true));
 
         $max_page_number = maxPageNumber($person_name_array);
         $name_array_cut = lastArrayRanges($person_name_array, $current_page);
         $contains_prev_page = containsPrevPage($person_name_array, $current_page);
         $contains_next_page = containsNextPage($person_name_array, $current_page, $max_page_number);
+        log_msg(print_r($name_array_cut, true));
 
         return arrayOfPersonStatusButtons($name_array_cut,
             $is_selected_person_array, $contains_prev_page, $contains_next_page);
     }
 
-    static function idStatusArray($id_person_array, $selected_array)
+    static function idStatusArray($id_person_array, $selected_array): array
     {
         $output_array = [];
         foreach ($id_person_array as $curr_id) {
             $output_array[$curr_id] = in_array($curr_id, $selected_array);
         }
+        log_msg(print_r($output_array, true));
         return $output_array;
     }
 
