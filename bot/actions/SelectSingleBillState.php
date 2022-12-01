@@ -50,6 +50,7 @@ class SelectSingleBillState extends BotState
     {
         $persons_ids = getSingleBillPersonIds($user_id, $db)[1];
 
+        log_msg(print_r($persons_ids, true));
         if (in_array($text, $persons_ids)) {
             vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
         } else {
