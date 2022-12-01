@@ -30,6 +30,7 @@ require_once 'bot/actions/ConfirmPasswordState.php';
 require_once 'bot/actions/InputPersonNameState.php';
 require_once 'bot/actions/MainBillState.php';
 require_once 'bot/actions/SelectSingleBillState.php';
+require_once 'bot/actions/CreateNewSingleBill.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/di/KeyboardModel.php';
