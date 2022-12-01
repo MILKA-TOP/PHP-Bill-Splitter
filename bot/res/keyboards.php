@@ -117,14 +117,14 @@ const BACK_BUTTON = [
         "type" => "callback",
         "payload" => '{"command": "' . PREV_PAGE_NAME_PAYLOAD . '"}',
         "label" => PREV_PAGE_INLINE],
-    "color" => "positive"];
+    "color" => "secondary"];
 
 const NEXT_BUTTON = [
     "action" => [
         "type" => "callback",
         "payload" => '{"command": "' . NEXT_PAGE_NAME_PAYLOAD . '"}',
         "label" => NEXT_PAGE_INLINE],
-    "color" => "positive"];
+    "color" => "secondary"];
 
 const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 

@@ -15,8 +15,9 @@ class CreateNewSingleBill extends BotState
 
 
         $inline_keyboard = self::getArraysForInlineKeyboard($updated_json, $bill_persons, $db);
-
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $inline_keyboard);
+        $user->updateStateWithArgs(CREATE_SINGLE_BILL_STATE, $updated_json);
+        vkApi_messagesSend($user_id, SELECT_PERSONS_FOR_SINGLE_BILL, SINGLE_BILL_CREATE_KEYBOARD);
+        vkApi_messagesSend($user_id, CHOOSE_PERSONS_FOR_SINGLE_BILL, $inline_keyboard);
     }
 
 
