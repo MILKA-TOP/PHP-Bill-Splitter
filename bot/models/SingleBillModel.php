@@ -5,7 +5,8 @@ function sendSingleBillListMessage($user_id, $db) {
     vkApi_messagesSend($user_id, $message, SINGLE_BILL_CHOOSE_KEYBOARD);
 }
 
-function getSingleBillDataString($user_id, $db): string
+// return [id, [personIds]]
+function getSingleBillPersonIds($user_id, $db): array
 {
     $user = new User($db);
     $user->id = $user_id;
@@ -15,7 +16,14 @@ function getSingleBillDataString($user_id, $db): string
     $bill = new Bill($db);
     $bill->id = $bill_id;
     $bill->getSingleBill();
-    $persons_ids = json_decode($bill->persons, true);
+    return [$bill_id, json_decode($bill->persons, true)];
+}
+
+function getSingleBillDataString($user_id, $db): string
+{
+    $singleResult = getSingleBillPersonIds($user_id, $db);
+    $bill_id = $singleResult[0];
+    $persons_ids= $singleResult[1];
 
     $person = new Person($db);
     $persons_names = $person->getPersonsBillList($persons_ids);

@@ -48,21 +48,9 @@ class SelectSingleBillState extends BotState
 
     private function checkSingleBillIdContains($user_id, $text, $db)
     {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-        $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
+        $persons_ids = getSingleBillPersonIds($user_id, $db)[1];
 
-        $bill = new Bill($db);
-        $bill->id = $bill_id;
-        $bill->getSingleBill();
-        $persons_ids = json_decode($bill->persons, true);
-
-        $singleBill = new SingleBill($db);
-        $singleBillArray = $singleBill->getPersonsBillList($bill_id);
-        $single_bill_id_array = getIdArrayFromSingleBillArray($singleBillArray);
-
-        if (in_array($text, $single_bill_id_array)) {
+        if (in_array($text, $persons_ids)) {
             vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
         } else {
             vkApi_messagesSend($user_id, SELECT_SINGLE_BILL_INFO_INCORRECT_MESSAGE, $this->keyboard);
