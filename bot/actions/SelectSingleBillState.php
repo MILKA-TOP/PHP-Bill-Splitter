@@ -66,14 +66,4 @@ class SelectSingleBillState extends BotState
         }
     }
 
-    private function getIdArrayFromSingleBillArray($array)
-    {
-        $output = [];
-        foreach ($array as $sub_array) {
-            $output[] = $sub_array['id'];
-        }
-        sort($output);
-        return $output;
-    }
-
 }

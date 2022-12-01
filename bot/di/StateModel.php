@@ -8,4 +8,5 @@ const state_model = array(
     SET_BILL_PASSWORD_CONFIRM_STATE => ConfirmPasswordState::class,
     SET_BILL_PERSONS_STATE => InputPersonNameState::class,
     MAIN_BILL_STATE => MainBillState::class,
+    SELECT_SINGLE_BILL_STATE => SelectSingleBillState::class,
 );
