@@ -122,7 +122,7 @@ class Bill
                        id = " . $billId . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
-        return json_decode($stmt->fetchAll(PDO::FETCH_ASSOC), true);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
