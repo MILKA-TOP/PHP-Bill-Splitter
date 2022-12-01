@@ -14,13 +14,15 @@ function getSingleBillDataString($user_id, $db): string
 
     $person = new Person($db);
     $persons_names = $person->getPersonsBillList($persons_ids);
-
+    log_msg(print_r($persons_names, true));
     $singleBill = new SingleBill($db);
     $singleBillArray = $singleBill->getPersonsBillList($bill_id);
     $single_bill_data_array = getIdArrayFromSingleBillArray($singleBillArray);
     $id_array = $single_bill_data_array[0];
     $id_persons_array = array_combine($id_array, $single_bill_data_array[1]);
     $id_fullValue_array = array_combine($id_array, $single_bill_data_array[2]);
+    log_msg(print_r($id_persons_array, true));
+    log_msg(print_r($id_fullValue_array, true));
 
     $output_string = "";
 
@@ -58,5 +60,6 @@ function getSeparatedPersonNamesLine($full_person_names, $person_ids): string
         $output_array[] = $full_person_names[$person_id];
     }
 
+    log_msg(print_r($output_array, true));
     return implode(' | ', $output_array);
 }

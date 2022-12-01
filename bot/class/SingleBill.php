@@ -82,9 +82,7 @@ class SingleBill
                        id = " . $billId . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
-        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $dataRow;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
