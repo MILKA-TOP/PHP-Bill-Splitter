@@ -20,6 +20,14 @@ abstract class BotState
         vkApi_messagesSend($user_id, ROLLBACK_TO_MAIN_MENU, MAIN_KEYBOARD);
     }
 
+    protected function backToBillMenu($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(MAIN_BILL_STATE);
+        vkApi_messagesSend($user_id, BACK_TO_BILL_MENU_MESSAGE, BILL_MAIN_KEYBOARD);
+    }
+
     protected function toMainBillMenuState($user_id, $db, $billId)
     {
         $user = new User($db);

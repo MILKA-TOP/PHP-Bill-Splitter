@@ -88,4 +88,5 @@ const BILL_NAME_STATE_ARG = "name";
 const ACTION_STATE_PAYLOAD_ARG = "value";
 const PERSON_NAME_STATE_ARG = "persons";
 const PAGE_NUMBER_PERSON_STATE_ARG = "page";
+const SINGLE_PERSONS_STATE_ARG = "single_persons";
 const BILL_ID_STATE_ARG = "bill_id";

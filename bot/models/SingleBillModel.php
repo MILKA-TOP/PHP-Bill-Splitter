@@ -1,6 +1,7 @@
 <?php
 
-function sendSingleBillListMessage($user_id, $db) {
+function sendSingleBillListMessage($user_id, $db)
+{
     $message = sprintf(SELECT_SINGLE_BILL_INFO_MESSAGE, getSingleBillDataString($user_id, $db));
     vkApi_messagesSend($user_id, $message, SINGLE_BILL_CHOOSE_KEYBOARD);
 }
@@ -19,11 +20,11 @@ function getSingleBillPersonIds($user_id, $db): array
     return [$bill_id, json_decode($bill->persons, true)];
 }
 
-function getSingleBillDataString($user_id, $db): string
+function getSingleBillArraysData($user_id, $db): array
 {
     $singleResult = getSingleBillPersonIds($user_id, $db);
     $bill_id = $singleResult[0];
-    $persons_ids= $singleResult[1];
+    $persons_ids = $singleResult[1];
 
     $person = new Person($db);
     $persons_names = $person->getPersonsBillList($persons_ids);
@@ -46,10 +47,30 @@ function getSingleBillDataString($user_id, $db): string
             );
     }
 
+    return [$id_persons_array, $persons_names, $id_fullValue_array];
+}
+
+function getSingleBillDataString($user_id, $db)
+{
+    $single_bill_data = getSingleBillArraysData($user_id, $db);
+    $id_persons_array=$single_bill_data[0];
+    $persons_names=$single_bill_data[1];
+    $id_fullValue_array=$single_bill_data[2];
+    $output_string = "";
+
+    foreach ($id_persons_array as $curr_single_id => $person_array) {
+        $output_string = $output_string .
+            sprintf(GROUP_LINE_FORMAT,
+                $curr_single_id,
+                getSeparatedPersonNamesLine($persons_names, $person_array),
+                $id_fullValue_array[$curr_single_id]
+            );
+    }
+
     return $output_string;
 }
 
-// Return [[ids], [persons], [fullValue]]
+// Return [[persons], [fullValue]]
 
 function getIdArrayFromSingleBillArray($array)
 {

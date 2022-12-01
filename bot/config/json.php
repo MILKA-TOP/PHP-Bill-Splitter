@@ -58,3 +58,10 @@ function addElementToJsonArray($input_json, $element) {
 function setIdBillArgState($billId) {
     return json_encode(array(BILL_ID_STATE_ARG => $billId), JSON_UNESCAPED_UNICODE);
 }
+
+function setJsonChoosePersons($input_json) {
+    $input_json = addPersonPageNumberFieldToJson($input_json);
+    $current_json_array = json_decode($input_json, true);
+    $current_json_array[SINGLE_PERSONS_STATE_ARG] = Array();
+    return json_encode($current_json_array, JSON_UNESCAPED_UNICODE);
+}

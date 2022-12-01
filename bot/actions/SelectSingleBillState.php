@@ -35,15 +35,8 @@ class SelectSingleBillState extends BotState
 
     private function createNewSingleBill($user_id, $db)
     {
+        CreateNewSingleBill::showPersonTable($user_id, $db);
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-    }
-
-    private function backToBillMenu($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateState(MAIN_BILL_STATE);
-        vkApi_messagesSend($user_id, BACK_TO_BILL_MENU_MESSAGE, BILL_MAIN_KEYBOARD);
     }
 
     private function checkSingleBillIdContains($user_id, $text, $db)

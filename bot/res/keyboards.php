@@ -131,7 +131,7 @@ const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 function arrayOfPersonButtons($names_array, $with_back = false, $with_next = false, $payload = REMOVE_PERSON_PAYLOAD): array
 {
     $buttons_array = array();
-    foreach ($names_array as $value=>$label) {
+    foreach ($names_array as $value => $label) {
         $buttons_array[] = [[
             "action" => [
                 "type" => "callback",
@@ -194,3 +194,46 @@ const SINGLE_BILL_CHOOSE_KEYBOARD = [
             "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
             "label" => BACK_BUTTON_TEXT],
             "color" => "secondary"]]]];
+
+const SINGLE_BILL_CREATE_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BILL_CREATE_SINGLE_BILL_PAYLOAD . '"}',
+            "label" => CREATE_NEW_SINGLE_BILL_BUTTON_TEXT],
+            "color" => "positive"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+            "label" => BACK_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+
+const STATUS_ARRAY = array(true => "positive", false => "negative");
+
+function arrayOfPersonStatusButtons($names_array,
+                                    $status_array,
+                                    $with_back = false,
+                                    $with_next = false): array
+{
+    $buttons_array = array();
+    foreach ($names_array as $value => $label) {
+        $buttons_array[] = [[
+            "action" => [
+                "type" => "callback",
+                "payload" => '{"command": "' . CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD
+                    . '", "value":"' . $value . '", "status:"' . $status_array[$value] . '"}',
+                "label" => $label],
+            "color" => STATUS_ARRAY[$status_array[$value]]]];
+    }
+
+    if ($with_back && $with_next) {
+        $buttons_array[] = BACK_NEXT_BUTTONS;
+    } else if ($with_back) {
+        $buttons_array[] = [BACK_BUTTON];
+    } else if ($with_next) {
+        $buttons_array[] = [NEXT_BUTTON];
+    }
+
+    return ["inline" => true, "buttons" => $buttons_array];
+}
