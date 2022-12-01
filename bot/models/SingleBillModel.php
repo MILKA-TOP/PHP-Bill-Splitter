@@ -20,8 +20,8 @@ function getSingleBillDataString($user_id, $db): string
     log_msg(print_r($singleBillArray, true));
     $single_bill_data_array = getIdArrayFromSingleBillArray($singleBillArray);
     log_msg(print_r($single_bill_data_array, true));
-    $id_persons_array = $single_bill_data_array[1];
-    $id_fullValue_array = $single_bill_data_array[2];
+    $id_persons_array = $single_bill_data_array[0];
+    $id_fullValue_array = $single_bill_data_array[1];
     log_msg(print_r($id_persons_array, true));
     log_msg(print_r($id_fullValue_array, true));
 
