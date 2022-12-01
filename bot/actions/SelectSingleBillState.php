@@ -23,7 +23,7 @@ class SelectSingleBillState extends BotState
                     $this->backToBillMenu($user_id, $db);
                     break;
                 case SINGLE_BILL_SHOW_ALL_GROUPS:
-                    getSingleBillDataString($user_id, $db);
+                    sendSingleBillListMessage($user_id, $db);
                     break;
                 default:
                     return false;

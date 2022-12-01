@@ -49,8 +49,7 @@ class MainBillState extends BotState
         $user = new User($db);
         $user->id = $user_id;
         $user->updateState(SELECT_SINGLE_BILL_STATE);
-        $message = sprintf(SELECT_SINGLE_BILL_INFO_MESSAGE, getSingleBillDataString($user_id, $db));
-        vkApi_messagesSend($user_id, $message, SINGLE_BILL_CHOOSE_KEYBOARD);
+        sendSingleBillListMessage($user_id, $db);
     }
 
     private function showSingleBill($user_id, $db)

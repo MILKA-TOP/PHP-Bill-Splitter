@@ -1,5 +1,10 @@
 <?php
 
+function sendSingleBillListMessage($user_id, $db) {
+    $message = sprintf(SELECT_SINGLE_BILL_INFO_MESSAGE, getSingleBillDataString($user_id, $db));
+    vkApi_messagesSend($user_id, $message, SINGLE_BILL_CHOOSE_KEYBOARD);
+}
+
 function getSingleBillDataString($user_id, $db): string
 {
     $user = new User($db);
