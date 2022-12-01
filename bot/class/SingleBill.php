@@ -79,7 +79,7 @@ class SingleBill
                       FROM
                         " . $this->db_table . "
                     WHERE 
-                       id = " . $billId . ";";
+                       billId = " . $billId . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
