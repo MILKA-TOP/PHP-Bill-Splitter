@@ -57,7 +57,7 @@ class SelectSingleBillState extends BotState
 
         $singleBill = new SingleBill($db);
         $singleBillArray = $singleBill->getPersonsBillList($bill_id);
-        $single_bill_id_array = $this->getIdArrayFromSingleBillArray($singleBillArray);
+        $single_bill_id_array = getIdArrayFromSingleBillArray($singleBillArray);
 
         if (in_array($text, $single_bill_id_array)) {
             vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
