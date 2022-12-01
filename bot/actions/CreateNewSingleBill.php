@@ -83,7 +83,7 @@ class CreateNewSingleBill extends BotState
         $user->getSingleUser();
 
         $click_element_id = $payload[ACTION_STATE_PAYLOAD_ARG];
-        $updated_element_status = !$payload[SINGLE_BILL_PERSON_STATUS_STATE_PAYLOAD_ARG];
+        $updated_element_status = $payload[SINGLE_BILL_PERSON_STATUS_STATE_PAYLOAD_ARG];
         $update_json = updatePersonsSingleBillArray($user->stateArgs, $click_element_id, $updated_element_status);
 
         $user->updateStateWithArgs(CREATE_SINGLE_BILL_STATE, $update_json);
