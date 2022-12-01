@@ -117,14 +117,14 @@ const BACK_BUTTON = [
         "type" => "callback",
         "payload" => '{"command": "' . PREV_PAGE_NAME_PAYLOAD . '"}',
         "label" => PREV_PAGE_INLINE],
-    "color" => "secondary"];
+    "color" => "primary"];
 
 const NEXT_BUTTON = [
     "action" => [
         "type" => "callback",
         "payload" => '{"command": "' . NEXT_PAGE_NAME_PAYLOAD . '"}',
         "label" => NEXT_PAGE_INLINE],
-    "color" => "secondary"];
+    "color" => "primary"];
 
 const BACK_NEXT_BUTTONS = [BACK_BUTTON, NEXT_BUTTON];
 
@@ -209,7 +209,7 @@ const SINGLE_BILL_CREATE_KEYBOARD = [
             "label" => BACK_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
-const STATUS_ARRAY = array(true => "positive", false => "negative");
+const STATUS_ARRAY = array(true => "positive", false => "secondary");
 
 function arrayOfPersonStatusButtons($names_array,
                                     $status_array,
