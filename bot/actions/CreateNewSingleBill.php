@@ -53,10 +53,10 @@ class CreateNewSingleBill extends BotState
                 case CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD:
                     $this->personClick($user_id, $array, $db);
                     break;
-                case PREV_PAGE_BILL_PAYLOAD:
+                case PREV_PAGE_NAME_PAYLOAD:
                     $this->prevPage($user_id, $db);
                     break;
-                case NEXT_PAGE_BILL_PAYLOAD:
+                case NEXT_PAGE_NAME_PAYLOAD:
                     $this->nextPage($user_id, $db);
                     break;
                 default:
