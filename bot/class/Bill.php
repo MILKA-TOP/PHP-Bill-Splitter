@@ -92,7 +92,7 @@ class Bill
         $stmt->execute();
     }
 
-    public function getNameBillList($id_array)
+    public function getNameBillList($id_array): array
     {
         $sqlQuery = "SELECT
                         id,
@@ -110,6 +110,19 @@ class Bill
             $output_array[$sub_array['id']] = $sub_array['name'];
         }
         return $output_array;
+    }
+
+    public function getSingleBillIds($billId)
+    {
+        $sqlQuery = "SELECT
+                        id
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id = " . $billId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
