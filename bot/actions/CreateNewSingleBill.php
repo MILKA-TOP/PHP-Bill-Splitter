@@ -96,7 +96,7 @@ class CreateNewSingleBill extends BotState
         $bill = new Bill($db);
         $bill->id = $user_args_array[BILL_ID_STATE_ARG];
         $bill->getSingleBill();
-        $max_page = maxPageNumber($bill->persons);
+        $max_page = maxPageNumber(json_decode($bill->persons, true));
         if ($current_page < $max_page) {
             $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page  + 1;
             self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array));
