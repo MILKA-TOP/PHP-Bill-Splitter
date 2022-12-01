@@ -53,8 +53,10 @@ function getIdArrayFromSingleBillArray($array)
 
 function getSeparatedPersonNamesLine($full_person_names, $person_ids): string
 {
-    $func = function (int $person_id) use ($full_person_names): int {
-        return $full_person_names[$person_id];
-    };
-    return implode(' | ', array_map($func, $person_ids));
+    $output_array = [];
+    foreach ($person_ids as $person_id) {
+        $output_array[] = $full_person_names[$person_id];
+    }
+
+    return implode(' | ', $output_array);
 }
