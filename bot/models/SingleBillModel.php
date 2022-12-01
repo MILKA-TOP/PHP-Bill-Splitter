@@ -17,6 +17,7 @@ function getSingleBillDataString($user_id, $db): string
     log_msg(print_r($persons_names, true));
     $singleBill = new SingleBill($db);
     $singleBillArray = $singleBill->getPersonsBillList($bill_id);
+    log_msg(print_r($singleBillArray, true));
     $single_bill_data_array = getIdArrayFromSingleBillArray($singleBillArray);
     $id_array = $single_bill_data_array[0];
     $id_persons_array = array_combine($id_array, $single_bill_data_array[1]);
