@@ -10,4 +10,5 @@ const state_model = array(
     MAIN_BILL_STATE => MainBillState::class,
     SELECT_SINGLE_BILL_STATE => SelectSingleBillState::class,
     CREATE_SINGLE_BILL_STATE => CreateNewSingleBill::class,
+    MAIN_SINGLE_BILL_STATE => MainSingleBillState::class,
 );

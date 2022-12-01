@@ -46,7 +46,8 @@ class SelectSingleBillState extends BotState
 
         log_msg(print_r($single_bill_ids, true));
         if (in_array($text, $single_bill_ids)) {
-            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+            MainSingleBillState::showSingleBillData($user_id, $text, $db);
+            //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
         } else {
             vkApi_messagesSend($user_id, SELECT_SINGLE_BILL_INFO_INCORRECT_MESSAGE, $this->keyboard);
         }
