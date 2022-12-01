@@ -76,14 +76,11 @@ function updatePersonsSingleBillArray($input_json, $person_id, $bool)
     $args_array = json_decode($input_json, true);
 
     $selected_array = $args_array[SINGLE_PERSONS_STATE_ARG];
-    log_msg("HRE1".$person_id);
-    log_msg("HRE2".print_r($selected_array, true));
     if ($bool) {
         $selected_array[] = $person_id;
     } else {
-        unset($person_id, $selected_array);
+        unset($selected_array[array_search($person_id, $selected_array)]);
     }
-    log_msg("HRE3".print_r($selected_array, true));
     $args_array[SINGLE_PERSONS_STATE_ARG] = $selected_array;
 
     return json_encode($args_array, JSON_UNESCAPED_UNICODE);
