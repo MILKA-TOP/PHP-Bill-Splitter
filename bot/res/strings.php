@@ -53,6 +53,14 @@ const ERROR_MAIN_MESSAGE = "Пожалуйста, введите коррект�
 
 const MAIN_BILL_INFO_MESSAGE = "Название чека: '%s';\nID: '%s';\nУчастники:\n%s";
 
+const BACK_TO_BILL_MENU_MESSAGE = "Вы вернулись в главное меню чека";
+
+const SELECT_SINGLE_BILL_INFO_MESSAGE = "Выберите из приведенного списка ту группу людей, у которой хотите изменить" .
+    " набор блюд, отправив её номер, или создайте новую группу.\n\n%s";
+
+const SELECT_SINGLE_BILL_INFO_INCORRECT_MESSAGE = "Группы с таким [id] нет в списке.\n\n Введите пожалуйста".
+    " корректный [id] или же создайте новую группу.";
+
 const CREATE_BILL_BUTTON_TEXT = "Создать счёт";
 const SHOW_BILLS_BUTTON_TEXT = "Показать доступные счета";
 const HELP_TEXT = "Помощь";
@@ -64,9 +72,11 @@ const MAIN_BILL_SHOW_SINGLE = "Вывести чек пользователя";
 const NEXT_BUTTON_TEXT = "Далее";
 const RENAME_BUTTON_TEXT = "Переименовать";
 const OK_BUTTON_TEXT = "Ок";
+const BACK_BUTTON_TEXT = "Назад";
 const CANCEL_BUTTON_TEXT = "Отмена";
 const SKIP_PASSWORD_BUTTON_TEXT = "Пропустить пароль";
 const CHANGE_PASSWORD_BUTTON_TEXT = "Изменить пароль";
+const CREATE_NEW_SINGLE_BILL_BUTTON_TEXT = "Создать новую группу";
 const NEXT_PAGE_INLINE = " ▶";
 const PREV_PAGE_INLINE = " ◀";
 

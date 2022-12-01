@@ -15,6 +15,7 @@ const HELP_PAYLOAD = "help";
 const BILL_SHOW_ALL_PAYLOAD = "bills_show_all";
 const BILL_CHANGE_SINGLE_BILL_PAYLOAD = "bills_update";
 const BILL_SHOW_SINGLE_PAYLOAD = "bills_show_single";
+const BILL_CREATE_SINGLE_BILL_PAYLOAD = "bills_create_single_bill";
 
 const NEXT_PAYLOAD = "next";
 const CONFIRM_PAYLOAD = "confirm";

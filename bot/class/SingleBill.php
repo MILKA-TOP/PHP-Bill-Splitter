@@ -69,5 +69,23 @@ class SingleBill
         $this->name  = $dataRow['name'];
         $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
+
+    public function getPersonsBillList($billId)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        persons,
+                        fullValue
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id = " . $billId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $dataRow;
+    }
+
 }
 

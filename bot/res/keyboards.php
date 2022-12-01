@@ -175,3 +175,17 @@ const BILL_MAIN_KEYBOARD = [
             "label" => CANCEL_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
+
+const SINGLE_BILL_CHOOSE_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BILL_CREATE_SINGLE_BILL_PAYLOAD . '"}',
+            "label" => CREATE_NEW_SINGLE_BILL_BUTTON_TEXT],
+            "color" => "positive"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+            "label" => BACK_BUTTON_TEXT],
+            "color" => "secondary"]]]];
