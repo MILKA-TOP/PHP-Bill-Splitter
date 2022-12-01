@@ -72,6 +72,7 @@ const MAIN_BILL_CHANGE_SINGLE_BILL = "Редактировать чек";
 const MAIN_BILL_SHOW_SINGLE = "Вывести чек пользователя";
 
 const NEXT_BUTTON_TEXT = "Далее";
+const SINGLE_BILL_SHOW_ALL = "Показать доступные группы";
 const RENAME_BUTTON_TEXT = "Переименовать";
 const OK_BUTTON_TEXT = "Ок";
 const BACK_BUTTON_TEXT = "Назад";

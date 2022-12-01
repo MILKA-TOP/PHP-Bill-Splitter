@@ -22,6 +22,9 @@ class SelectSingleBillState extends BotState
                 case BACK_PAYLOAD:
                     $this->backToBillMenu($user_id, $db);
                     break;
+                case SINGLE_BILL_SHOW_ALL_GROUPS:
+                    getSingleBillDataString($user_id, $db);
+                    break;
                 default:
                     return false;
             }
