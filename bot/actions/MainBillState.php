@@ -50,7 +50,7 @@ class MainBillState extends BotState
         $bill->id = $bill_id;
         $bill->getSingleBill();
         $persons = json_decode($bill->persons, true);
-
+        log_msg(print_r($persons, true));
         foreach ($persons as $curr_id) {
             $this->sendPersonBill($user_id, $bill_id, $curr_id, $db);
         }
@@ -69,12 +69,14 @@ class MainBillState extends BotState
         $single_bill = new SingleBill($db);
         $full_single_bill_list = $single_bill->getPersonsSingleBillList($bill_id);
         $used_single_bill_ids = [];
+        log_msg(print_r($full_single_bill_list, true));
 
         foreach ($full_single_bill_list as $currSingleId => $currPersons) {
             if (in_array($person_id, $currPersons)) {
                 $used_single_bill_ids[] = $currSingleId;
             }
         }
+        log_msg(print_r($used_single_bill_ids, true));
 
         foreach ($used_single_bill_ids as $currSingleId) {
             $single_bill->id = $currSingleId;
