@@ -37,7 +37,6 @@ class InputFieldValueState extends BotState
             $double_val = doubleval($value);
             if ($double_val >= 0) {
                 $this->setCurrentValue($user_id, $double_val, $db);
-                vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
                 return;
             }
         }
