@@ -65,7 +65,7 @@ class MainSingleBillState extends BotState
                     $this->toInputFieldNameState($user_id, $db);
                     break;
                 case SINGLE_BILL_REMOVE_POSITION_PAYLOAD:
-                    $this->removePosition($user_id, $db);
+                    RemoveFieldState::showSingleBillData($user_id, $db);
                     break;
                 case BACK_PAYLOAD:
                     $this->toSingleBillList($user_id, $db);
@@ -77,10 +77,4 @@ class MainSingleBillState extends BotState
         }
         return false;
     }
-
-    private function removePosition($user_id, $db)
-    {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-    }
-
 }
