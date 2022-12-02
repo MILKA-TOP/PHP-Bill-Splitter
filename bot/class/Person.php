@@ -37,7 +37,6 @@ class Person
     {
         $sqlQuery = "SELECT
                         name, 
-                        singleBillsIds, 
                         billId 
                       FROM
                         " . $this->db_table . "
