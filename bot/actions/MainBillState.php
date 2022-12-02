@@ -64,7 +64,7 @@ class MainBillState extends BotState
 
         $person = new Person($db);
         $person->id = $person_id;
-        $person->getPerson();
+        $person->getSinglePerson();
 
         $single_bill = new SingleBill($db);
         $full_single_bill_list = $single_bill->getPersonsSingleBillList($bill_id);

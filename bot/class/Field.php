@@ -18,15 +18,6 @@ class Field
         $this->conn = $db;
     }
 
-    // GET ALL
-    public function getField()
-    {
-        $sqlQuery = "SELECT id, name, price, singleBillId, billId FROM " . $this->db_table . "";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-        return $stmt;
-    }
-
     // CREATE
     public function createField()
     {

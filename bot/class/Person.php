@@ -16,15 +16,6 @@ class Person
         $this->conn = $db;
     }
 
-    // GET ALL
-    public function getPerson()
-    {
-        $sqlQuery = "SELECT id, name, billId FROM " . $this->db_table . ";";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-        return $stmt;
-    }
-
     // CREATE
     public function createPerson()
     {
