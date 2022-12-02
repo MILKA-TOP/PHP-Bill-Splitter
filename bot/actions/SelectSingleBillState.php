@@ -40,9 +40,9 @@ class SelectSingleBillState extends BotState
 
     private function checkSingleBillIdContains($user_id, $text, $db)
     {
-        $bill = new Bill($db);
+        $single_bill = new SingleBill($db);
         $bill_id = getSingleBillPersonIds($user_id, $db)[0];
-        $single_bill_ids = $bill->getSingleBillIds($bill_id);
+        $single_bill_ids = $single_bill->getSingleBillIds($bill_id);
 
         log_msg(print_r($single_bill_ids, true));
         if (in_array($text, $single_bill_ids)) {

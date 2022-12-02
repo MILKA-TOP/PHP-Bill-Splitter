@@ -105,7 +105,21 @@ class SingleBill
         return $output_array;
     }
 
-    public function updateFullValue($deltaValue) {
+    public function getSingleBillIds($billId)
+    {
+        $sqlQuery = "SELECT
+                        id
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       billId = " . $billId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updateFullValue($deltaValue)
+    {
         $sqlQuery = "UPDATE " . $this->db_table . " 
                     SET fullValue = fullValue + " . $deltaValue . "
                     WHERE id = " . $this->id . ";";
@@ -113,7 +127,8 @@ class SingleBill
         $stmt->execute();
     }
 
-    public function updateFieldsArray($fields) {
+    public function updateFieldsArray($fields)
+    {
         $sqlQuery = "UPDATE " . $this->db_table . " 
                     SET fields = '" . $fields . "'
                     WHERE id = " . $this->id . ";";
