@@ -82,14 +82,13 @@ const ERROR_FIELD_VALUE_INCORRECT = "Введенное вами значени�
 
 const SINGLE_BILL_POSITIONS = "[%s] | %s | %s руб.\n";
 
+const SL = "----------------\n";
 const BILL_FINAL_STRING = "Чек:\n[%s]\n" . SL . "%s" . SL . "\n\nОбщая сумма: %.2f руб.";
 
 const SINGLE_FIELD_FOR_BILL = "\"%s\" - %.2f руб.\n";
 const GROUP_FIELD_FOR_BILL = "\"%s\" - %.2f руб./чел.\n";
 
 const FIELD_FORMAT_BY_BOOL_ARRAY = array(true => SINGLE_FIELD_FOR_BILL, false => GROUP_FIELD_FOR_BILL);
-
-const SL = "----------------\n";
 
 const SINGLE_BILL_EMPTY_SELECTED = "Выберите хотя бы одного пользователя, чтобы создать группу.";
 const SINGLE_BILL_SAME_SELECTED = "Группа с таким набором пользователей уже присутствует";
