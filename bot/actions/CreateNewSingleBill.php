@@ -119,6 +119,8 @@ class CreateNewSingleBill extends BotState
         $single_bill = new SingleBill($db);
         $singleBillIdToPersonsArray = $single_bill->getPersonsSingleBillList($bill_id);
 
+        log_msg("1".print_r($singleBillIdToPersonsArray, true));
+        log_msg("2".print_r($selected_persons_ids, true));
         if (!$selected_persons_ids) {
             vkApi_messagesSend($user_id, SINGLE_BILL_EMPTY_SELECTED, $this->keyboard);
         } else if (!in_array($selected_persons_ids, $singleBillIdToPersonsArray)) {
