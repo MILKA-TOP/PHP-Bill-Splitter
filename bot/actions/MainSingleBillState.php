@@ -13,6 +13,9 @@ class MainSingleBillState extends BotState
         $person = new Person($db);
         $person_names = $person->getPersonsBillList(json_decode($singleBill->persons, true));
 
+        log_msg(print_r(json_decode($singleBill->persons, true)));
+        log_msg(print_r(json_decode($person_names, true)));
+
         $field = new Field($db);
         $field_name_array = $field->getFieldsNamesList($fields_id_array);
         $field_value_array = $field->getFieldsValuesList($fields_id_array);
