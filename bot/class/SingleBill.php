@@ -87,7 +87,7 @@ class SingleBill
 
     public function updateFullValue($deltaValue) {
         $sqlQuery = "UPDATE " . $this->db_table . " 
-                    SET stateId = stateId + " . $deltaValue . "
+                    SET fullValue = fullValue + " . $deltaValue . "
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
