@@ -103,3 +103,4 @@ const PERSON_NAME_STATE_ARG = "persons";
 const PAGE_NUMBER_PERSON_STATE_ARG = "page";
 const SINGLE_PERSONS_STATE_ARG = "single_persons";
 const BILL_ID_STATE_ARG = "bill_id";
+const SINGLE_BILL_ID_STATE_ARG = "single_bill_id";

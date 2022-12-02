@@ -21,6 +21,10 @@ class MainSingleBillState extends BotState
         $output_message = sprintf(SINGLE_BILL_REMOVE_POSITION_MESSAGE,
             count($person_names), $singleBill->fullValue, implode(",", $person_names), $fields_string);
 
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $user->updateStateWithArgs(MAIN_SINGLE_BILL_STATE, setSingleBillJson($user->stateArgs, $singleBillId));
 
         vkApi_messagesSend($user_id, $output_message, SINGLE_BILL_DATA_KEYBOARD);
     }

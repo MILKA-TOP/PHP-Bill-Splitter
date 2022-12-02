@@ -85,3 +85,15 @@ function updatePersonsSingleBillArray($input_json, $person_id, $bool)
 
     return json_encode($args_array, JSON_UNESCAPED_UNICODE);
 }
+
+function setSingleBillJson($input_json, $single_bill_id)
+{
+    $args_array = json_decode($input_json, true);
+
+    $output_array = array(
+        BILL_ID_STATE_ARG => $args_array[BILL_ID_STATE_ARG],
+        SINGLE_BILL_ID_STATE_ARG => $single_bill_id,
+    );
+
+    return json_encode($output_array, JSON_UNESCAPED_UNICODE);
+}
