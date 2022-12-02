@@ -30,7 +30,7 @@ function getSingleBillArraysData($user_id, $db): array
     $persons_names = $person->getPersonsBillList($persons_ids);
 
     $singleBill = new SingleBill($db);
-    $singleBillArray = $singleBill->getPersonsBillList($bill_id);
+    $singleBillArray = $singleBill->getPersonsValueBillList($bill_id);
 
     $single_bill_data_array = getIdArrayFromSingleBillArray($singleBillArray);
     $id_persons_array = $single_bill_data_array[0];

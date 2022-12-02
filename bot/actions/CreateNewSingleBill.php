@@ -76,7 +76,7 @@ class CreateNewSingleBill extends BotState
         $user_args_array = json_decode($user->stateArgs, true);
         $current_page = $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG];
         if ($current_page > 0) {
-            $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page  - 1;
+            $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page - 1;
             self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array));
         } else {
             vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
@@ -98,7 +98,7 @@ class CreateNewSingleBill extends BotState
         $bill->getSingleBill();
         $max_page = maxPageNumber(json_decode($bill->persons, true));
         if ($current_page < $max_page) {
-            $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page  + 1;
+            $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page + 1;
             self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array));
         } else {
             vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
@@ -107,8 +107,26 @@ class CreateNewSingleBill extends BotState
 
     private function creatingSingleBill($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-        //MainSingleBillState::MainSingleBillState()
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+
+        $arg_array = json_decode($user->stateArgs, true);
+        $selected_persons_ids = $arg_array[SINGLE_PERSONS_STATE_ARG];
+        $bill_id = $arg_array[BILL_ID_STATE_ARG];
+        sort($selected_persons_ids);
+
+        $single_bill = new SingleBill($db);
+        $singleBillIdToPersonsArray = $single_bill->getPersonsSingleBillList($bill_id);
+
+        if (!$selected_persons_ids) {
+            vkApi_messagesSend($user_id, SINGLE_BILL_EMPTY_SELECTED, $this->keyboard);
+        } else if (!in_array($selected_persons_ids, $singleBillIdToPersonsArray)) {
+            vkApi_messagesSend($user_id, SINGLE_BILL_SAME_SELECTED, $this->keyboard);
+        } else {
+            //MainSingleBillState::showSingleBillData($user_id, , $db);
+            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        }
     }
 
     private function personClick($user_id, $payload, $db)

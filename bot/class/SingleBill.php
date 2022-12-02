@@ -70,7 +70,7 @@ class SingleBill
         $this->isPersonField = $dataRow['isPersonField'];
     }
 
-    public function getPersonsBillList($billId)
+    public function getPersonsValueBillList($billId)
     {
         $sqlQuery = "SELECT
                         id,
@@ -83,6 +83,26 @@ class SingleBill
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPersonsSingleBillList($billId)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        persons 
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       billId = " . $billId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $output_array = [];
+        foreach ($dataRow as $sub_array) {
+            $output_array[$sub_array['id']] = $sub_array['persons'];
+        }
+        return $output_array;
     }
 
     public function updateFullValue($deltaValue) {
