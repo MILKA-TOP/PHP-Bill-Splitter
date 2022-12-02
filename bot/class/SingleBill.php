@@ -100,7 +100,7 @@ class SingleBill
 
         $output_array = [];
         foreach ($dataRow as $sub_array) {
-            $output_array[$sub_array['id']] = $sub_array['persons'];
+            $output_array[$sub_array['id']] = json_decode($sub_array['persons'], true);
         }
         return $output_array;
     }
