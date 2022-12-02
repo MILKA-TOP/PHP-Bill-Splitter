@@ -81,6 +81,7 @@ class MainBillState extends BotState
         foreach ($used_single_bill_ids as $currSingleId) {
             $single_bill->id = $currSingleId;
             $single_bill->getSingleBill();
+            $single_bill_persons_count = count(json_decode($single_bill->persons, true));
 
             $format_field_line = FIELD_FORMAT_BY_BOOL_ARRAY[$single_bill->isPersonField];
             $output_value += $single_bill->fullValue;
@@ -95,7 +96,7 @@ class MainBillState extends BotState
                 $item_list_string = $item_list_string . sprintf(
                         $format_field_line,
                         $field->name,
-                        $field->price / count($single_bill->persons));
+                        $field->price / $single_bill_persons_count);
             }
         }
 
