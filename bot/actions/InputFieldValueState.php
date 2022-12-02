@@ -33,7 +33,12 @@ class InputFieldValueState extends BotState
 
     private function setCurrentValue($user_id, $value, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        if (is_numeric($value)) {
+            $double_val = doubleval($value);
+            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        } else {
+            vkApi_messagesSend($user_id, ERROR_FIELD_VALUE_INCORRECT, $this->keyboard);
+        }
     }
 
 }
