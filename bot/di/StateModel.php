@@ -12,4 +12,5 @@ const state_model = array(
     CREATE_SINGLE_BILL_STATE => CreateNewSingleBill::class,
     MAIN_SINGLE_BILL_STATE => MainSingleBillState::class,
     SET_FIELD_NAME_STATE => InputFieldNameState::class,
+    SET_FIELD_VALUE_STATE => InputFieldValueState::class,
 );

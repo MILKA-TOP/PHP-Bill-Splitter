@@ -7,12 +7,7 @@ class InputFieldValueState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $input_name = $data["message"]["text"];
-        if (strlen($input_name) > 0 && strlen($input_name) < FIELD_NAME_MAX_SIZE) {
-            $this->setCurrentName($user_id, $input_name, $db);
-        } else {
-            vkApi_messagesSend($user_id, INPUT_FIELD_NAME_INCORRECT_MESSAGE, $this->keyboard);
-        }
+        $this->setCurrentValue($user_id, $data["message"]["text"], $db);
     }
 
     private function payloadSwitch($user_id, $data, $db)
@@ -25,6 +20,9 @@ class InputFieldValueState extends BotState
                 case BACK_PAYLOAD:
                     $this->toMainSingleBillState($user_id, $db);
                     break;
+                case RENAME_FIELD_PAYLOAD:
+                    $this->toInputFieldNameState($user_id, $db);
+                    break;
                 default:
                     return false;
             }
@@ -33,7 +31,7 @@ class InputFieldValueState extends BotState
         return false;
     }
 
-    private function setCurrentName($user_id, $name, $db)
+    private function setCurrentValue($user_id, $value, $db)
     {
         vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }

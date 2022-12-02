@@ -19,6 +19,7 @@ const BILL_CREATE_SINGLE_BILL_PAYLOAD = "bills_create_single_bill";
 
 const SINGLE_BILL_ADD_POSITION_PAYLOAD = "single_bill_add";
 const SINGLE_BILL_REMOVE_POSITION_PAYLOAD = "single_bill_remove";
+const RENAME_FIELD_PAYLOAD = "rename_field";
 
 const CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD = "change_person_single_bill_status";
 
