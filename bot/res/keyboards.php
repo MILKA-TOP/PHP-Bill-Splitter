@@ -257,3 +257,13 @@ const SINGLE_BILL_DATA_KEYBOARD = [
             "label" => BACK_BUTTON_TEXT],
             "color" => "secondary"]]]];
 
+const BACK_INPUT_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+            "label" => BACK_BUTTON_TEXT],
+            "color" => "secondary"],
+    ]]];
+

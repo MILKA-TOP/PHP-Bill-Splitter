@@ -34,7 +34,15 @@ abstract class BotState
         $user->id = $user_id;
         $user->updateState(SELECT_SINGLE_BILL_STATE);
         sendSingleBillListMessage($user_id, $db);
+    }
 
+    protected function toMainSingleBillState($user_id, $db) {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+
+        $single_bill_id = json_decode($user->stateArgs, true)[SINGLE_BILL_ID_STATE_ARG];
+        MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
     }
 
     protected function toMainBillMenuState($user_id, $db, $billId)

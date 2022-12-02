@@ -80,7 +80,10 @@ class MainSingleBillState extends BotState
 
     private function addPosition($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(SET_FIELD_NAME_STATE);
+        vkApi_messagesSend($user_id, FIELD_NAME_MESSAGE, BACK_INPUT_KEYBOARD);
     }
 
     private function removePosition($user_id, $db)
