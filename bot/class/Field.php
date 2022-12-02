@@ -124,5 +124,15 @@ class Field
         return $output_array;
     }
 
+    public function removeField()
+    {
+        $sqlQuery = "DELETE FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
 }
 

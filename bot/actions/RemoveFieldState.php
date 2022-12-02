@@ -42,7 +42,7 @@ class RemoveFieldState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case BACK_PAYLOAD:
-                    $this->toSingleBillList($user_id, $db);
+                    $this->toMainSingleBillState($user_id, $db);
                     break;
                 default:
                     return false;
@@ -67,8 +67,12 @@ class RemoveFieldState extends BotState
         $fieldsIdArray = $field->getFieldsIdsBySingleBillId($singleBillId);
 
         if (in_array($text, $fieldsIdArray)) {
-            //MainSingleBillState::showSingleBillData($user_id, $text, $db);
-            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+            $field = new Field($db);
+            $field->id = $text;
+            $field->getSingleField();
+            $singleBill->updateFullValue(-$field->price);
+            $field->removeField();
+            MainSingleBillState::showSingleBillData($user_id, $text, $db);
         } else {
             vkApi_messagesSend($user_id, SELECT_SINGLE_BILL_INFO_INCORRECT_MESSAGE, $this->keyboard);
         }
