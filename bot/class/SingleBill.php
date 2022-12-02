@@ -50,11 +50,11 @@ class SingleBill
     public function getSingleBill()
     {
         $sqlQuery = "SELECT
-                        adminId,
-                        password,
-                        persons,
-                        name,
-                        singleBillsIds
+                       billId,
+                       persons,
+                       fields,
+                       fullValue,
+                       isPersonField
                       FROM
                         " . $this->db_table . "
                     WHERE
@@ -63,11 +63,11 @@ class SingleBill
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->adminId = $dataRow['adminId'];
-        $this->password  = $dataRow['password'];
-        $this->persons  = $dataRow['persons'];
-        $this->name  = $dataRow['name'];
-        $this->singleBillsIds = $dataRow['singleBillsIds'];
+        $this->billId = $dataRow['billId'];
+        $this->persons = $dataRow['persons'];
+        $this->fields = $dataRow['fields'];
+        $this->fullValue = $dataRow['fullValue'];
+        $this->isPersonField = $dataRow['isPersonField'];
     }
 
     public function getPersonsBillList($billId)

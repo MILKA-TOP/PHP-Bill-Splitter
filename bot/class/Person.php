@@ -62,7 +62,7 @@ class Person
         $this->billId = $dataRow['billId'];
     }
 
-    public function getPersonsBillList($id_array)
+    public function getPersonsBillList($id_array): array
     {
         $sqlQuery = "SELECT
                         id,
