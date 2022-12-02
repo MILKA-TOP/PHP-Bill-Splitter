@@ -41,7 +41,61 @@ class MainBillState extends BotState
 
     private function showAllBills($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
+
+        $bill = new Bill($db);
+        $bill->id = $bill_id;
+        $bill->getSingleBill();
+        $persons = json_decode($bill->persons, true);
+
+        foreach ($persons as $curr_id) {
+            $this->sendPersonBill($user_id, $bill_id, $curr_id, $db);
+        }
+
+    }
+
+    private function sendPersonBill($user_id, $bill_id, $person_id, $db)
+    {
+        $output_value = 0.0;
+        $item_list_string = "";
+
+        $person = new Person($db);
+        $person->id = $person_id;
+        $person->getPerson();
+
+        $single_bill = new SingleBill($db);
+        $full_single_bill_list = $single_bill->getPersonsSingleBillList($bill_id);
+        $used_single_bill_ids = [];
+
+        foreach ($full_single_bill_list as $currSingleId => $currPersons) {
+            if (in_array($person_id, $currPersons)) {
+                $used_single_bill_ids[] = $currSingleId;
+            }
+        }
+
+        foreach ($used_single_bill_ids as $currSingleId) {
+            $single_bill->id = $currSingleId;
+            $single_bill->getSingleBill();
+
+            $format_field_line = FIELD_FORMAT_BY_BOOL_ARRAY[$single_bill->isPersonField];
+            $output_value += $single_bill->fullValue;
+
+            $field = new Field($db);
+            $fields_ids = $field->getFieldsIdsBySingleBillId($currSingleId);
+
+            foreach ($fields_ids as $currFieldId) {
+                $field->id = $currFieldId;
+                $field->getField();
+
+                $item_list_string = $item_list_string . sprintf($format_field_line, $field->name, $field->price);
+            }
+        }
+
+        $output_message = sprintf(BILL_FINAL_STRING, $person->name, $item_list_string, $output_value);
+        vkApi_messagesSend($user_id, $output_message, $this->keyboard);
     }
 
     private function showSingleBill($user_id, $db)

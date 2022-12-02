@@ -20,15 +20,6 @@ class Bill
         $this->conn = $db;
     }
 
-    // GET ALL
-    public function getBills()
-    {
-        $sqlQuery = "SELECT id, adminId, password, persons, name FROM " . $this->db_table . "";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-        return $stmt;
-    }
-
     // CREATE
     public function createBill()
     {

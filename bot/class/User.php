@@ -17,15 +17,6 @@ class User
         $this->conn = $db;
     }
 
-    // GET ALL
-    public function getUsers()
-    {
-        $sqlQuery = "SELECT id, stateId, stateArgs, bills FROM " . $this->db_table . "";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-        return $stmt;
-    }
-
     // CREATE
     public function createUser()
     {
