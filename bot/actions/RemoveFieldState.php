@@ -16,7 +16,7 @@ class RemoveFieldState extends BotState
         $singleBill->getSingleBill();
 
         $field = new Field($db);
-        $fields_id_array = $field->getFieldsIdsBySingleBillId($singleBillId);
+        $fields_id_array = $field->getFieldsIdsBySingleBillId($single_bill_id);
 
         $field = new Field($db);
         $field_name_array = $field->getFieldsNamesList($fields_id_array);
