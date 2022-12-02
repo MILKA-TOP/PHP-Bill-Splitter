@@ -48,7 +48,7 @@ class CreateNewSingleBill extends BotState
                     $this->toSingleBillList($user_id, $db);
                     break;
                 case BILL_CREATE_SINGLE_BILL_PAYLOAD:
-                    $this->creatingSingleBill($user_id, $db);
+                    $this->tryCreatingSingleBill($user_id, $db);
                     break;
                 case CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD:
                     $this->personClick($user_id, $array, $db);
@@ -105,7 +105,7 @@ class CreateNewSingleBill extends BotState
         }
     }
 
-    private function creatingSingleBill($user_id, $db)
+    private function tryCreatingSingleBill($user_id, $db)
     {
         $user = new User($db);
         $user->id = $user_id;
@@ -119,15 +119,18 @@ class CreateNewSingleBill extends BotState
         $single_bill = new SingleBill($db);
         $singleBillIdToPersonsArray = $single_bill->getPersonsSingleBillList($bill_id);
 
-        log_msg("1".print_r($singleBillIdToPersonsArray, true));
-        log_msg("2".print_r($selected_persons_ids, true));
         if (!$selected_persons_ids) {
             vkApi_messagesSend($user_id, SINGLE_BILL_EMPTY_SELECTED, $this->keyboard);
         } else if (in_array($selected_persons_ids, $singleBillIdToPersonsArray)) {
             vkApi_messagesSend($user_id, SINGLE_BILL_SAME_SELECTED, $this->keyboard);
         } else {
-            //MainSingleBillState::showSingleBillData($user_id, , $db);
-            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+            $single_bill->fullValue = 0.0;
+            $single_bill->fields = EMPTY_JSON_ARRAY;
+            $single_bill->isPersonField = 0;
+            $single_bill->billId = $bill_id;
+            $single_bill->persons = arrayToJson($selected_persons_ids);
+            $single_bill->createSingleBill();
+            MainSingleBillState::showSingleBillData($user_id, $single_bill->id, $db);
         }
     }
 
