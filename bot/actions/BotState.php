@@ -36,13 +36,24 @@ abstract class BotState
         sendSingleBillListMessage($user_id, $db);
     }
 
-    protected function toMainSingleBillState($user_id, $db) {
+    protected function toMainSingleBillState($user_id, $db)
+    {
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
 
         $single_bill_id = json_decode($user->stateArgs, true)[SINGLE_BILL_ID_STATE_ARG];
         MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
+    }
+
+    protected function toInputFieldNameState($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+
+        $user->updateStateWithArgs(SET_FIELD_NAME_STATE, filterToSingleBillJson($user->stateArgs));
+        vkApi_messagesSend($user_id, FIELD_NAME_MESSAGE, BACK_INPUT_KEYBOARD);
     }
 
     protected function toMainBillMenuState($user_id, $db, $billId)

@@ -97,3 +97,15 @@ function setSingleBillJson($input_json, $single_bill_id)
 
     return json_encode($output_array, JSON_UNESCAPED_UNICODE);
 }
+
+function filterToSingleBillJson($input_json)
+{
+    $args_array = json_decode($input_json, true);
+
+    $output_array = array(
+        BILL_ID_STATE_ARG => $args_array[BILL_ID_STATE_ARG],
+        SINGLE_BILL_ID_STATE_ARG => $args_array[SINGLE_BILL_ID_STATE_ARG],
+    );
+
+    return json_encode($output_array, JSON_UNESCAPED_UNICODE);
+}

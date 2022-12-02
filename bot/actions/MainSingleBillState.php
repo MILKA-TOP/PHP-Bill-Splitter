@@ -62,7 +62,7 @@ class MainSingleBillState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case SINGLE_BILL_ADD_POSITION_PAYLOAD:
-                    $this->addPosition($user_id, $db);
+                    $this->toInputFieldNameState($user_id, $db);
                     break;
                 case SINGLE_BILL_REMOVE_POSITION_PAYLOAD:
                     $this->removePosition($user_id, $db);
@@ -76,14 +76,6 @@ class MainSingleBillState extends BotState
             return true;
         }
         return false;
-    }
-
-    private function addPosition($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateState(SET_FIELD_NAME_STATE);
-        vkApi_messagesSend($user_id, FIELD_NAME_MESSAGE, BACK_INPUT_KEYBOARD);
     }
 
     private function removePosition($user_id, $db)

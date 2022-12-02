@@ -1,7 +1,7 @@
 <?php
 
 
-class InputSingleBillNameState extends BotState
+class InputFieldNameState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {
@@ -11,7 +11,7 @@ class InputSingleBillNameState extends BotState
         if (strlen($input_name) > 0 && strlen($input_name) < FIELD_NAME_MAX_SIZE) {
             $this->setCurrentName($user_id, $input_name, $db);
         } else {
-            vkApi_messagesSend($user_id, INPUT_NAME_INCORRECT_MESSAGE, $this->keyboard);
+            vkApi_messagesSend($user_id, INPUT_FIELD_NAME_INCORRECT_MESSAGE, $this->keyboard);
         }
     }
 
