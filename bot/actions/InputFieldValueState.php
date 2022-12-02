@@ -47,7 +47,7 @@ class InputFieldValueState extends BotState
     private function setCurrentValue($user_id, $double_val, $db)
     {
         $user = new User($db);
-        $user_id->id = $user_id;
+        $user->id = $user_id;
         $user->getSingleUser();
 
         $state_args_array = json_decode($user->stateArgs, true);
