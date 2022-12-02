@@ -267,6 +267,20 @@ const BACK_INPUT_KEYBOARD = [
             "color" => "secondary"],
     ]]];
 
+const INPUT_VALUE_FIELD_KEYBOARD = [
+    "one_time" => false,
+    "buttons" => [[
+        ["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . RENAME_FIELD_PAYLOAD . '"}',
+            "label" => FIELD_RENAME_BUTTON_TEXT],
+            "color" => "primary"]],
+        [["action" => [
+            "type" => "text",
+            "payload" => '{"command": "' . BACK_PAYLOAD . '"}',
+            "label" => BACK_BUTTON_TEXT],
+            "color" => "secondary"]]]];
+
 const REMOVE_FIELD_KEYBOARD = [
     "one_time" => false,
     "buttons" => [[

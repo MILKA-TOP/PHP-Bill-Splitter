@@ -13,4 +13,5 @@ const state_model = array(
     MAIN_SINGLE_BILL_STATE => MainSingleBillState::class,
     SET_FIELD_NAME_STATE => InputFieldNameState::class,
     SET_FIELD_VALUE_STATE => InputFieldValueState::class,
+    REMOVE_FIELD_STATE => RemoveFieldState::class,
 );
