@@ -109,3 +109,11 @@ function filterToSingleBillJson($input_json)
 
     return json_encode($output_array, JSON_UNESCAPED_UNICODE);
 }
+
+function addNameFieldToJson($input_json, $name) {
+    $args_array = json_decode($input_json, true);
+
+    $args_array[BILL_NAME_STATE_ARG] = $name;
+
+    return json_encode($args_array, JSON_UNESCAPED_UNICODE);
+}

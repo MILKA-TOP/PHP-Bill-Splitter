@@ -35,7 +35,13 @@ class InputFieldNameState extends BotState
 
     private function setCurrentName($user_id, $name, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $user->updateStateWithArgs(SET_FIELD_VALUE_STATE, addNameFieldToJson($user->stateArgs, $name));
+
+        $output_message = sprintf(FIELD_INPUT_VALUE, $name);
+        vkApi_messagesSend($user_id, $output_message, INPUT_VALUE_FIELD_KEYBOARD);
     }
 
 }
