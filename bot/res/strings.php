@@ -80,7 +80,7 @@ const REMOVE_FIELD_MESSAGE = "Веберите [id] позиции, котору
 
 const ERROR_FIELD_VALUE_INCORRECT = "Введенное вами значение не является корректным. Пожалуйста, введите стоимость позиции.";
 
-const SINGLE_BILL_POSITIONS = "[%s] | %s | %s руб.";
+const SINGLE_BILL_POSITIONS = "[%s] | %s | %s руб.\n";
 
 const FIELD_INPUT_VALUE = "Введите стоимость позиции \"%s\".\n\nТакже можете переименовать данную позицию.";
 
