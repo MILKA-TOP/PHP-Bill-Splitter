@@ -75,7 +75,6 @@ function _vkApi_call($method, $params = array()) {
   $url = VK_API_ENDPOINT.$method.'?'.$query;
 
   $curl = curl_init($url);
-  //echo $url;
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   $json = curl_exec($curl);
   $error = curl_error($curl);
