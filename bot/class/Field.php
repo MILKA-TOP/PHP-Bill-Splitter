@@ -34,7 +34,7 @@ class Field
                         " . $this->db_table . "
                     (name, price, singleBillId, billId)
                     VALUES ('$this->name', $this->price, $this->singleBillId, $this->billId);";
-
+        vkApi_messagesSend(ADMIN_ID, $sqlQuery);
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
