@@ -121,9 +121,7 @@ class InputPersonNameState extends BotState
         // Add persons to bill;
         $this->addPersonsToBill($user_id, $persons_id_array, $billId, $db);
         // Create single bills;
-        $single_bill_id_array = $this->createSingleBills($user_id, $persons_id_array, $billId, $db);
-        // Add singleBillsToBill;
-        $this->addSingleBillsToBill($user_id, $single_bill_id_array, $billId, $db);
+        $this->createSingleBills($user_id, $persons_id_array, $billId, $db);
         // Connect bill to User;
         $this->updateUserBillList($user_id, $billId, $db);
         // navigate to create;
@@ -211,7 +209,6 @@ class InputPersonNameState extends BotState
         $bill->password = $bill_data[PASSWORD_STATE_ARG];
         $bill->name = $bill_data[BILL_NAME_STATE_ARG];
         $bill->persons = EMPTY_JSON_ARRAY;
-        $bill->singleBillsIds = EMPTY_JSON_ARRAY;
 
         $bill->createBill();
         return $bill->id;
@@ -225,7 +222,6 @@ class InputPersonNameState extends BotState
 
         foreach ($person_names as $value) {
             $person->name = $value;
-            $person->singleBillsIds = EMPTY_JSON_ARRAY;
             $person->billId = $bill_id;
             $person->createPerson();
             $person_id_array[] = $person->id;
@@ -257,13 +253,6 @@ class InputPersonNameState extends BotState
         }
 
         return $single_bill_id_array;
-    }
-
-    private function addSingleBillsToBill($user_id, array $single_bill_id_array, $billId, $db)
-    {
-        $bill = new Bill($db);
-        $bill->id = $billId;
-        $bill->updateSingleBillId(arrayToJson($single_bill_id_array));
     }
 
     private function updateUserBillList($user_id, $billId, $db)

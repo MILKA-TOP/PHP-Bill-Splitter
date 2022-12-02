@@ -5,7 +5,6 @@ class Person
     // Columns
     public $id;
     public $name;
-    public $singleBillsIds;
     public $billId;
     // Connection
     private $conn;
@@ -20,7 +19,7 @@ class Person
     // GET ALL
     public function getPerson()
     {
-        $sqlQuery = "SELECT id, name, singleBillsIds, billId FROM " . $this->db_table . "";
+        $sqlQuery = "SELECT id, name, billId FROM " . $this->db_table . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt;
@@ -31,8 +30,8 @@ class Person
     {
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    (name, singleBillsIds, billId)
-                    VALUES ('$this->name', '$this->singleBillsIds', $this->billId);";
+                    (name, billId)
+                    VALUES ('$this->name', $this->billId);";
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
@@ -58,7 +57,6 @@ class Person
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->name = $dataRow['name'];
-        $this->singleBillsIds = $dataRow['singleBillsIds'];
         $this->billId = $dataRow['billId'];
     }
 

@@ -11,7 +11,6 @@ class Bill
     public $password;
     public $persons;
     public $name;
-    public $singleBillsIds;
     // Table
     private $db_table = "BILL";
 
@@ -24,7 +23,7 @@ class Bill
     // GET ALL
     public function getBills()
     {
-        $sqlQuery = "SELECT id, adminId, password, persons, name, singleBillsIds FROM " . $this->db_table . "";
+        $sqlQuery = "SELECT id, adminId, password, persons, name FROM " . $this->db_table . "";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt;
@@ -38,8 +37,8 @@ class Bill
         else $password_string = 'null';
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    (adminId, password, persons, name, singleBillsIds)
-                    VALUES ($this->adminId, $password_string, '$this->persons', '$this->name', '$this->singleBillsIds');";
+                    (adminId, password, persons, name)
+                    VALUES ($this->adminId, $password_string, '$this->persons', '$this->name');";
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
@@ -57,8 +56,7 @@ class Bill
                         adminId, 
                         password, 
                         persons, 
-                        name, 
-                        singleBillsIds
+                        name
                       FROM
                         " . $this->db_table . "
                     WHERE 
@@ -71,22 +69,12 @@ class Bill
         $this->password = $dataRow['password'];
         $this->persons = $dataRow['persons'];
         $this->name = $dataRow['name'];
-        $this->singleBillsIds = $dataRow['singleBillsIds'];
     }
 
     public function updatePersonId($newPersonIdsJson)
     {
         $sqlQuery = "UPDATE " . $this->db_table . " 
                     SET persons = '" . $newPersonIdsJson . "'
-                    WHERE id = " . $this->id . ";";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-    }
-
-    public function updateSingleBillId($newSingleBillIdsJson)
-    {
-        $sqlQuery = "UPDATE " . $this->db_table . " 
-                    SET singleBillsIds = '" . $newSingleBillIdsJson . "'
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
