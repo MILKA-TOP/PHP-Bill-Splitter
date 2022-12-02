@@ -68,7 +68,7 @@ class MainSingleBillState extends BotState
                     $this->removePosition($user_id, $db);
                     break;
                 case BACK_PAYLOAD:
-                    $this->showSingleBill($user_id, $db);
+                    $this->toSingleBillList($user_id, $db);
                     break;
                 default:
                     return false;
