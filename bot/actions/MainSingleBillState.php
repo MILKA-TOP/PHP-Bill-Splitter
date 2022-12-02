@@ -8,13 +8,36 @@ class MainSingleBillState extends BotState
         $singleBill = new SingleBill($db);
         $singleBill->id = $singleBillId;
         $singleBill->getSingleBill();
+        $fields_id_array = json_decode($singleBill->fields, true);
 
         $person = new Person($db);
         $person_names = $person->getPersonsBillList(json_decode($singleBill->persons, true));
 
+        $field = new Field($db);
+        $field_name_array = $field->getFieldsNamesList($fields_id_array);
+        $field_value_array = $field->getFieldsValuesList($fields_id_array);
+        $fields_string = self::formattedFieldsList($field_name_array, $field_value_array);
+
         $output_message = sprintf(SINGLE_BILL_REMOVE_POSITION_MESSAGE,
-            count($person_names), $singleBill->fullValue, implode(",", $person_names), "");
+            count($person_names), $singleBill->fullValue, implode(",", $person_names), $fields_string);
+
+
         vkApi_messagesSend($user_id, $output_message, SINGLE_BILL_DATA_KEYBOARD);
+    }
+
+    static function formattedFieldsList($field_name_array, $field_value_array): string
+    {
+        $output_message = "";
+
+        foreach ($field_name_array as $curr_id => $name) {
+            $output_message = $output_message . sprintf(
+                    SINGLE_BILL_POSITIONS,
+                    $curr_id,
+                    $name,
+                    $field_value_array[$curr_id]);
+        }
+
+        return $output_message;
     }
 
     public function stateAction($user_id, $data, $db)

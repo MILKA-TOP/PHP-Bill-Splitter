@@ -64,5 +64,47 @@ class Field
         $this->singleBillId = $dataRow['singleBillId'];
         $this->bills = $dataRow['bills'];
     }
+
+    public function getFieldsNamesList($id_array)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        name 
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id in (" . implode(', ', $id_array) . ");";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $output_array = [];
+        foreach ($dataRow as $sub_array) {
+            $output_array[$sub_array['id']] = $sub_array['name'];
+        }
+        return $output_array;
+    }
+
+    public function getFieldsValuesList($id_array)
+    {
+        $sqlQuery = "SELECT
+                        id,
+                        price 
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       id in (" . implode(', ', $id_array) . ");";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        $dataRow = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $output_array = [];
+        foreach ($dataRow as $sub_array) {
+            $output_array[$sub_array['id']] = $sub_array['price'];
+        }
+        return $output_array;
+    }
+
+
 }
 
