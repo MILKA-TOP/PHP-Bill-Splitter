@@ -33,7 +33,7 @@ class Field
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
                     (name, price, singleBillId, billId)
-                    VALUES ($this->name, $this->price, $this->singleBillId, $this->billId);";
+                    VALUES ('$this->name', $this->price, $this->singleBillId, $this->billId);";
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
