@@ -7,7 +7,7 @@ class Field
     public $name;
     public $price;
     public $singleBillId;
-    public $bills;
+    public $billId;
     // Connection
     private $conn;
     // Table
@@ -21,7 +21,7 @@ class Field
     // GET ALL
     public function getField()
     {
-        $sqlQuery = "SELECT id, name, price, singleBillId, bills FROM " . $this->db_table . "";
+        $sqlQuery = "SELECT id, name, price, singleBillId, billId FROM " . $this->db_table . "";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt;
@@ -32,11 +32,12 @@ class Field
     {
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    (name, price, singleBillId, bills)
-                    VALUES ($this->name, $this->price, $this->singleBillId, $this->bills);";
+                    (name, price, singleBillId, billId)
+                    VALUES ($this->name, $this->price, $this->singleBillId, $this->billId);";
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
@@ -50,7 +51,7 @@ class Field
                         name, 
                         price, 
                         singleBillId, 
-                        bills 
+                        billId 
                       FROM
                         " . $this->db_table . "
                     WHERE 
@@ -62,7 +63,7 @@ class Field
         $this->name = $dataRow['name'];
         $this->price = $dataRow['price'];
         $this->singleBillId = $dataRow['singleBillId'];
-        $this->bills = $dataRow['bills'];
+        $this->billId = $dataRow['billId'];
     }
 
     public function getFieldsNamesList($id_array)

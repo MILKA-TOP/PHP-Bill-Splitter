@@ -85,5 +85,21 @@ class SingleBill
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateFullValue($deltaValue) {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET stateId = stateId + " . $deltaValue . "
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
+    public function updateFieldsArray($fields) {
+        $sqlQuery = "UPDATE " . $this->db_table . " 
+                    SET fields = '" . $fields . "'
+                    WHERE id = " . $this->id . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+    }
+
 }
 

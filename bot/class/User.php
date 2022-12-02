@@ -88,7 +88,6 @@ class User
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
-
     }
 }
 

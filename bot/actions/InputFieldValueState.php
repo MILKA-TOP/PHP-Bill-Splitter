@@ -7,7 +7,7 @@ class InputFieldValueState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $this->setCurrentValue($user_id, $data["message"]["text"], $db);
+        $this->checkCurrentValue($user_id, $data["message"]["text"], $db);
     }
 
     private function payloadSwitch($user_id, $data, $db)
@@ -31,14 +31,44 @@ class InputFieldValueState extends BotState
         return false;
     }
 
-    private function setCurrentValue($user_id, $value, $db)
+    private function checkCurrentValue($user_id, $value, $db)
     {
         if (is_numeric($value)) {
             $double_val = doubleval($value);
-            vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-        } else {
-            vkApi_messagesSend($user_id, ERROR_FIELD_VALUE_INCORRECT, $this->keyboard);
+            if ($double_val >= 0) {
+                $this->setCurrentValue($user_id, $double_val, $db);
+                vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+                return;
+            }
         }
+        vkApi_messagesSend($user_id, ERROR_FIELD_VALUE_INCORRECT, $this->keyboard);
+    }
+
+    private function setCurrentValue($user_id, $double_val, $db)
+    {
+        $user = new User($db);
+        $user_id->id = $user_id;
+        $user->getSingleUser();
+
+        $state_args_array = json_decode($user->stateArgs, true);
+        $single_bill_id = $state_args_array[SINGLE_BILL_ID_STATE_ARG];
+        $field_name = $state_args_array[BILL_NAME_STATE_ARG];
+
+        $single_bill = new SingleBill($db);
+        $single_bill->id = $single_bill_id;
+        $single_bill->getSingleBill();
+
+        $field = new Field($db);
+        $field->name = $field_name;
+        $field->price = $double_val;
+        $field->singleBillId = $single_bill_id;
+        $field->billId = $single_bill->billId;
+        $field->createField();
+
+        $single_bill->updateFullValue($double_val);
+        $single_bill->updateFieldsArray(addElementToJsonArray($single_bill->fields, $field->id));
+
+        MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
     }
 
 }
