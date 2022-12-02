@@ -8,7 +8,9 @@ class MainSingleBillState extends BotState
         $singleBill = new SingleBill($db);
         $singleBill->id = $singleBillId;
         $singleBill->getSingleBill();
-        $fields_id_array = json_decode($singleBill->fields, true);
+
+        $field = new Field($db);
+        $fields_id_array = $field->getFieldsIdsBySingleBillId($singleBillId);
 
         $person = new Person($db);
         $person_names = $person->getPersonsBillList(json_decode($singleBill->persons, true));

@@ -249,7 +249,6 @@ class InputPersonNameState extends BotState
         foreach ($persons_id_array as $value) {
             $single_bill->billId = $billId;
             $single_bill->persons = arrayToJson([$value]);
-            $single_bill->fields = EMPTY_JSON_ARRAY;
             $single_bill->isPersonField = 1;
             $single_bill->fullValue = 0.0;
             $single_bill->createSingleBill();

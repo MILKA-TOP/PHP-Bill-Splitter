@@ -9,7 +9,6 @@ class SingleBill
     public $id;
     public $billId;
     public $persons;
-    public $fields;
     public $fullValue;
     public $isPersonField;
     // Table
@@ -23,7 +22,7 @@ class SingleBill
     // GET ALL
     public function getSingleBills()
     {
-        $sqlQuery = "SELECT id, billId, persons, fields, fullValue, isPersonField FROM " . $this->db_table . "";
+        $sqlQuery = "SELECT id, billId, persons, fullValue, isPersonField FROM " . $this->db_table . "";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
         return $stmt;
@@ -34,8 +33,8 @@ class SingleBill
     {
         $sqlQuery = "INSERT INTO
                         " . $this->db_table . "
-                    (billId, persons, fields, fullValue, isPersonField)
-                    VALUES ($this->billId, '$this->persons', '$this->fields', $this->fullValue, $this->isPersonField);";
+                    (billId, persons, fullValue, isPersonField)
+                    VALUES ($this->billId, '$this->persons', $this->fullValue, $this->isPersonField);";
 
         $stmt = $this->conn->prepare($sqlQuery);
         if ($stmt->execute()) {
@@ -52,7 +51,6 @@ class SingleBill
         $sqlQuery = "SELECT
                        billId,
                        persons,
-                       fields,
                        fullValue,
                        isPersonField
                       FROM
@@ -65,7 +63,6 @@ class SingleBill
 
         $this->billId = $dataRow['billId'];
         $this->persons = $dataRow['persons'];
-        $this->fields = $dataRow['fields'];
         $this->fullValue = $dataRow['fullValue'];
         $this->isPersonField = $dataRow['isPersonField'];
     }
@@ -122,15 +119,6 @@ class SingleBill
     {
         $sqlQuery = "UPDATE " . $this->db_table . " 
                     SET fullValue = fullValue + " . $deltaValue . "
-                    WHERE id = " . $this->id . ";";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-    }
-
-    public function updateFieldsArray($fields)
-    {
-        $sqlQuery = "UPDATE " . $this->db_table . " 
-                    SET fields = '" . $fields . "'
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();

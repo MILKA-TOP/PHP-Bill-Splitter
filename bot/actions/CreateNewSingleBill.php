@@ -125,7 +125,6 @@ class CreateNewSingleBill extends BotState
             vkApi_messagesSend($user_id, SINGLE_BILL_SAME_SELECTED, $this->keyboard);
         } else {
             $single_bill->fullValue = 0.0;
-            $single_bill->fields = EMPTY_JSON_ARRAY;
             $single_bill->isPersonField = 0;
             $single_bill->billId = $bill_id;
             $single_bill->persons = arrayToJson($selected_persons_ids);

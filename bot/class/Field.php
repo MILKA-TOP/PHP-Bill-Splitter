@@ -106,6 +106,18 @@ class Field
         return $output_array;
     }
 
+    public function getFieldsIdsBySingleBillId($singleBillId)
+    {
+        $sqlQuery = "SELECT
+                        id
+                      FROM
+                        " . $this->db_table . "
+                    WHERE 
+                       singleBillId = " . $singleBillId . ";";
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 

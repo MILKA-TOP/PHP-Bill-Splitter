@@ -65,7 +65,6 @@ class InputFieldValueState extends BotState
         $field->createField();
 
         $single_bill->updateFullValue($double_val);
-        $single_bill->updateFieldsArray(addElementToJsonArray($single_bill->fields, $field->id));
 
         MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
     }

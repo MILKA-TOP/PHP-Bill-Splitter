@@ -14,7 +14,9 @@ class RemoveFieldState extends BotState
         $singleBill = new SingleBill($db);
         $singleBill->id = $single_bill_id;
         $singleBill->getSingleBill();
-        $fields_id_array = json_decode($singleBill->fields, true);
+
+        $field = new Field($db);
+        $fields_id_array = $field->getFieldsIdsBySingleBillId($singleBillId);
 
         $field = new Field($db);
         $field_name_array = $field->getFieldsNamesList($fields_id_array);
@@ -60,7 +62,9 @@ class RemoveFieldState extends BotState
         $singleBill = new SingleBill($db);
         $singleBill->id = $singleBillId;
         $singleBill->getSingleBill();
-        $fieldsIdArray = json_decode($singleBill->fields, true);
+
+        $field = new Field($db);
+        $fieldsIdArray = $field->getFieldsIdsBySingleBillId($singleBillId);
 
         if (in_array($text, $fieldsIdArray)) {
             //MainSingleBillState::showSingleBillData($user_id, $text, $db);
