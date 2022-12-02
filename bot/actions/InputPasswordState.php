@@ -17,11 +17,9 @@ class InputPasswordState extends BotState
     private function payloadSwitch($user_id, $data, $db)
     {
         $data_payload = $this->getPayloadArgs($data);
-        echo $data_payload;
         if ($data_payload != null) {
             $array = json_decode($data_payload, true);
             if (!isset($array[COMMAND_PAYLOAD])) return false;
-            echo $array[COMMAND_PAYLOAD];
             switch ($array[COMMAND_PAYLOAD]) {
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);

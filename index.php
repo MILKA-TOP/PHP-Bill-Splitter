@@ -106,7 +106,6 @@ function _callback_okResponse()
 
 function _callback_response($data)
 {
-    echo $data;
     exit();
 }
 
