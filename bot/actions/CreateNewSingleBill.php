@@ -123,7 +123,7 @@ class CreateNewSingleBill extends BotState
         log_msg("2".print_r($selected_persons_ids, true));
         if (!$selected_persons_ids) {
             vkApi_messagesSend($user_id, SINGLE_BILL_EMPTY_SELECTED, $this->keyboard);
-        } else if (!in_array($selected_persons_ids, $singleBillIdToPersonsArray)) {
+        } else if (in_array($selected_persons_ids, $singleBillIdToPersonsArray)) {
             vkApi_messagesSend($user_id, SINGLE_BILL_SAME_SELECTED, $this->keyboard);
         } else {
             //MainSingleBillState::showSingleBillData($user_id, , $db);
