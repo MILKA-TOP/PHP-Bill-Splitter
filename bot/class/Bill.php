@@ -111,20 +111,5 @@ class Bill
         }
         return $output_array;
     }
-
-    public function getSingleBillIds($billId)
-    {
-        $sqlQuery = "SELECT
-                        singleBillsIds
-                      FROM
-                        " . $this->db_table . "
-                    WHERE 
-                       id = " . $billId . ";";
-        $stmt = $this->conn->prepare($sqlQuery);
-        $stmt->execute();
-
-        return json_decode($stmt->fetchAll(PDO::FETCH_ASSOC)[0]['singleBillsIds'], true);
-    }
-
 }
 

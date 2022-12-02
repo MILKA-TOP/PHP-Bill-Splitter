@@ -112,7 +112,12 @@ class SingleBill
                        billId = " . $billId . ";";
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $output_array = [];
+        foreach ($res as $sub_array) {
+            $output_array[] = $sub_array['id'];
+        }
+        return $output_array;
     }
 
     public function updateFullValue($deltaValue)
