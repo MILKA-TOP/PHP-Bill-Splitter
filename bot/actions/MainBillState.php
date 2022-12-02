@@ -90,9 +90,12 @@ class MainBillState extends BotState
 
             foreach ($fields_ids as $currFieldId) {
                 $field->id = $currFieldId;
-                $field->getField();
+                $field->getSingleField();
 
-                $item_list_string = $item_list_string . sprintf(SINGLE_FIELD_FOR_BILL, $field->name, $field->price);
+                $item_list_string = $item_list_string . sprintf(
+                        $format_field_line,
+                        $field->name,
+                        $field->price / count($single_bill->persons));
             }
         }
 
