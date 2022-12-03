@@ -9,7 +9,7 @@ class Cache
     {
         $memcache = new Memcache();
 
-        $memcache->addServer($this->host, $this->port);
+        $memcache->connect($this->host, $this->port);
         return $memcache;
     }
 }
