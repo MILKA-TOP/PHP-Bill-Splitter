@@ -88,6 +88,6 @@ class StartState extends BotState
         $user = new User($db);
         $user->id = $user_id;
         $user->updateState(SET_BILL_ID_STATE);
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        vkApi_messagesSend($user_id, INPUT_BILL_ID_MESSAGE, BACK_INPUT_KEYBOARD);
     }
 }
