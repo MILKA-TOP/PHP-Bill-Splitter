@@ -30,6 +30,9 @@ class StartState extends BotState
                 case HELP_PAYLOAD:
                     vkApi_messagesSend($user_id, START_MESSAGE, $this->keyboard);
                     break;
+                case CONNECT_BILL_START_PAYLOAD:
+                    $this->connectToNewBill($user_id, $db);
+                    break;
                 default:
                     return false;
             }
@@ -78,5 +81,13 @@ class StartState extends BotState
             return true;
         }
         return false;
+    }
+
+    private function connectToNewBill($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->updateState(SET_BILL_ID_STATE);
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 }

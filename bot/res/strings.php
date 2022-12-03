@@ -82,7 +82,9 @@ const ERROR_FIELD_VALUE_INCORRECT = "Введенное вами значени�
 
 const SINGLE_BILL_POSITIONS = "[%s] | %s | %s руб.\n";
 
-const SL = "----------------\n";
+const UNKNOWN_BILL_ID_ERROR = "Чека с данным [id] не существует.";
+
+const SL = "--------------------------------\n";
 const BILL_FINAL_STRING = "Чек:\n[%s]\n" . SL . "%s" . SL . "\n\nОбщая сумма: %.2f руб.";
 
 const SINGLE_FIELD_FOR_BILL = "\"%s\" - %.2f руб.\n";
@@ -97,6 +99,7 @@ const FIELD_INPUT_VALUE = "Введите стоимость позиции \"%s
 
 const CREATE_BILL_BUTTON_TEXT = "Создать счёт";
 const SHOW_BILLS_BUTTON_TEXT = "Показать доступные счета";
+const CONNECT_TO_BILL_BUTTON_TEXT = "Присоединиться к счету";
 const HELP_TEXT = "Помощь";
 
 const MAIN_BILL_SHOW_ALL = "Вывести все чеки";

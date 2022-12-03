@@ -3,6 +3,7 @@
 const COMMAND_PAYLOAD = "command";
 const CREATE_BILL_PAYLOAD = "create_user_bill";
 const SHOW_BILLS_PAYLOAD = "show_user_bills";
+const CONNECT_BILL_START_PAYLOAD = "start_connect_bill";
 const SKIP_PASSWORD_PAYLOAD = "skip_password";
 const REMOVE_PERSON_PAYLOAD = "remove_person";
 const NEXT_PAGE_NAME_PAYLOAD = "name_next_page";
