@@ -65,6 +65,8 @@ class Bill
         $this->password = $dataRow['password'];
         $this->persons = $dataRow['persons'];
         $this->name = $dataRow['name'];
+
+        $this->memcache->set($this->id, $this->persons, false, 90);
     }
 
     public function updatePersonId($newPersonIdsJson)
