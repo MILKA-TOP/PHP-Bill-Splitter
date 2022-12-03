@@ -1,6 +1,7 @@
 <?php
 
 const COMMAND_PAYLOAD = "command";
+const START_PAYLOAD = "start";
 const CREATE_BILL_PAYLOAD = "create_user_bill";
 const SHOW_BILLS_PAYLOAD = "show_user_bills";
 const CONNECT_BILL_START_PAYLOAD = "start_connect_bill";

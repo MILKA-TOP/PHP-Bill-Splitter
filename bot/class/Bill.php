@@ -4,6 +4,7 @@ class Bill
 {
     // Connection
     private $conn;
+    private $memcache;
 
     // Columns
     public $id;
@@ -18,6 +19,9 @@ class Bill
     public function __construct($db)
     {
         $this->conn = $db;
+
+        $cache = new Cache();
+        $this->memcache = $cache->getConnection();
     }
 
     // CREATE
@@ -32,6 +36,7 @@ class Bill
                     VALUES ($this->adminId, $password_string, '$this->persons', '$this->name');";
 
         $stmt = $this->conn->prepare($sqlQuery);
+        $this->memcache->set($this->id, $this->persons, false, 90);
         if ($stmt->execute()) {
             $this->id = $this->conn->lastInsertId();
             return true;
@@ -68,6 +73,7 @@ class Bill
                     SET persons = '" . $newPersonIdsJson . "'
                     WHERE id = " . $this->id . ";";
         $stmt = $this->conn->prepare($sqlQuery);
+        $this->memcache->set($this->id, $newPersonIdsJson, false, 90);
         $stmt->execute();
     }
 
@@ -89,6 +95,18 @@ class Bill
             $output_array[$sub_array['id']] = $sub_array['name'];
         }
         return $output_array;
+    }
+
+    public function getPersonsByCache()
+    {
+        $cached_data = $this->memcache->get($this->id);
+        if ($cached_data != null) {
+            log_msg("Get from cache");
+            $this->persons = $cached_data;
+        } else {
+            log_msg("Get from db");
+            $this->getSingleBill();
+        }
     }
 }
 

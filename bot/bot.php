@@ -9,7 +9,7 @@ function bot_sendMessage($user_id, $data)
     actionByState($user_id, $currentState, $data, $db);
 }
 
-function stateById($user_id, $db)
+function stateById($user_id, $db): int
 {
     $item = new User($db);
 

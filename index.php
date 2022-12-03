@@ -15,6 +15,7 @@ require_once 'bot/class/Person.php';
 require_once 'bot/class/Field.php';
 require_once 'bot/class/Bill.php';
 require_once 'bot/config/database.php';
+require_once 'bot/config/cache.php';
 require_once 'bot/res/json.php';
 require_once 'bot/res/states.php';
 require_once 'bot/res/payloads.php';

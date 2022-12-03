@@ -48,7 +48,7 @@ class MainBillState extends BotState
 
         $bill = new Bill($db);
         $bill->id = $bill_id;
-        $bill->getSingleBill();
+        $bill->getPersonsByCache();
         $persons = json_decode($bill->persons, true);
         log_msg(print_r($persons, true));
         foreach ($persons as $curr_id) {

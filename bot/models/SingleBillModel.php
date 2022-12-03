@@ -16,7 +16,7 @@ function getSingleBillPersonIds($user_id, $db): array
 
     $bill = new Bill($db);
     $bill->id = $bill_id;
-    $bill->getSingleBill();
+    $bill->getPersonsByCache();
     return [$bill_id, json_decode($bill->persons, true)];
 }
 

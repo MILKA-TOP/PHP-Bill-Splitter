@@ -27,6 +27,7 @@ class StartState extends BotState
                 case SHOW_BILLS_PAYLOAD:
                     $this->showUserBills($user_id, $db);
                     break;
+                case START_PAYLOAD:
                 case HELP_PAYLOAD:
                     vkApi_messagesSend($user_id, START_MESSAGE, $this->keyboard);
                     break;
