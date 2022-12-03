@@ -1,7 +1,7 @@
 <?php
 
 
-class InputBillIdState extends BotState
+class InputBillPasswordState extends BotState
 {
     function stateAction($user_id, $data, $db)
     {
@@ -31,23 +31,19 @@ class InputBillIdState extends BotState
 
     private function checkId($user_id, $message, $db)
     {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
+
         $bill = new Bill($db);
-        $bill->id = $message;
+        $bill->id = $bill_id;
         $bill->getSingleBill();
 
-        if (is_null($bill->adminId)) {
-            vkApi_messagesSend($user_id, UNKNOWN_BILL_ID_ERROR, $this->keyboard);
+        if ($bill->password === $message) {
+            $this->toMainBillMenuState($user_id, $db, $bill_id);
         } else {
-            $user = new User($db);
-            $user->id = $user_id;
-
-            if (is_null($bill->password)) {
-                $this->toMainBillMenuState($user_id, $db, $message);
-            } else {
-                $user->updateStateWithArgs(SET_BILL_PASSWORD_STATE, setIdBillArgState($message));
-                $output_message = sprintf(INPUT_BILL_PASSWORD_MESSAGE, $message);
-                vkApi_messagesSend($user_id, $output_message, INPUT_BILL_PASSWORD_MESSAGE);
-            }
+            vkApi_messagesSend($user_id, INCORRECT_PASSWORD_BILL_ERROR, $this->keyboard);
         }
     }
 
