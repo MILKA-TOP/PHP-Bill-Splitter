@@ -6,8 +6,9 @@ class StartState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        if ($this->billOpenTry($user_id, $data["message"]["text"], $db)) return;
-        switch ($data["message"]["text"]) {
+        $message = $this->getMessageOrEmpty($data);
+        if ($this->billOpenTry($user_id, $message, $db)) return;
+        switch ($message) {
             default:
                 vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
         }

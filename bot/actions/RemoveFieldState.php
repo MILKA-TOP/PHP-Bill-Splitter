@@ -31,7 +31,8 @@ class RemoveFieldState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $this->checkSingleBillIdContains($user_id, $data["message"]["text"], $db);
+        $message = $this->getMessageOrEmpty($data);
+        $this->checkSingleBillIdContains($user_id, $message, $db);
     }
 
     private function payloadSwitch($user_id, $data, $db)

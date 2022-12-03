@@ -7,7 +7,7 @@ class InputFieldValueState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $this->checkCurrentValue($user_id, $data["message"]["text"], $db);
+        $this->checkCurrentValue($user_id, $this->getMessageOrEmpty($data), $db);
     }
 
     private function payloadSwitch($user_id, $data, $db)

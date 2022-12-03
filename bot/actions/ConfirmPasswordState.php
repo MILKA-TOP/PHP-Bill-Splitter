@@ -6,7 +6,7 @@ class ConfirmPasswordState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $input_password = $data["message"]["text"];
+        $input_password = $this->getMessageOrEmpty($data);
         $arg_password = $this->getPassword($user_id, $db);
 
         if ($input_password === $arg_password) {

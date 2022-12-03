@@ -12,6 +12,15 @@ abstract class BotState
         $this->keyboard = $keyboard;
     }
 
+    protected function getMessageOrEmpty($data): string
+    {
+        $message = "";
+        if (isset($data["message"]) && isset($data["message"]["text"])) {
+            $message = $data["message"]["text"];
+        }
+        return $message;
+    }
+
     protected function toStartMenuState($user_id, $db)
     {
         $user = new User($db);

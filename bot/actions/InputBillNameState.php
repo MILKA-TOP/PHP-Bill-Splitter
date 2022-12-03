@@ -7,7 +7,7 @@ class InputBillNameState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $input_name = $data["message"]["text"];
+        $input_name = $this->getMessageOrEmpty($data);
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_PERSON_MAX_SIZE) {
             $this->setCurrentName($user_id, $input_name, $db);
         } else {

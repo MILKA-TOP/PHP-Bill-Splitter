@@ -50,7 +50,7 @@ class MainSingleBillState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        switch ($data["message"]["text"]) {
+        switch ($this->getMessageOrEmpty($data)) {
             default:
                 vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
         }

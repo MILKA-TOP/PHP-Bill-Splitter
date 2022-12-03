@@ -6,7 +6,7 @@ class InputPasswordState extends BotState
     {
         if ($this->payloadSwitch($user_id, $data, $db)) return;
 
-        $input_name = $data["message"]["text"];
+        $input_name = $this->getMessageOrEmpty($data);;
         if (strlen($input_name) > 0 && strlen($input_name) < BILL_PASSWORD_MAX_SIZE) {
             $this->setCurrentPassword($user_id, $input_name, $db);
         } else {
