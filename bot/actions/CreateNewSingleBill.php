@@ -37,7 +37,7 @@ class CreateNewSingleBill extends BotState
         }
     }
 
-    private function payloadSwitch($user_id, $data, $db)
+    private function payloadSwitch($user_id, $data, $db): bool
     {
         $data_payload = $this->getPayloadArgs($data);
         if (!empty($data_payload)) {
@@ -148,7 +148,7 @@ class CreateNewSingleBill extends BotState
         //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 
-    static function getArraysForInlineKeyboard($json, $personsIds, $db)
+    static function getArraysForInlineKeyboard($json, $personsIds, $db): array
     {
         $json_array = json_decode($json, true);
         $current_page = $json_array[PAGE_NUMBER_PERSON_STATE_ARG];

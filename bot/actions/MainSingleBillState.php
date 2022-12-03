@@ -56,7 +56,7 @@ class MainSingleBillState extends BotState
         }
     }
 
-    private function payloadSwitch($user_id, $data, $db)
+    private function payloadSwitch($user_id, $data, $db): bool
     {
         $data_payload = $this->getPayloadArgs($data);
         if ($data_payload != null) {

@@ -214,7 +214,7 @@ class InputPersonNameState extends BotState
         return $bill->id;
     }
 
-    private function createPersons($user_id, $bill_data, $bill_id, $db)
+    private function createPersons($user_id, $bill_data, $bill_id, $db): array
     {
         $person = new Person($db);
         $person_names = $bill_data[PERSON_NAME_STATE_ARG];
@@ -237,7 +237,7 @@ class InputPersonNameState extends BotState
         $bill->updatePersonId(arrayToJson($persons_id_array));
     }
 
-    private function createSingleBills($user_id, array $persons_id_array, $billId, $db)
+    private function createSingleBills($user_id, array $persons_id_array, $billId, $db): array
     {
         $single_bill = new SingleBill($db);
         $single_bill_id_array = [];
