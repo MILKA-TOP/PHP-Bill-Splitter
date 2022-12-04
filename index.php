@@ -23,6 +23,7 @@ require_once 'bot/res/numbers.php';
 require_once 'bot/models/InlineKeyboardPageModel.php';
 require_once 'bot/models/SingleBillModel.php';
 require_once 'bot/actions/BotState.php';
+require_once 'bot/models/PersonPageChooserModel.php';
 require_once 'bot/actions/StartState.php';
 require_once 'bot/actions/InputBillNameState.php';
 require_once 'bot/actions/ConfirmNameState.php';

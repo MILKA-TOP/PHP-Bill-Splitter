@@ -1,7 +1,7 @@
 <?php
 
 
-class InputPersonNameState extends BotState
+class InputPersonNameState extends PersonPageChooserModel
 {
     function stateAction($user_id, $data, $db)
     {
@@ -43,115 +43,6 @@ class InputPersonNameState extends BotState
             return true;
         }
         return false;
-    }
-
-    private function prevPage($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-        $state_args = json_decode($user->stateArgs, true);
-        if (isset($state_args[PAGE_NUMBER_PERSON_STATE_ARG])) {
-            $name_array_full = array();
-            $current_page = $state_args[PAGE_NUMBER_PERSON_STATE_ARG];
-            if (isset($state_args[PERSON_NAME_STATE_ARG])) $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
-
-            $max_page_number = maxPageNumber($name_array_full);
-            if ($current_page <= 0) {
-                vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
-                return;
-            }
-
-            $current_page = $current_page - 1;
-            $state_args_json = $user->stateArgs;
-            $this->showMessageWithCorrectPersonsList($name_array_full,
-                $current_page, $max_page_number, $state_args_json, $user, $user_id
-            );
-            return;
-        }
-
-        vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
-    }
-
-    private function nextPage($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-        $state_args = json_decode($user->stateArgs, true);
-        if (isset($state_args[PAGE_NUMBER_PERSON_STATE_ARG])) {
-            $name_array_full = array();
-            $current_page = $state_args[PAGE_NUMBER_PERSON_STATE_ARG];
-            if (isset($state_args[PERSON_NAME_STATE_ARG])) {
-                $name_array_full = $state_args[PERSON_NAME_STATE_ARG];
-            }
-            $max_page_number = maxPageNumber($name_array_full);
-            if ($current_page >= $max_page_number) {
-                vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
-                return;
-            }
-
-            $current_page = $current_page + 1;
-            $state_args_json = $user->stateArgs;
-            $this->showMessageWithCorrectPersonsList($name_array_full,
-                $current_page, $max_page_number, $state_args_json, $user, $user_id
-            );
-            return;
-        }
-        vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
-    }
-
-    private function creatingBill($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-        $state_args = json_decode($user->stateArgs, true);
-        $persons_names = $state_args[PERSON_NAME_STATE_ARG];
-        if (count($persons_names) === 0) {
-            vkApi_messagesSend($user_id, ERROR_MESSAGE_PERSON_ZERO_LIST_INPUT, $this->keyboard);
-            return;
-        }
-
-        // Create bill;
-        $billId = $this->createMainBill($user_id, $state_args, $db);
-
-        // Crate persons
-        $persons_id_array = $this->createPersons($user_id, $state_args, $billId, $db);
-        // Add persons to bill;
-        $this->addPersonsToBill($user_id, $persons_id_array, $billId, $db);
-        // Create single bills;
-        $this->createSingleBills($user_id, $persons_id_array, $billId, $db);
-        // Connect bill to User;
-        $this->updateUserBillList($user_id, $billId, $db);
-        // navigate to create;
-
-        $this->toMainBillMenuState($user_id, $db, $billId);
-        //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
-    }
-
-    private function removePerson($user_id, $payload, $db)
-    {
-        $remove_person_name = $payload[ACTION_STATE_PAYLOAD_ARG];
-
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-        $state_args = json_decode($user->stateArgs, true);
-        $persons_names = $state_args[PERSON_NAME_STATE_ARG];
-
-        if (!in_array($remove_person_name, $persons_names)) {
-            vkApi_messagesSend($user_id, ERROR_MASSAGE_PERSON_REMOVE_NAME, $this->keyboard);
-            return;
-        }
-
-        unset($persons_names[array_search($remove_person_name, $persons_names)]);
-
-        $name_array_full = removePersonNameFieldToJson($user->stateArgs, $remove_person_name);
-        $max_page_number = maxPageNumber($persons_names);
-        $this->showMessageWithCorrectPersonsList($persons_names,
-            $max_page_number, $max_page_number, $name_array_full, $user, $user_id
-        );
     }
 
     private function addPersonToArgs($user_id, $name, $db)
@@ -199,70 +90,6 @@ class InputPersonNameState extends BotState
             $contains_prev_page, $contains_next_page
         );
         vkApi_messagesSend($user_id, INPUT_PERSONS_BILL_LIST_MESSAGE, $inline_keyboard_generated);
-    }
-
-
-    private function createMainBill($user_id, $bill_data, $db)
-    {
-        $bill = new Bill($db);
-        $bill->adminId = $user_id;
-        $bill->password = $bill_data[PASSWORD_STATE_ARG];
-        $bill->name = $bill_data[BILL_NAME_STATE_ARG];
-        $bill->persons = EMPTY_JSON_ARRAY;
-
-        $bill->createBill();
-        return $bill->id;
-    }
-
-    private function createPersons($user_id, $bill_data, $bill_id, $db): array
-    {
-        $person = new Person($db);
-        $person_names = $bill_data[PERSON_NAME_STATE_ARG];
-        $person_id_array = [];
-
-        foreach ($person_names as $value) {
-            $person->name = $value;
-            $person->billId = $bill_id;
-            $person->createPerson();
-            $person_id_array[] = $person->id;
-        }
-
-        return $person_id_array;
-    }
-
-    private function addPersonsToBill($user_id, array $persons_id_array, $billId, $db)
-    {
-        $bill = new Bill($db);
-        $bill->id = $billId;
-        $bill->updatePersonId(arrayToJson($persons_id_array));
-    }
-
-    private function createSingleBills($user_id, array $persons_id_array, $billId, $db): array
-    {
-        $single_bill = new SingleBill($db);
-        $single_bill_id_array = [];
-
-        foreach ($persons_id_array as $value) {
-            $single_bill->billId = $billId;
-            $single_bill->persons = arrayToJson([$value]);
-            $single_bill->isPersonField = 1;
-            $single_bill->fullValue = 0.0;
-            $single_bill->createSingleBill();
-
-            $single_bill_id_array[] = $single_bill->id;
-        }
-
-        return $single_bill_id_array;
-    }
-
-    private function updateUserBillList($user_id, $billId, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->getSingleUser();
-
-        $updated_array_json = addElementToJsonArray($user->bills, $billId);
-        $user->updateBillIdsArray($updated_array_json);
     }
 
 }
