@@ -1,7 +1,7 @@
 <?php
 
 
-class InputPersonsForFieldsState extends BotState
+class InputPersonsForFieldsState extends PersonPageChooserModel
 {
     function stateAction($user_id, $data, $db)
     {
@@ -13,18 +13,24 @@ class InputPersonsForFieldsState extends BotState
     private function payloadSwitch($user_id, $data, $db): bool
     {
         $data_payload = $this->getPayloadArgs($data);
-        if ($data_payload != null) {
+        if (!empty($data_payload)) {
             $array = json_decode($data_payload, true);
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
-                case CONFIRM_PAYLOAD:
-                    $this->setConfirmState($user_id, $db);
-                    break;
                 case BACK_PAYLOAD:
-                    $this->setBackState($user_id, $db);
+                    $this->toSingleBillList($user_id, $db);
                     break;
-                case CANCEL_PAYLOAD:
-                    $this->toStartMenuState($user_id, $db);
+                case BILL_CREATE_SINGLE_BILL_PAYLOAD:
+                    $this->tryCreatingSingleBill($user_id, $db);
+                    break;
+                case CHANGE_PERSON_STATE_SINGLE_BILL_PAYLOAD:
+                    $this->personClick($user_id, $array, $db);
+                    break;
+                case PREV_PAGE_NAME_PAYLOAD:
+                    $this->prevPage($user_id, $db);
+                    break;
+                case NEXT_PAGE_NAME_PAYLOAD:
+                    $this->nextPage($user_id, $db);
                     break;
                 default:
                     return false;
@@ -32,22 +38,6 @@ class InputPersonsForFieldsState extends BotState
             return true;
         }
         return false;
-    }
-
-    private function setConfirmState($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateState(SET_BILL_PASSWORD_INPUT_STATE);
-        vkApi_messagesSend($user_id, INPUT_PASSWORD_MESSAGE, INPUT_PASSWORD_KEYBOARD);
-    }
-
-    private function setBackState($user_id, $db)
-    {
-        $user = new User($db);
-        $user->id = $user_id;
-        $user->updateStateWithArgs(SET_BILL_NAME_STATE, EMPTY_JSON_STATE);
-        vkApi_messagesSend($user_id, INPUT_NAME_MESSAGE, CREATE_BILL_INPUT);
     }
 
 }

@@ -33,6 +33,7 @@ class MainBillState extends BotState
                     break;
                 case BILL_ADD_FIELD_PAYLOAD:
                     $this->addNewFieldToBill($user_id, $db);
+                    break;
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
                     break;
