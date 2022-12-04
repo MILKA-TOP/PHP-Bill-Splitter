@@ -35,12 +35,16 @@ class InputBillPasswordState extends BotState
         $user->id = $user_id;
         $user->getSingleUser();
         $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
+        $bill_array = json_decode($user->bills, true);
 
         $bill = new Bill($db);
         $bill->id = $bill_id;
         $bill->getSingleBill();
 
         if ($bill->password === $message) {
+            if (!in_array($bill_id, $bill_array)) {
+                $user->updateBillIdsArray(addElementToJsonArray($user->bills, $bill_id));
+            }
             $this->toMainBillMenuState($user_id, $db, $bill_id);
         } else {
             vkApi_messagesSend($user_id, INCORRECT_PASSWORD_BILL_ERROR, $this->keyboard);
