@@ -88,7 +88,8 @@ const SINGLE_BILL_POSITIONS = SL . "[%s] | %s | %.2f руб.\n";
 const UNKNOWN_BILL_ID_ERROR = "Чека с данным [id] не существует.";
 const INCORRECT_PASSWORD_BILL_ERROR = "Введен неверный пароль от чека.";
 
-const BILL_FINAL_STRING = SL . "🧾 | Чек:\n[%s]\n" . SL . "%s" . SL . "\n\n💰 | Общая сумма: %.2f руб." . "\n" . SL;
+const BILL_FINAL_STRING = SL . "🧾 | Чек:\n👤 | Имя пользователя: \"%s\";" . "\n" . SL . "%s" . SL .
+    "\n\n💰 | Общая сумма: %.2f руб." . "\n" . SL;
 
 const SINGLE_FIELD_FOR_BILL = "\"%s\" - %.2f руб.\n";
 const GROUP_FIELD_FOR_BILL = "\"%s\" - %.2f руб./чел.\n";
