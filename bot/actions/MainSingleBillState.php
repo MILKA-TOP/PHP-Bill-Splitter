@@ -21,7 +21,7 @@ class MainSingleBillState extends BotState
         $fields_string = self::formattedFieldsList($field_name_array, $field_value_array);
 
         $output_message = sprintf(SINGLE_BILL_REMOVE_POSITION_MESSAGE,
-            count($person_names), $singleBill->fullValue, implode(",", $person_names), $fields_string);
+            count($person_names), $singleBill->fullValue, implode(", ", $person_names), $fields_string);
 
         $user = new User($db);
         $user->id = $user_id;
