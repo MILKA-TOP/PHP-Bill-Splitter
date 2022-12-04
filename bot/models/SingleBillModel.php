@@ -53,9 +53,9 @@ function getSingleBillArraysData($user_id, $db): array
 function getSingleBillDataString($user_id, $db)
 {
     $single_bill_data = getSingleBillArraysData($user_id, $db);
-    $id_persons_array=$single_bill_data[0];
-    $persons_names=$single_bill_data[1];
-    $id_fullValue_array=$single_bill_data[2];
+    $id_persons_array = $single_bill_data[0];
+    $persons_names = $single_bill_data[1];
+    $id_fullValue_array = $single_bill_data[2];
     $output_string = "";
 
     foreach ($id_persons_array as $curr_single_id => $person_array) {
@@ -87,9 +87,9 @@ function getSeparatedPersonNamesLine($full_person_names, $person_ids): string
 {
     $output_array = [];
     foreach ($person_ids as $person_id) {
-        $output_array[] = $full_person_names[$person_id];
+        $output_array[] = "[ " . $full_person_names[$person_id] . " ]";
     }
 
     log_msg(print_r($output_array, true));
-    return implode(' | ', $output_array);
+    return implode(', ', $output_array);
 }
