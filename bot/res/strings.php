@@ -121,6 +121,7 @@ const CREATE_NEW_SINGLE_BILL_BUTTON_TEXT = "Создать новую групп
 const SINGLE_BILL_ADD_POSITION_BUTTON_TEXT = "Добавить позицию";
 const FIELD_RENAME_BUTTON_TEXT = "Переименовать позицию";
 const SINGLE_BILL_REMOVE_POSITION_BUTTON_TEXT = "Удалить позицию";
+const SHOW_BILL_DATA_BUTTON_TEXT = "Показать данные чека";
 const NEXT_PAGE_INLINE = " ▶";
 const PREV_PAGE_INLINE = " ◀";
 

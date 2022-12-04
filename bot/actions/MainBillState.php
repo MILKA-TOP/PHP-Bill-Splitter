@@ -28,6 +28,9 @@ class MainBillState extends BotState
                 case BILL_SHOW_SINGLE_PAYLOAD:
                     $this->showSingleBill($user_id, $db);
                     break;
+                case OPEN_BILL_PAYLOAD:
+                    $this->showBillData($user_id, $db);
+                    break;
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
                     break;
@@ -37,6 +40,15 @@ class MainBillState extends BotState
             return true;
         }
         return false;
+    }
+
+    private function showBillData($user_id, $db) {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $bill_id = json_decode($user->stateArgs)[BILL_ID_STATE_ARG];
+
+        $this->toMainBillMenuState($user_id, $db, $bill_id);
     }
 
     private function showAllBills($user_id, $db)
