@@ -87,7 +87,7 @@ function getSeparatedPersonNamesLine($full_person_names, $person_ids): string
 {
     $output_array = [];
     foreach ($person_ids as $person_id) {
-        $output_array[] = "[ " . $full_person_names[$person_id] . " ]";
+        $output_array[] = "\"" . $full_person_names[$person_id] . "\"";
     }
 
     log_msg(print_r($output_array, true));
