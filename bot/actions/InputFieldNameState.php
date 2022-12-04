@@ -23,7 +23,7 @@ class InputFieldNameState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case BACK_PAYLOAD:
-                    $this->toMainSingleBillState($user_id, $db);
+                    $this->correctBack($user_id, $db);
                     break;
                 default:
                     return false;
@@ -43,5 +43,4 @@ class InputFieldNameState extends BotState
         $output_message = sprintf(FIELD_INPUT_VALUE, $name);
         vkApi_messagesSend($user_id, $output_message, INPUT_VALUE_FIELD_KEYBOARD);
     }
-
 }

@@ -83,6 +83,22 @@ abstract class BotState
         vkApi_messagesSend($user_id, $output_message, BILL_MAIN_KEYBOARD);
     }
 
+    protected function correctBack($user_id, $db)
+    {
+        $user = new User($db);
+        $user->id = $user_id;
+        $user->getSingleUser();
+        $is_go_to_main_bill = json_decode($user->stateArgs, true)[SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG];
+        $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
+
+        if ($is_go_to_main_bill) {
+            $this->toMainBillMenuState($user_id, $db, $bill_id);
+        } else {
+            $this->toMainSingleBillState($user_id, $db);
+        }
+    }
+
+
     private function personsLines($person_name_list): string
     {
         $output_message = "";

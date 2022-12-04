@@ -19,7 +19,7 @@ class InputBillPasswordState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case BACK_PAYLOAD:
-                    $this->toStartMenuState($user_id, $db);
+                    $this->correctBack($user_id, $db);
                     break;
                 default:
                     return false;
