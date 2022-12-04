@@ -9,8 +9,8 @@ class CreateNewSingleBill extends PersonPageChooserModel
         $user->getSingleUser();
         $updated_json = setJsonChoosePersons($user->stateArgs);
 
-        PersonPageChooserModel::sendInlineKeyboard($user_id, $db, $updated_json);
         vkApi_messagesSend($user_id, SELECT_PERSONS_FOR_SINGLE_BILL, SINGLE_BILL_CREATE_KEYBOARD);
+        PersonPageChooserModel::sendInlineKeyboard($user_id, $db, $updated_json);
     }
 
     function stateAction($user_id, $data, $db)

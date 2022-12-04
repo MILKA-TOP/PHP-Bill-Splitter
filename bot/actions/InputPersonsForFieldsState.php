@@ -13,8 +13,8 @@ class InputPersonsForFieldsState extends PersonPageChooserModel
         $user->getSingleUser();
         $updated_json = setJsonChoosePersons($user->stateArgs);
 
+        vkApi_messagesSend($user_id, SELECT_FOR_NEW_FIELD_PERSONS, SINGLE_BILL_CREATE_KEYBOARD);
         PersonPageChooserModel::sendInlineKeyboard($user_id, $db, $updated_json, InputPersonsForFieldsState::STATE_ID);
-        vkApi_messagesSend($user_id, InputPersonsForFieldsState::STATE_ID, SINGLE_BILL_CREATE_KEYBOARD);
     }
 
     function stateAction($user_id, $data, $db)
