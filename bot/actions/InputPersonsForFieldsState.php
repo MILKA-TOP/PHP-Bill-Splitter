@@ -4,7 +4,7 @@
 class InputPersonsForFieldsState extends PersonPageChooserModel
 {
 
-    const STATE_ID = SELECT_PERSONS_FOR_SINGLE_BILL;
+    const STATE_ID = FROM_MAIN_BILL_CREATE_FIELD;
 
     static function showPersonTable($user_id, $db)
     {
