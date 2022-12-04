@@ -109,6 +109,7 @@ const HELP_TEXT = "Помощь";
 const MAIN_BILL_SHOW_ALL = "Вывести все чеки";
 const MAIN_BILL_CHANGE_SINGLE_BILL = "Редактировать чек";
 const MAIN_BILL_SHOW_SINGLE = "Вывести чек пользователя";
+const MAIN_BILL_ADD_FIELD = "Добавить позицию к чеку (блюдо/напиток)";
 
 const NEXT_BUTTON_TEXT = "Далее";
 const SINGLE_BILL_SHOW_ALL = "Показать доступные группы";

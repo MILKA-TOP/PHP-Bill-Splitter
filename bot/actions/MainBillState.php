@@ -31,6 +31,8 @@ class MainBillState extends BotState
                 case OPEN_BILL_PAYLOAD:
                     $this->showBillData($user_id, $db);
                     break;
+                case BILL_ADD_FIELD_PAYLOAD:
+                    $this->addNewFieldToBill($user_id, $db);
                 case CANCEL_PAYLOAD:
                     $this->toStartMenuState($user_id, $db);
                     break;
@@ -42,7 +44,13 @@ class MainBillState extends BotState
         return false;
     }
 
-    private function showBillData($user_id, $db) {
+    private function addNewFieldToBill($user_id, $db)
+    {
+        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+    }
+
+    private function showBillData($user_id, $db)
+    {
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();

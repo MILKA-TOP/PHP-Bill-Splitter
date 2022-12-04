@@ -17,6 +17,7 @@ const HELP_PAYLOAD = "help";
 const BILL_SHOW_ALL_PAYLOAD = "bills_show_all";
 const BILL_CHANGE_SINGLE_BILL_PAYLOAD = "bills_update";
 const BILL_SHOW_SINGLE_PAYLOAD = "bills_show_single";
+const BILL_ADD_FIELD_PAYLOAD = "add_new_field_to_bill";
 const BILL_CREATE_SINGLE_BILL_PAYLOAD = "bills_create_single_bill";
 
 const SINGLE_BILL_ADD_POSITION_PAYLOAD = "single_bill_add";
