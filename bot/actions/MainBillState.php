@@ -103,7 +103,7 @@ class MainBillState extends BotState
             $single_bill_persons_count = count(json_decode($single_bill->persons, true));
 
             $format_field_line = FIELD_FORMAT_BY_BOOL_ARRAY[$single_bill->isPersonField];
-            $output_value += $single_bill->fullValue;
+            $output_value += ($single_bill->fullValue) / $single_bill_persons_count;
 
             $field = new Field($db);
             $fields_ids = $field->getFieldsIdsBySingleBillId($currSingleId);
