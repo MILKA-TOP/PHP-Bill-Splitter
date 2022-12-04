@@ -18,7 +18,7 @@ class InputFieldValueState extends BotState
             if (!isset($array[COMMAND_PAYLOAD])) return false;
             switch ($array[COMMAND_PAYLOAD]) {
                 case BACK_PAYLOAD:
-                    $this->toMainSingleBillState($user_id, $db);
+                    $this->correctBack($user_id, $db);
                     break;
                 case RENAME_FIELD_PAYLOAD:
                     $this->toInputFieldNameState($user_id, $db);
@@ -52,6 +52,7 @@ class InputFieldValueState extends BotState
         $state_args_array = json_decode($user->stateArgs, true);
         $single_bill_id = $state_args_array[SINGLE_BILL_ID_STATE_ARG];
         $field_name = $state_args_array[BILL_NAME_STATE_ARG];
+        $go_to_main_bill = $state_args_array[SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG];
 
         $single_bill = new SingleBill($db);
         $single_bill->id = $single_bill_id;
@@ -66,7 +67,11 @@ class InputFieldValueState extends BotState
 
         $single_bill->updateFullValue($double_val);
 
-        MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
+        if ($go_to_main_bill) {
+            $this->toMainBillMenuState($user_id, $db, $single_bill->billId);
+        } else {
+            MainSingleBillState::showSingleBillData($user_id, $single_bill_id, $db);
+        }
     }
 
 }
