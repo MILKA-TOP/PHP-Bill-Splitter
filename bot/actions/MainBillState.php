@@ -71,10 +71,11 @@ class MainBillState extends BotState
         $bill->id = $bill_id;
         $bill->getPersonsByCache();
         $persons = json_decode($bill->persons, true);
+        $group_bill_value = 0.0;
         foreach ($persons as $curr_id) {
-            $this->sendPersonBill($user_id, $bill_id, $curr_id, $db);
+            $group_bill_value += $this->sendPersonBill($user_id, $bill_id, $curr_id, $db);
         }
-
+        vkApi_messagesSend($user_id, sprintf(BILL_FINAL_GROUP_ALL_STRING, $group_bill_value), $this->keyboard);
     }
 
     private function sendPersonBill($user_id, $bill_id, $person_id, $db)
@@ -120,6 +121,7 @@ class MainBillState extends BotState
 
         $output_message = sprintf(BILL_FINAL_STRING, $person->name, $item_list_string, $output_value);
         vkApi_messagesSend($user_id, $output_message, $this->keyboard);
+        return $output_value;
     }
 
     private function showSingleBill($user_id, $db)
