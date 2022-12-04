@@ -47,7 +47,7 @@ class MainBillState extends BotState
 
     private function addNewFieldToBill($user_id, $db)
     {
-        vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
+        InputPersonsForFieldsState::showPersonTable($user_id, $db);
     }
 
     private function showBillData($user_id, $db)

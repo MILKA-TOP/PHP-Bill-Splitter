@@ -16,4 +16,5 @@ const state_model = array(
     REMOVE_FIELD_STATE => RemoveFieldState::class,
     SET_BILL_ID_STATE => InputBillIdState::class,
     SET_BILL_PASSWORD_STATE => InputBillPasswordState::class,
+    FROM_MAIN_BILL_CREATE_FIELD => InputPersonsForFieldsState::class,
 );

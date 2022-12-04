@@ -86,13 +86,14 @@ function updatePersonsSingleBillArray($input_json, $person_id, $bool)
     return json_encode($args_array, JSON_UNESCAPED_UNICODE);
 }
 
-function setSingleBillJson($input_json, $single_bill_id)
+function setSingleBillJson($input_json, $single_bill_id, $toMainMenuReturn = false)
 {
     $args_array = json_decode($input_json, true);
 
     $output_array = array(
         BILL_ID_STATE_ARG => $args_array[BILL_ID_STATE_ARG],
         SINGLE_BILL_ID_STATE_ARG => $single_bill_id,
+        SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG => $toMainMenuReturn,
     );
 
     return json_encode($output_array, JSON_UNESCAPED_UNICODE);
@@ -105,12 +106,14 @@ function filterToSingleBillJson($input_json)
     $output_array = array(
         BILL_ID_STATE_ARG => $args_array[BILL_ID_STATE_ARG],
         SINGLE_BILL_ID_STATE_ARG => $args_array[SINGLE_BILL_ID_STATE_ARG],
+        SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG => $args_array[SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG],
     );
 
     return json_encode($output_array, JSON_UNESCAPED_UNICODE);
 }
 
-function addNameFieldToJson($input_json, $name) {
+function addNameFieldToJson($input_json, $name)
+{
     $args_array = json_decode($input_json, true);
 
     $args_array[BILL_NAME_STATE_ARG] = $name;

@@ -136,3 +136,4 @@ const PAGE_NUMBER_PERSON_STATE_ARG = "page";
 const SINGLE_PERSONS_STATE_ARG = "single_persons";
 const BILL_ID_STATE_ARG = "bill_id";
 const SINGLE_BILL_ID_STATE_ARG = "single_bill_id";
+const SINGLE_BILL_TO_MAIN_MENU_RETURN_STATE_ARG = "to_main_menu";

@@ -3,14 +3,14 @@
 abstract class PersonPageChooserModel extends BotState
 {
 
-    static function sendInlineKeyboard($user_id, $db, $updated_json)
+    static function sendInlineKeyboard($user_id, $db, $updated_json, $state = CREATE_SINGLE_BILL_STATE)
     {
         $user = new User($db);
         $user->id = $user_id;
         $bill_persons = getSingleBillPersonIds($user_id, $db)[1];
 
         $inline_keyboard = self::getArraysForInlineKeyboard($updated_json, $bill_persons, $db);
-        $user->updateStateWithArgs(CREATE_SINGLE_BILL_STATE, $updated_json);
+        $user->updateStateWithArgs($state, $updated_json);
         vkApi_messagesSend($user_id, CHOOSE_PERSONS_FOR_SINGLE_BILL, $inline_keyboard);
     }
 
@@ -24,7 +24,7 @@ abstract class PersonPageChooserModel extends BotState
         return $output_array;
     }
 
-    protected function prevPage($user_id, $db)
+    protected function prevPage($user_id, $db, $state = CREATE_SINGLE_BILL_STATE)
     {
         $user = new User($db);
         $user->id = $user_id;
@@ -34,14 +34,14 @@ abstract class PersonPageChooserModel extends BotState
         $current_page = $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG];
         if ($current_page > 0) {
             $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page - 1;
-            self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array));
+            self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array), $state);
         } else {
             vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
         }
 
     }
 
-    protected function nextPage($user_id, $db)
+    protected function nextPage($user_id, $db, $state = CREATE_SINGLE_BILL_STATE)
     {
         $user = new User($db);
         $user->id = $user_id;
@@ -56,13 +56,13 @@ abstract class PersonPageChooserModel extends BotState
         $max_page = maxPageNumber(json_decode($bill->persons, true));
         if ($current_page < $max_page) {
             $user_args_array[PAGE_NUMBER_PERSON_STATE_ARG] = $current_page + 1;
-            self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array));
+            self::sendInlineKeyboard($user_id, $db, arrayToJson($user_args_array), $state);
         } else {
             vkApi_messagesSend($user_id, ERROR_MAIN_MESSAGE, $this->keyboard);
         }
     }
 
-    protected function personClick($user_id, $payload, $db)
+    protected function personClick($user_id, $payload, $db, $state = CREATE_SINGLE_BILL_STATE)
     {
         $user = new User($db);
         $user->id = $user_id;
@@ -73,7 +73,7 @@ abstract class PersonPageChooserModel extends BotState
 
         $update_json = updatePersonsSingleBillArray($user->stateArgs, $click_element_id, $updated_element_status);
 
-        self::sendInlineKeyboard($user_id, $db, $update_json);
+        self::sendInlineKeyboard($user_id, $db, $update_json, $state);
         //vkApi_messagesSend($user_id, DEVELOP_MESSAGE, $this->keyboard);
     }
 

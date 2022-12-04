@@ -39,6 +39,7 @@ require_once 'bot/actions/InputFieldValueState.php';
 require_once 'bot/actions/RemoveFieldState.php';
 require_once 'bot/actions/InputBillIdState.php';
 require_once 'bot/actions/InputBillPasswordState.php';
+require_once 'bot/actions/InputPersonsForFieldsState.php';
 require_once 'bot/res/strings.php';
 require_once 'bot/res/keyboards.php';
 require_once 'bot/di/KeyboardModel.php';
