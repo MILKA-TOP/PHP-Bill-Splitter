@@ -46,7 +46,7 @@ class MainBillState extends BotState
         $user = new User($db);
         $user->id = $user_id;
         $user->getSingleUser();
-        $bill_id = json_decode($user->stateArgs)[BILL_ID_STATE_ARG];
+        $bill_id = json_decode($user->stateArgs, true)[BILL_ID_STATE_ARG];
 
         $this->toMainBillMenuState($user_id, $db, $bill_id);
     }
