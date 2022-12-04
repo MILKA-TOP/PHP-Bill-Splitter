@@ -79,8 +79,19 @@ abstract class BotState
         $person_name_list = $person->getPersonsBillList(json_decode($bill->persons, true));
 
         $output_message = sprintf(MAIN_BILL_INFO_MESSAGE,
-            $bill->name, $billId, implode("\n", $person_name_list));
+            $bill->name, $billId, $this->personsLines($person_name_list));
         vkApi_messagesSend($user_id, $output_message, BILL_MAIN_KEYBOARD);
+    }
+
+    private function personsLines($person_name_list): string
+    {
+        $output_message = "";
+        $counter = 1;
+        foreach ($person_name_list as $name) {
+            $output_message = $output_message . sprintf(PERSON_NAME_IN_BILL_FORMAT, $counter, $name);
+            $counter++;
+        }
+        return $output_message;
     }
 
     protected function getPayloadArgs($data)
