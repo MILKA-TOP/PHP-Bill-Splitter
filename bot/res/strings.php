@@ -93,7 +93,7 @@ const INCORRECT_PASSWORD_BILL_ERROR = "Введен неверный парол�
 const BILL_FINAL_STRING = SL . "🧾 | Чек:\n👤 | Имя пользователя: \"%s\";" . "\n" . SL . "%s" . SL .
     "\n\n💰 | Общая сумма: %.2f руб." . "\n" . SL;
 
-const BILL_FINAL_GROUP_ALL_STRING = SL . "💸 | Итоговая сумма общего чека: %.2f\n" . SL;
+const BILL_FINAL_GROUP_ALL_STRING = SL . "💸 | Итоговая сумма общего чека: %.2f руб.\n" . SL;
 
 const SINGLE_FIELD_FOR_BILL = "\"%s\" - %.2f руб.\n";
 const GROUP_FIELD_FOR_BILL = "\"%s\" - %.2f руб./чел.\n";
